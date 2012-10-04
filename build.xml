@@ -1,0 +1,732 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<project name="iugonet" default="extract">
+  <property file="build.properties"/>
+
+  <target name="install_git" description="Install Git">
+    <exec executable="sudo">
+      <arg value="yum"/>
+      <arg value="-y"/>
+      <arg value="install"/>
+      <arg value="git"/>
+    </exec>
+    <exec executable="git">
+      <arg value="config"/>
+      <arg value="--global"/>
+      <arg value="user.name"/>
+      <arg value="${GIT_USER_NAME}"/>
+    </exec>
+    <exec executable="git">
+      <arg value="config"/>
+      <arg value="--global"/>
+      <arg value="user.email"/>
+      <arg value="${GIT_USER_EMAIL}"/>
+    </exec>
+  </target>
+
+  <target name="pre_install" description="Install All">
+    <antcall target="install_maven"/>
+    <antcall target="install_tomcat"/>
+    <antcall target="install_g2d"/>
+    <antcall target="install_httpd"/>
+    <antcall target="install_postgresql"/>
+  </target>
+
+  <target name="install_packages" description="Install RPM packages">
+    <exec executable="sudo">
+      <arg value="yum"/>
+      <arg value="-y"/>
+      <arg value="install"/>
+      <arg value="emacs"/>
+    </exec>
+    <exec executable="sudo">
+      <arg value="yum"/>
+      <arg value="-y"/>
+      <arg value="install"/>
+      <arg value="gcc"/>
+    </exec>
+    <exec executable="sudo">
+      <arg value="yum"/>
+      <arg value="-y"/>
+      <arg value="install"/>
+      <arg value="zlib-devel"/>
+    </exec>
+    <exec executable="sudo">
+      <arg value="yum"/>
+      <arg value="-y"/>
+      <arg value="install"/>
+      <arg value="readline-devel"/>
+    </exec>
+    <exec executable="sudo">
+      <arg value="yum"/>
+      <arg value="-y"/>
+      <arg value="install"/>
+      <arg value="flex"/>
+    </exec>
+    <exec executable="sudo">
+      <arg value="yum"/>
+      <arg value="-y"/>
+      <arg value="install"/>
+      <arg value="glibc-headers"/>
+    </exec>
+    <exec executable="sudo">
+      <arg value="yum"/>
+      <arg value="-y"/>
+      <arg value="install"/>
+      <arg value="httpd-devel"/>
+    </exec>
+    <exec executable="sudo">
+      <arg value="yum"/>
+      <arg value="-y"/>
+      <arg value="install"/>
+      <arg value="gcc-c++"/>
+    </exec>
+    <exec executable="sudo">
+      <arg value="yum"/>
+      <arg value="-y"/>
+      <arg value="install"/>
+      <arg value="libstdc++-devel"/>
+    </exec>
+  </target>
+
+  <target name="install_maven" description="install Apache Maven">
+    <condition property="have.resources">
+      <available file="${TEMP_DIR}/${MAVEN_TGZ}"/>
+    </condition>
+
+    <echo message="${have.resources}"/>
+
+    <condition property="have.resources">
+      <available file="${MAVEN_HOME}"/>
+    </condition>
+
+    <echo message="${have.resources}"/>
+
+    <exec executable="sudo"> <!-- Change permission of ${ENV_SET_FILE} -->
+      <arg value="chmod"/>
+      <arg value="o+w"/>
+      <arg value="${ENV_SET_FILE}"/>
+    </exec>
+
+    <echo message='### for MAVEN&#10;' file="${ENV_SET_FILE}" append="yes"/>
+    <echo message='export MAVEN_HOME=${MAVEN_HOME}&#10;' file="${ENV_SET_FILE}" append="yes"/>
+    <echo message='export PATH=${MAVEN_HOME}/bin:$PATH&#10;' file="${ENV_SET_FILE}" append="yes"/>
+    <get src="http://ftp.riken.jp/net/apache/maven/binaries/${MAVEN_TGZ}" dest="${TEMP_DIR}" usetimestamp="true"/>
+    <exec executable="sudo">
+      <arg value="tar"/>
+      <arg value="xvzf"/>
+      <arg value="${TEMP_DIR}/${MAVEN_TGZ}"/>
+      <arg value="--directory"/>
+      <arg value="${INSTALL_DIR}"/>
+    </exec>
+    <exec executable="sudo">
+      <arg value="ln"/>
+      <arg value="-s"/>
+      <arg value="${INSTALL_DIR}/${MAVEN}"/>
+      <arg value="${MAVEN_HOME}"/>
+    </exec>
+
+    <exec executable="sudo"> <!-- Change permission of ${ENV_SET_FILE} -->
+      <arg value="chmod"/>
+      <arg value="o-w"/>
+      <arg value="${ENV_SET_FILE}"/>
+    </exec>
+  </target>
+
+  <target name="set_maven_proxy" description="set Apache Maven proxy">
+    <exec executable="sudo"> <!-- Change permission of ${MAVEN_HOME}/conf/settings.xml -->
+      <arg value="chmod"/>
+      <arg value="o+w"/>
+      <arg value="${MAVEN_HOME}/conf/settings.xml"/>
+    </exec>
+    <echo message='### for proxy setting &#10;' file="${MAVEN_HOME}/conf/settings.xml" append="yes"/>
+    <echo message="&#60;settings&#62;&#10;" file="${MAVEN_HOME}/conf/settings.xml" append="yes"/>
+    <echo message="&#60;proxies&#62;&#10;" file="${MAVEN_HOME}/conf/settings.xml" append="yes"/>
+    <echo message="&#60;proxy&#62;&#10;" file="${MAVEN_HOME}/conf/settings.xml" append="yes"/>
+    <echo message="&#60;protocol&#62;http&#60;/protocol&#62;&#10;" file="${MAVEN_HOME}/conf/settings.xml" append="yes"/>
+    <echo message="&#60;host&#62;${PROXY_HTTP}&#60;/host&#62;&#10;" file="${MAVEN_HOME}/conf/settings.xml" append="yes"/>
+    <echo message="&#60;port&#62;${PROXY_PORT}&#60;/port&#62;&#10;" file="${MAVEN_HOME}/conf/settings.xml" append="yes"/>
+    <echo message="&#60;/proxy&#62;&#10;" file="${MAVEN_HOME}/conf/settings.xml" append="yes"/>
+    <echo message="&#60;/proxies&#62;&#10;" file="${MAVEN_HOME}/conf/settings.xml" append="yes"/>
+    <echo message="&#60;/settings&#62;&#10;" file="${MAVEN_HOME}/conf/settings.xml" append="yes"/>
+
+    <exec executable="sudo"> <!-- Change permission of ${MAVEN_HOME}/conf/settings.xml -->
+      <arg value="chmod"/>
+      <arg value="o-w"/>
+      <arg value="${MAVEN_HOME}/conf/settings.xml"/>
+    </exec>
+  </target>
+
+  <target name="install_tomcat" description="install Apache Tomcat">
+    <exec executable="sudo"> <!-- Change permission of ${ENV_SET_FILE} -->
+      <arg value="chmod"/>
+      <arg value="o+w"/>
+      <arg value="${ENV_SET_FILE}"/>
+    </exec>
+
+    <echo message='### for TOMCAT&#10;' file="${ENV_SET_FILE}" append="yes"/>
+    <echo message='export TOMCAT_USER=dspace&#10;' file="${ENV_SET_FILE}" append="yes"/>
+    <echo message='export CATALINA_HOME=${CATALINA_HOME}&#10;' file="${ENV_SET_FILE}" append="yes"/>
+    <echo message='export PATH=${CATALINA_HOME}/bin:$PATH&#10;' file="${ENV_SET_FILE}" append="yes"/>
+    <get src="http://ftp.riken.jp/net/apache//tomcat/tomcat-${TOMCAT_VER}/v${TOMCAT_VERSION}/bin/${TOMCAT_TGZ}" dest="${TEMP_DIR}" usetimestamp="true"/>
+    <exec executable="sudo">
+      <arg value="tar"/>
+      <arg value="xvzf"/>
+      <arg value="${TEMP_DIR}/${TOMCAT_TGZ}"/>
+      <arg value="--directory"/>
+      <arg value="${INSTALL_DIR}"/>
+    </exec>
+    <exec executable="sudo">
+      <arg value="ln"/>
+      <arg value="-s"/>
+      <arg value="${INSTALL_DIR}/${TOMCAT}"/>
+      <arg value="${CATALINA_HOME}"/>
+    </exec>
+    <exec executable="sudo">
+      <arg value="chown"/>
+      <arg value="-R"/>
+      <arg value="dspace:dspace"/>
+      <arg value="${INSTALL_DIR}/${TOMCAT}"/>
+    </exec>
+    <exec executable="sudo">
+      <arg value="cp"/>
+      <arg value="${WORK}/${CATALINA_HOME}/conf/server.xml"/>
+      <arg value="${CATALINA_HOME}/conf"/>
+    </exec>
+
+    <exec executable="sudo"> <!-- Change permission of ${ENV_SET_FILE} -->
+      <arg value="chmod"/>
+      <arg value="o-w"/>
+      <arg value="${ENV_SET_FILE}"/>
+    </exec>
+  </target>
+
+
+  <target name="install_g2d" description="Install G2d">
+    <exec executable="git">
+      <arg value="clone"/>
+      <arg value="ssh://${SSH_SERVER}/~/git/git2dspace/g2d.git"/>
+      <arg value="${WORK}/g2d"/>
+    </exec>
+  </target>
+
+  <target name="install_httpd" description="Install Apache HTTPD">
+    <exec executable="sudo"> <!-- Change permission of ${ENV_SET_FILE} -->
+      <arg value="chmod"/>
+      <arg value="-R"/>
+      <arg value="o+rwx"/>
+      <arg value="${HTTP_CONF}"/>
+    </exec>
+
+    <echo message='### for Proxy&#10;' file="${HTTP_CONF}/httpd.conf" append="yes"/>
+    <echo message="ProxyPass /iugonet/ ajp://localhost:8009/iugonet/&#10;" file="${HTTP_CONF}/httpd.conf" append="yes"/>
+
+    <exec executable="sudo">
+      <arg value="chmod"/>
+      <arg value="-R"/>
+      <arg value="o-rwx"/>
+      <arg value="${HTTP_CONF}"/>
+    </exec>
+
+    <exec executable="sudo">
+      <arg value="chkconfig"/>
+      <arg value="httpd"/>
+      <arg value="on"/>
+    </exec>
+
+    <exec executable="sudo">
+      <arg value="/etc/init.d/httpd"/>
+      <arg value="start"/>
+    </exec>
+  </target>
+
+  <target name="install_postgresql_bin" description="Install PostgreSQL Binary">
+    <exec executable="sudo"> <!-- Change permission of ${ENV_SET_FILE} -->
+      <arg value="chmod"/>
+      <arg value="o+w"/>
+      <arg value="${ENV_SET_FILE}"/>
+    </exec>
+
+    <echo message='### for PostgreSQL&#10;' file="${ENV_SET_FILE}" append="yes"/>
+    <echo message='export POSTGRES_HOME=${POSTGRESQL_HOME}&#10;' file="${ENV_SET_FILE}" append="yes"/>
+    <echo message='export PGLILB=${POSTGRESQL_HOME}/lib&#10;' file="${ENV_SET_FILE}" append="yes"/>
+    <echo message='export PGDATA=${PGDATA}&#10;' file="${ENV_SET_FILE}" append="yes"/>
+    <echo message='export MANPATH=${MANPATH}:${POSTGRESQL_HOME}/man&#10;' file="${ENV_SET_FILE}" append="yes"/>
+    <echo message='export PATH=${POSTGRESQL_HOME}/bin:$PATH&#10;' file="${ENV_SET_FILE}" append="yes"/>
+    <echo message='export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${PGLIB}&#10;' file="${ENV_SET_FILE}" append="yes"/>
+
+    <exec executable="sudo">  <!-- Change permission of ${ENV_SET_FILE} -->
+      <arg value="chmod"/>
+      <arg value="o-w"/>
+      <arg value="${ENV_SET_FILE}"/>
+    </exec>
+
+    <exec executable="sudo" dir="${TEMP_DIR}">
+      <arg value="yum"/>
+      <arg value="-y"/>
+      <arg value="install"/>
+      <arg value="postgresql84"/>
+    </exec>
+
+    <exec executable="sudo" dir="${TEMP_DIR}">
+      <arg value="yum"/>
+      <arg value="-y"/>
+      <arg value="install"/>
+      <arg value="postgresql84-server"/>
+    </exec>
+
+    <exec executable="sudo" dir="${TEMP_DIR}">
+      <arg value="-u"/>
+      <arg value="postgres"/>
+      <arg value="initdb"/> 
+      <arg value="--pgdata=${PGDATA}"/>
+      <arg value="--no-locale"/> 
+      <arg value="--encoding=UTF-8"/> 
+    </exec>
+
+    <exec executable="sudo"> <!-- Change permission of ${ENV_SET_FILE} -->
+      <arg value="chmod"/>
+      <arg value="-R"/>
+      <arg value="o+rwx"/>
+      <arg value="${PGDATA}"/>
+    </exec>
+
+    <echo message='### for Log&#10;' file="${PGDATA}/postgresql.conf" append="yes"/>
+    <echo message="log_destination = 'syslog'&#10;" file="${PGDATA}/postgresql.conf" append="yes"/>
+    <echo message='### for encryption&#10;' file="${PGDATA}/pg_hba.conf" append="yes"/>
+    <echo message='host dspace dspace 127.0.0.1/32 md5&#10;' file="${PGDATA}/pg_hba.conf" append="yes"/>
+
+    <exec executable="sudo">
+      <arg value="chmod"/>
+      <arg value="-R"/>
+      <arg value="o-rwx"/>
+      <arg value="${PGDATA}"/>
+    </exec>
+
+    <exec executable="sudo" dir="${TEMP_DIR}">
+      <arg value="-u"/>
+      <arg value="pgsql"/>
+      <arg value="pg_ctl"/> 
+      <arg value="--pgdata=${PGDATA}"/>
+      <arg value="start"/> 
+    </exec>
+  </target>
+
+  <target name="install_postgresql" description="Install PostgreSQL">
+    <exec executable="sudo"> <!-- Change permission of ${ENV_SET_FILE} -->
+      <arg value="chmod"/>
+      <arg value="o+w"/>
+      <arg value="${ENV_SET_FILE}"/>
+    </exec>
+
+    <echo message='### for PostgreSQL&#10;' file="${ENV_SET_FILE}" append="yes"/>
+    <echo message='export POSTGRES_HOME=${POSTGRESQL_HOME}&#10;' file="${ENV_SET_FILE}" append="yes"/>
+    <echo message='export PGLILB=${POSTGRESQL_HOME}/lib&#10;' file="${ENV_SET_FILE}" append="yes"/>
+    <echo message='export PGDATA=${PGDATA}&#10;' file="${ENV_SET_FILE}" append="yes"/>
+    <echo message='export MANPATH=${MANPATH}:${POSTGRESQL_HOME}/man&#10;' file="${ENV_SET_FILE}" append="yes"/>
+    <echo message='export PATH=${POSTGRESQL_HOME}/bin:$PATH&#10;' file="${ENV_SET_FILE}" append="yes"/>
+    <echo message='export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${PGLIB}&#10;' file="${ENV_SET_FILE}" append="yes"/>
+
+    <get src="http://ftp.jaist.ac.jp/pub/postgresql/source/v${POSTGRESQL_VERSION}/postgresql-${POSTGRESQL_VERSION}.tar.gz" dest="${TEMP_DIR}"/>
+    <exec executable="sudo">
+      <arg value="/usr/sbin/useradd"/>
+      <arg value="-c"/>
+      <arg value="Server"/>
+      <arg value="-d"/>
+      <arg value="${POSTGRESQL_HOME}"/>
+      <arg value="pgsql"/>
+    </exec>
+    <exec executable="sudo">
+      <arg value="rm"/>
+      <arg value="-rf"/>
+      <arg value="${POSTGRESQL_HOME}"/>
+    </exec>
+    <exec executable="sudo">
+      <arg value="su"/>
+      <arg value="-"/>
+      <arg value="pgsql"/>
+    </exec>
+    <exec executable="sudo">
+      <arg value="tar"/>
+      <arg value="xvzf"/>
+      <arg value="${TEMP_DIR}/${POSTGRESQL_TGZ}"/>
+      <arg value="--directory"/>
+      <arg value="${TEMP_DIR}"/>
+    </exec>
+    <exec executable="sudo">
+      <arg value="mkdir"/>
+      <arg value="${POSTGRESQL_HOME}-${POSTGRESQL_VERSION}"/>
+    </exec>
+    <exec executable="sudo">
+      <arg value="chmod"/>
+      <arg value="755"/>
+      <arg value="${POSTGRESQL_HOME}-${POSTGRESQL_VERSION}"/>
+    </exec>
+    <exec executable="sudo">
+      <arg value="chown"/>
+      <arg value="-R"/>
+      <arg value="pgsql:pgsql"/>
+      <arg value="${POSTGRESQL_HOME}-${POSTGRESQL_VERSION}"/>
+    </exec>
+    <exec executable="sudo">
+      <arg value="ln"/>
+      <arg value="-s"/>
+      <arg value="${POSTGRESQL_HOME}-${POSTGRESQL_VERSION}"/>
+      <arg value="${POSTGRESQL_HOME}"/>
+    </exec>
+    <exec executable="sudo" dir="${TEMP_DIR}/${POSTGRESQL}">
+      <arg value="./configure"/> 
+      <arg value="--prefix=${POSTGRESQL_HOME}"/> 
+      <arg value="--with-pgport=${POSTGRESQL_PORT}"/> 
+    </exec>
+    <exec executable="sudo" dir="${TEMP_DIR}/${POSTGRESQL}">
+      <arg value="make"/> 
+    </exec>
+    <exec executable="sudo" dir="${TEMP_DIR}/${POSTGRESQL}">
+      <arg value="make"/> 
+      <arg value="install"/> 
+    </exec>
+    <exec executable="sudo">
+      <arg value="mkdir"/> 
+      <arg value="${PGDATA}-${POSTGRESQL_VERSION}"/> 
+    </exec>
+    <exec executable="sudo">
+      <arg value="chmod"/> 
+      <arg value="700"/> 
+      <arg value="${PGDATA}-${POSTGRESQL_VERSION}"/> 
+    </exec>
+    <exec executable="sudo">
+      <arg value="chown"/> 
+      <arg value="-R"/> 
+      <arg value="pgsql:pgsql"/> 
+      <arg value="${PGDATA}-${POSTGRESQL_VERSION}"/> 
+    </exec>
+    <exec executable="sudo">
+      <arg value="ln"/> 
+      <arg value="-s"/> 
+      <arg value="${PGDATA}-${POSTGRESQL_VERSION}"/> 
+      <arg value="${PGDATA}"/> 
+    </exec>
+    <exec executable="sudo">
+      <arg value="su"/>
+      <arg value="-"/>
+      <arg value="pgsql"/>
+      <arg line="-c'initdb --no-locale --encoding=UTF-8'"/> 
+    </exec>
+
+    <exec executable="sudo"> <!-- Change permission of ${ENV_SET_FILE} -->
+      <arg value="chmod"/>
+      <arg value="-R"/>
+      <arg value="o+rwx"/>
+      <arg value="${PGDATA}-${POSTGRESQL_VERSION}"/> 
+    </exec>
+
+    <echo message='### for Log&#10;' file="${PGDATA}/postgresql.conf" append="yes"/>
+    <echo message="log_destination = 'syslog'&#10;" file="${PGDATA}/postgresql.conf" append="yes"/>
+    <echo message='### for encryption&#10;' file="${PGDATA}/pg_hba.conf" append="yes"/>
+    <echo message='host dspace dspace 127.0.0.1/32 md5&#10;' file="${PGDATA}/pg_hba.conf" append="yes"/>
+
+    <exec executable="sudo">
+      <arg value="chmod"/>
+      <arg value="-R"/>
+      <arg value="o-rwx"/>
+      <arg value="${PGDATA}-${POSTGRESQL_VERSION}"/> 
+    </exec>
+    
+    <exec executable="sudo">
+      <arg value="su"/>
+      <arg value="-"/>
+      <arg value="pgsql"/>
+      <arg line="-c'${POSTGRESQL_HOME}/bin/pg_ctl start'"/> 
+    </exec>
+
+    <exec executable="sudo"> <!-- Change permission of ${ENV_SET_FILE} -->
+      <arg value="chmod"/>
+      <arg value="o-w"/>
+      <arg value="${ENV_SET_FILE}"/>
+    </exec>
+  </target>
+
+  <target name="install_postgresql_bin2" description="Install PostgreSQL Binary2">
+    <exec executable="sudo">
+      <arg value="su"/>
+      <arg value="-"/>
+      <arg value="pgsql"/>
+      <arg line="-c'createuser -d -S -R dspace'"/> 
+    </exec>
+    <exec executable="createdb">
+      <arg value="dspace"/>
+    </exec>
+  </target>
+
+
+  <target name="install_mdb" description="Install IUGONET Metadata DB.">
+    <get src="http://ftp.jaist.ac.jp/pub/sourceforge/d/project/ds/dspace/DSpace%20Stable/${DSPACE_VERSION}/${DSPACE_RELEASE_TGZ}" dest="${TEMP_DIR}" usetimestamp="true"/>
+    <get src="http://ftp.jaist.ac.jp/pub/sourceforge/d/project/ds/dspace/DSpace%20Stable/${DSPACE_VERSION}/${DSPACE_SRC_TGZ}" dest="${TEMP_DIR}" usetimestamp="true"/>
+    <untar src="${TEMP_DIR}/${DSPACE_RELEASE_TGZ}" dest="${WORK}" compression="gzip"/>
+    <untar src="${TEMP_DIR}/${DSPACE_SRC_TGZ}" dest="${WORK}" compression="gzip"/>
+
+    <exec executable="sudo">
+      <arg value="mkdir"/>
+      <arg value="${DSPACE_INSTALL_DIR}-${DSPACE_VERSION}/"/>
+    </exec>
+    <exec executable="sudo">
+      <arg value="chown"/>
+      <arg value="-R"/>
+      <arg value="dspace:dspace"/>
+      <arg value="${DSPACE_INSTALL_DIR}-${DSPACE_VERSION}/"/>
+    </exec>
+    <exec executable="sudo">
+      <arg value="ln"/>
+      <arg value="-s"/>
+      <arg value="${DSPACE_INSTALL_DIR}-${DSPACE_VERSION}/"/>
+      <arg value="${DSPACE_INSTALL_DIR}"/>
+    </exec>
+
+    <antcall target="cp_conf.sh"/>
+    <exec executable="mvn" dir="${DSPACE_RELEASE_DIR}/dspace">
+      <arg value="package"/>
+    </exec>
+    <exec executable="ant" dir="${DSPACE_RELEASE_DIR}/dspace/target/dspace-${DSPACE_VERSION}-build.dir">
+      <arg value="fresh_install"/>
+    </exec>
+    <antcall target="cp_webapps.sh"/>
+    <antcall target="cp_src.sh"/>
+    <antcall target="comp.sh"/>    
+  </target>
+
+  <target name="cp_conf.sh" description="originally cp_conf.sh">
+    <copy file="${CUSTOM_DIR}/config/dspace.cfg" todir="${DSPACE_RELEASE_DIR}/dspace/config/"/>
+    <copy file="${CUSTOM_DIR}/config/registries/dublin-core-types.xml" todir="${DSPACE_RELEASE_DIR}/dspace/config/registries/"/>
+  </target>
+
+  <target name="cp_webapps.sh" description="originally cp_webapps.sh">
+    <delete dir="${IUGONET_WEBAPPS}"/>
+    <copy todir="${IUGONET_WEBAPPS}">
+      <fileset dir="${DEFAULT_WEBAPPS}"/>
+    </copy>
+    <exec executable="cp">
+      <arg value="-rf"/>
+      <arg value="${CUSTOM_IUGONET_WEBAPPS}/iugonet"/>
+      <arg value="${IUGONET_WEBAPPS}"/>
+    </exec>
+    <exec executable="cp">
+      <arg value="-rf"/>
+      <arg value="${CUSTOM_DIR}/webapps/iphone"/>
+      <arg value="${DSPACE_INSTALL_DIR}/webapps"/>
+    </exec>
+    <exec executable="cp">
+      <arg value="-rf"/>
+      <arg line="${CUSTOM_IUGONET_WEBAPPS}/index.jsp ${IUGONET_WEBAPPS}"/>
+    </exec>
+    <exec executable="cp">
+      <arg value="-rf"/>
+      <arg line="${CUSTOM_IUGONET_WEBAPPS}/collection-home.jsp ${IUGONET_WEBAPPS}"/>
+    </exec>
+    <exec executable="cp">
+      <arg value="-rf"/>
+      <arg line="${CUSTOM_IUGONET_WEBAPPS}/community-home.jsp ${IUGONET_WEBAPPS}"/>
+    </exec>
+    <exec executable="cp">
+      <arg value="-rf"/>
+      <arg line="${CUSTOM_IUGONET_WEBAPPS}/community-list.jsp ${IUGONET_WEBAPPS}"/>
+    </exec>
+    <exec executable="cp">
+      <arg value="-rf"/>
+      <arg line="${CUSTOM_IUGONET_WEBAPPS}/display-item.jsp ${IUGONET_WEBAPPS}"/>
+    </exec>
+    <exec executable="cp">
+      <arg value="-rf"/>
+      <arg line="${CUSTOM_IUGONET_WEBAPPS}/utils.js ${IUGONET_WEBAPPS}"/>
+    </exec>
+    <exec executable="cp">
+      <arg value="-rf"/>
+      <arg line="${CUSTOM_IUGONET_WEBAPPS}/apple-touch-icon.png ${IUGONET_WEBAPPS}"/>
+    </exec>
+    <exec executable="cp">
+      <arg value="-rf"/>
+      <arg line="${CUSTOM_IUGONET_WEBAPPS}/static/js/helpFreeWord.js ${IUGONET_WEBAPPS}/static/js"/>
+    </exec>
+    <exec executable="cp">
+      <arg value="-rf"/>
+      <arg line="${CUSTOM_IUGONET_WEBAPPS}/static/js/helpTime.js ${IUGONET_WEBAPPS}/static/js"/>
+    </exec>
+    <exec executable="cp">
+      <arg value="-rf"/>
+      <arg line="${CUSTOM_IUGONET_WEBAPPS}/static/js/helpResourceType.js ${IUGONET_WEBAPPS}/static/js"/>
+    </exec>
+    <exec executable="cp">
+      <arg value="-rf"/>
+      <arg line="${CUSTOM_IUGONET_WEBAPPS}/static/js/gmaps.js ${IUGONET_WEBAPPS}/static/js"/>
+    </exec>
+    <exec executable="cp">
+      <arg value="-rf"/>
+      <arg line="${CUSTOM_IUGONET_WEBAPPS}/static/js/searchbox.js ${IUGONET_WEBAPPS}/static/js"/>
+    </exec>
+    <exec executable="cp">
+      <arg value="-rf"/>
+      <arg line="${CUSTOM_IUGONET_WEBAPPS}/styles.css ${IUGONET_WEBAPPS}"/>
+    </exec>
+    <exec executable="cp">
+      <arg value="-rf"/>
+      <arg line="${CUSTOM_IUGONET_WEBAPPS}/favicon.ico ${IUGONET_WEBAPPS}"/>
+    </exec>
+    <exec executable="cp">
+      <arg value="-rf"/>
+      <arg line="${CUSTOM_IUGONET_WEBAPPS}/browse/full.jsp ${IUGONET_WEBAPPS}/browse"/>
+    </exec>
+    <exec executable="cp">
+      <arg value="-rf"/>
+      <arg line="${CUSTOM_IUGONET_WEBAPPS}/layout/header-default.jsp ${IUGONET_WEBAPPS}/layout"/>
+    </exec>
+    <exec executable="cp">
+      <arg value="-rf"/>
+      <arg line="${CUSTOM_IUGONET_WEBAPPS}/layout/footer-default.jsp ${IUGONET_WEBAPPS}/layout"/>
+    </exec>
+    <exec executable="cp">
+      <arg value="-rf"/>
+      <arg line="${CUSTOM_IUGONET_WEBAPPS}/layout/navbar-default.jsp ${IUGONET_WEBAPPS}/layout"/>
+    </exec>
+    <exec executable="cp">
+      <arg value="-rf"/>
+      <arg line="${CUSTOM_IUGONET_WEBAPPS}/layout/location-bar.jsp ${IUGONET_WEBAPPS}/layout"/>
+    </exec>
+    <exec executable="cp">
+      <arg value="-rf"/>
+      <arg line="${CUSTOM_IUGONET_WEBAPPS}/search/results.jsp ${IUGONET_WEBAPPS}/search"/>
+    </exec>
+    <exec executable="cp">
+      <arg value="-rf"/>
+      <arg line="${CUSTOM_IUGONET_WEBAPPS}/WEB-INF/web.xml ${IUGONET_WEBAPPS}/WEB-INF"/>
+    </exec>
+  </target>
+
+  <target name="cp_src.sh" description="originally cp_src.sh">
+    <exec executable="cp">
+      <arg value="-rf"/>
+      <arg line="${CUSTOM_SRC_DSPACE_API}/resources/Messages.properties ${DSPACE_SRC_RELEASE_API}/resources"/>
+    </exec>
+    <exec executable="cp">
+      <arg value="-rf"/>
+      <arg line="${CUSTOM_SRC_DSPACE_API}/java/org/dspace/administer/StructBuilder.java ${DSPACE_SRC_RELEASE_API}/java/org/dspace/administer"/>
+    </exec>
+    <exec executable="cp">
+      <arg value="-rf"/>
+      <arg line="${CUSTOM_SRC_DSPACE_API}/java/org/dspace/app/util/SyndicationFeed.java ${DSPACE_SRC_RELEASE_API}/java/org/dspace/app/util"/>
+    </exec>
+    <exec executable="cp">
+      <arg value="-rf"/>
+      <arg line="${CUSTOM_SRC_DSPACE_API}/java/org/dspace/app/statistics/ReportGenerator.java ${DSPACE_SRC_RELEASE_API}/java/org/dspace/app/statistics"/>
+    </exec>
+    <exec executable="cp">
+      <arg value="-rf"/>
+      <arg line="${CUSTOM_SRC_DSPACE_JSPUI}/servlet/SearchServlet.java ${DSPACE_SRC_RELEASE_JSPUI}/servlet"/>
+    </exec>
+    <exec executable="cp">
+      <arg value="-rf"/>
+      <arg line="${CUSTOM_SRC_DSPACE_JSPUI}/servlet/OpenURLServlet.java ${DSPACE_SRC_RELEASE_JSPUI}/servlet"/>
+    </exec>
+    <exec executable="cp">
+      <arg value="-rf"/>
+      <arg line="${CUSTOM_SRC_DSPACE_JSPUI}/servlet/HandleServlet.java ${DSPACE_SRC_RELEASE_JSPUI}/servlet"/>
+    </exec>
+    <exec executable="cp">
+      <arg value="-rf"/>
+      <arg line="${CUSTOM_SRC_DSPACE_JSPUI}/jsptag/ItemListTag.java ${DSPACE_SRC_RELEASE_JSPUI}/jsptag"/>
+    </exec>
+    <exec executable="cp">
+      <arg value="-rf"/>
+      <arg line="${CUSTOM_SRC_DSPACE_JSPUI}/jsptag/BrowseListTag.java ${DSPACE_SRC_RELEASE_JSPUI}/jsptag"/>
+    </exec>
+    <exec executable="cp">
+      <arg value="-rf"/>
+      <arg line="${CUSTOM_SRC_DSPACE_JSPUI}/jsptag/ItemTag.java ${DSPACE_SRC_RELEASE_JSPUI}/jsptag"/>
+    </exec>
+  </target>
+
+  <target name="comp.sh" description="originally comp.sh">
+    <exec executable="mvn" dir="${DSPACE_SRC_RELEASE_DIR}/dspace-api">
+      <arg value="install"/>
+    </exec>
+    <!--exec executable="sudo">
+      <arg value="su"/>
+      <arg line="- dspace -c'rm -rf ~/.m2'"/>
+    </exec-->
+    <exec executable="mvn" dir="${DSPACE_SRC_RELEASE_DIR}/dspace-jspui/dspace-jspui-api">
+      <arg value="install"/>
+    </exec>
+    <copy file="${DSPACE_SRC_RELEASE_DIR}/dspace-api/target/dspace-api-${DSPACE_VERSION}.jar" todir="${DSPACE_INSTALL_DIR}/lib"/>
+    <copy file="${DSPACE_SRC_RELEASE_DIR}/dspace-api/target/dspace-api-${DSPACE_VERSION}.jar" todir="${IUGONET_WEBAPPS}/WEB-INF/lib"/>
+    <copy file="${DSPACE_SRC_RELEASE_DIR}/dspace-jspui/dspace-jspui-api/target/dspace-jspui-api-${DSPACE_VERSION}.jar" todir="${IUGONET_WEBAPPS}/WEB-INF/lib"/>
+  </target>
+
+  <target name="set_tomcat_daemon" description="Set Tomcat Daemon">
+    <exec executable="cp">
+      <arg value="${CATALINA_HOME}/bin/commons-daemon-native.tar.gz"/>
+      <arg value="${TEMP_DIR}"/>
+    </exec>
+    <exec executable="tar">
+      <arg value="xvzf"/>
+      <arg value="${TEMP_DIR}/commons-daemon-native.tar.gz"/>
+      <arg value="--directory"/>
+      <arg value="${TEMP_DIR}"/>
+    </exec>
+    <!--exec executable="autoconf" dir="${TEMP_DIR}/commons-daemon-1.0.8-native-src/unix/"/-->
+    <exec executable="./configure" dir="${TEMP_DIR}/commons-daemon-1.0.8-native-src/unix/"/>
+    <exec executable="make" dir="${TEMP_DIR}/commons-daemon-1.0.8-native-src/unix/">
+      <arg value="clean"/> 
+    </exec>
+    <exec executable="make" dir="${TEMP_DIR}/commons-daemon-1.0.8-native-src/unix/"/>
+    <exec executable="cp" dir="${TEMP_DIR}/commons-daemon-1.0.8-native-src/unix/">
+      <arg value="jsvc"/> 
+      <arg value="${CATALINA_HOME}/bin"/>
+    </exec>
+  </target>
+
+  <target name="clean" description="Clean Everything">
+    <delete dir="${TEMP_DIR}/${POSTGRESQL}" quiet="true"/>
+    <delete file="${TEMP_DIR}/${MAVEN_TGZ}" quiet="true"/>
+    <delete file="${TEMP_DIR}/${TOMCAT_TGZ}" quiet="true"/>
+    <delete file="${TEMP_DIR}/${TOMCAT_CNT_TGZ}" quiet="true"/>
+    <delete file="${TEMP_DIR}/${POSTGRESQL_TGZ}" quiet="true"/>
+
+    <delete file="${MAVEN_HOME}" quiet="true"/>
+    <exec executable="sudo">
+      <arg value="rm"/>
+      <arg value="-rf"/>
+      <arg value="${INSTALL_DIR}/${MAVEN}"/>
+    </exec>
+
+    <delete file="${CATALINA_HOME}" quiet="true"/>
+    <exec executable="sudo">
+      <arg value="rm"/>
+      <arg value="-rf"/>
+      <arg value="${INSTALL_DIR}/${TOMCAT}"/>
+    </exec>
+    <exec executable="sudo">
+      <arg value="rm"/>
+      <arg value="-rf"/>
+      <arg value="${TEMP_DIR}/${TOMCAT_CNT}"/>
+    </exec>
+
+    <delete dir="${WORK}/${DSPACE_RELEASE}" quiet="true" />
+    <delete dir="${WORK}/${DSPACE_SRC}" quiet="true" />
+    <delete file="${TEMP_DIR}/${DSPACE_RELEASE_TGZ}" quiet="true" />
+    <delete file="${TEMP_DIR}/${DSPACE_SRC_TGZ}" quiet="true" />
+
+    <delete dir="${TEMP_DIR}/${POSTGRESQL}" quiet="true"/>
+    <delete file="${TEMP_DIR}/${POSTGRESQL_TGZ}" quiet="true"/>
+    <delete file="${POSTGRESQL_HOME}" quiet="true"/>
+    <delete file="${PGDATA}" quiet="true"/>
+    <exec executable="sudo">
+      <arg value="rm"/>
+      <arg value="-rf"/>
+      <arg value="${POSTGRESQL_HOME}-${POSTGRESQL_VERSION}"/>
+    </exec>
+    <exec executable="sudo">
+      <arg value="rm"/>
+      <arg value="-rf"/>
+      <arg value="${PGDATA}-${POSTGRESQL_VERSION}"/>
+    </exec>
+  </target>
+
+</project>
