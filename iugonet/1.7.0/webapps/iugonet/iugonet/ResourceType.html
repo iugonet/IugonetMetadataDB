@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>SPASE Data Model</title>
+</head>
+
+<body bgcolor=#ffffff text=#000000>
+
+<h3>SPASE Ontology</h3>
+<ul>
+<li>This figure shows the relationship between 12 resource types in the SPASE Ontology.</li>
+<li>If you place cursor over the resource type, you can check the details.</li>
+<li>For more details, please check <a href="http://www.spase-group.org/data/dictionary">the documents by the SPASE consortium</a>.</li>
+</ul>
+
+<center>
+<img src="image/spaseOntology.png" border="0" usemap="#spaseOntology"/>
+<map id="spaseOntology" name="spaseOntology">
+<div>
+<area shape="poly" coords="64,112,84,118,136,104,144,106,144,54,64,54" title="Document: A set of information designed and presented as an individual entity. A document may contain plain or formatted text, in-line graphics, sound, other multimedia data, or hypermedia references. Some examples of documents include a paper, letter, book, user guide, map, drawing, photograph, or image."/> <!-- Document --> 
+<area shape="poly" coords="64,188,84,212,136,180,144,178,144,130,64,130" title="Catalog: A tabular listing of events or observational notes, especially those that have utility in aiding a user in locating data. Catalogues include lists of events, files in a product, and data availability."/> <!-- Catalog -->
+<area shape="poly" coords="64,264,84,288,136,256,144,254,144,206,64,206" title="DisplayData: A graphical representation of data wherein the underlying numeric values are not (readily) accessible for analysis. Examples are line plots and spectrograms."/> <!-- DisplayData -->
+<area shape="poly" coords="64,340,84,364,136,332,144,330,144,282,64,282" title="NumericalData: Data product stored as numerical values in a specified format."/> <!-- NumericalData -->
+<area shape="poly" coords="250,398,270,404,322,390,330,392,330,340,250,340" title="Granule: An accessible portion of another resource. A Granule may be composed of one or more physical pieces (files) which are considered inseparable. For example, a data storage format that maintains metadata and binary data in separate, but tightly coupled files. Granules should not be used to group files that have simple relationships or which are associated through a parent resouce. For example, each file containing a time interval data for a Numerical Data resource would each be considered a Granule. The ParentID of a Granule resource must be a NumericalData resource. The attributes of a Granule supersede the corresponding attributes in the NumericalData resource."/> <!-- Granule -->
+<area shape="poly" coords="304,278,324,284,376,270,384,272,384,228,304,228" title="Annotation: Information which is explanatory or descriptive which is associated with another resource."/> <!-- Annotation -->
+<area shape="poly" coords="316,136,336,142,388,128,396,130,396,78,316,78" title="Instrument: A device that makes measurements used to characterize a physical phenomenon, or a family of like devices."/> <!-- Instrument -->
+<area shape="poly" coords="446,200,264,206,518,192,526,440,526,142,446,142" title="Observatory: The host(spacecraft, network, facility) for instruments making observations, or a family of closely related hosts."/> <!-- Observatory -->
+<area shape="poly" coords="546,260,566,266,618,252,626,254,626,202,546,202" title="Person: An individual human being."/> <!-- Person -->
+<area shape="poly" coords="356,362,376,368,428,354,436,356,436,304,356,304" title="Repository: A location or facility where resources are stored."/> <!-- Repository -->
+<area shape="poly" coords="462,366,482,372,534,358,542,360,542,308,462,308" title="Service: A location or facility that can perform a well defined task."/> <!-- Service -->
+<area shape="poly" coords="578,366,598,372,650,360,658,360,658,308,578,308" title="Registry: A location or facility where resources are cataloged."/> <!-- Registry -->
+</div>
+</map>
+<input type="button" value="Close" onclick="window.close()"/>
+</center>
+
+</body>
+</html>
+

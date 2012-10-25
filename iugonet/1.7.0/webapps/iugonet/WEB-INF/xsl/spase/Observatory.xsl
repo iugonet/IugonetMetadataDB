@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+
+
+  <!-- DEFINE -->
+  <xsl:import href="./common/ResourceHeader.xsl"/>
+  <xsl:import href="./common/Location.xsl"/>
+
+
+  <!-- Template -->
+  <xsl:template name="Observatory">
+
+
+    <!-- Parameter -->
+    <xsl:param name="related_flag"/>
+
+
+    <!-- ResourceID -->
+    <xsl:comment> [ResourceID] </xsl:comment>
+    <xsl:for-each select="//dublin_core/dcvalue[@element='ResourceID']">
+    <xsl:sort select="./@metadata_value_id" data-type="number" order="ascending"/>
+      <tr>
+        <td class="metadataFieldLabel1"><hr class="hrMetaDataField"/>ResourceID</td>
+      </tr>
+      <tr>
+        <td class="metadataFieldValue1"><a><xsl:attribute name="href"><xsl:value-of select="concat('/iugonet/browse?type=ObservatoryID&amp;value=', .)"/></xsl:attribute><xsl:value-of select="."/></a></td>
+      </tr>
+    </xsl:for-each>
+
+
+    <!-- Resource Header -->
+    <xsl:call-template name="ResourceHeader">
+      <xsl:with-param name="related_flag"><xsl:value-of select="$related_flag"/></xsl:with-param>
+      <xsl:with-param name="resource_type">Observatory</xsl:with-param>
+      <xsl:with-param name="parent_element"></xsl:with-param>
+      <xsl:with-param name="indent_number">1</xsl:with-param>
+    </xsl:call-template>
+
+
+    <!-- ObservatoryGroup -->
+    <xsl:comment> [ObservatoryGroup] </xsl:comment>
+    <xsl:for-each select="//dublin_core/dcvalue[@qualifier='ObservatoryGroup']">
+    <xsl:sort select="./@metadata_value_id" data-type="number" order="ascending"/>
+      <tr>
+        <td class="metadataFieldLabel1"><hr class="hrMetaDataField"/>ObservatoryGroup</td>
+      </tr>
+      <tr>
+        <td class="metadataFieldValue1"><xsl:value-of select="."/></td>
+      </tr>
+    </xsl:for-each>
+
+
+    <!-- Location -->
+    <xsl:call-template name="Location">
+      <xsl:with-param name="related_flag"><xsl:value-of select="$related_flag"/></xsl:with-param>
+      <xsl:with-param name="resource_type">Observatory</xsl:with-param>
+      <xsl:with-param name="parent_element"></xsl:with-param>
+      <xsl:with-param name="indent_number">1</xsl:with-param>
+    </xsl:call-template>
+
+
+    <!-- Extension -->
+    <xsl:comment> [Extension] </xsl:comment>
+    <xsl:for-each select="//dublin_core/dcvalue[@qualifier='Extension']">
+    <xsl:sort select="./@metadata_value_id" data-type="number" order="ascending"/>
+      <tr>
+        <td class="metadataFieldLabel1"><hr class="hrMetaDataField"/>Extension</td>
+      </tr>
+      <tr>
+        <td class="metadataFieldValue1"><xsl:value-of select="."/></td>
+      </tr>
+    </xsl:for-each>
+
+
+  </xsl:template>
+
+</xsl:stylesheet>

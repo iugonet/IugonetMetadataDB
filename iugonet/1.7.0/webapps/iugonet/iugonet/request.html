@@ -1,0 +1,232 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<result>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<title>IUGONET OpenSearch</title>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<link type="text/css" rel="stylesheet" href="request_files/sru.css">
+<link title="IUGONET" type="application/opensearchdescription+xml" href="http://devel.iugonet.org/opensearch/request.html" rel="search">
+<link title="IUGONET" type="application/sru+xml" href="http://www.iugonet.org/" rel="search">
+</head>
+<body topmargin="0" leftmargin="0" marginheight="0" marginwidth="0">
+<div style="width: 966px; margin: 0pt auto;">
+<table style="width: 966px; margin: 0pt auto; text-align: left;" border="0" cellpadding="0" cellspacing="0">
+<tbody>
+<tr>
+<td width="100%"><table width="100%" border="0" cellpadding="0" cellspacing="20">
+<tbody>
+<tr valign="top">
+<td>
+<a href="http://www.iugonet.org/">
+<img alt="IUGONET OpenSearch" src="image/iugonet_opensearch_logo.png" border="0" width="100%">
+</a>
+</td>
+</tr>
+<div style="text-align: center;">
+
+<script>
+    function mungeForm() {
+      inform = document.CQLForm;
+      outform = document.SRUForm;
+      max = inform.maxIndex.value;
+      cql = "";
+      prevIdx = 0;
+      // Step through elements in form to create CQL
+      for (var idx = 1; idx <= max; idx++) {
+        term = trim(inform["term"+idx].value);
+        if (term) {
+          if (prevIdx) {
+            cql += " " + inform["bool" + prevIdx].value + " "
+          }
+          if (term.indexOf(' ')) {
+            term = '"' + term + '"';
+          }
+          cql += inform["index" + idx].value + " " + inform["relat" + idx].value + " " + term
+          prevIdx = idx
+        }
+      }
+      if (!cql) {
+        alert("At least one term is required to search");
+        return false;
+      }
+      outform.query.value = cql
+      outform.submit();
+      return false;
+    }
+
+    function trim(stringToTrim) {
+	return stringToTrim.replace(/^\s+|\s+$/g,"");
+    }
+
+
+</script>
+
+<table style="width: 966px; margin: 0pt auto; text-align: left;" border="0" cellpadding="0" cellspacing="0">
+<tbody>
+<tr>
+<td colspan="2" width="100%">
+<table class="layout" cellspacing="0">
+<td style="padding-right: 10px;" width="100%"><form onsubmit="return mungeForm();" name="CQLForm">
+<input value="25" name="maxIndex" type="hidden"><table border="0" cellspacing="0"><tbody><tr>
+<td colspan="4">
+<input onclick="return mungeForm();" value="Search" type="submit">
+            &nbsp;&nbsp;
+	<input onclick="document.CQLForm.reset();return false" value="Reset" type="button">
+</td>
+</tr>
+</tbody>
+</table>
+<br>
+<table class="formtable" border="0" cellspacing="0">
+<tbody>
+<tr>
+<th width="35%" id="title">dcterms</th>
+<th width="15%" id="title">Relation</th>
+<th width="35%" id="title">Term</th>
+<th width="15%" id="title">Boolean</th></tr>
+
+<tr><td id="skyblue" title="<- spase:"><b>contributor</b></td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel01" id="skyblue"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="skyblue"><input id="skyblue" name="contributor" size="50" type="text" ></td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool01" id="skyblue"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="skyblue" title="<- spase:"><b>creator</b></td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel02" id="skyblue"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="skyblue"><input id="skyblue" name="term6" size="50" type="text"></td><td id="#f3ffff"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool02" id="skyblue"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="purple" title="<- spase:"><b>coverage</b></td><td id="purple"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel03" id="purple"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="purple"><input id="purple" name="term6" size="50" type="text"></td><td id="purple"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool03" id="purple"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="purple" title="<- spase:">spatial</td><td id="purple"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel04" id="purple"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="purple"><input id="purple" name="term6" size="50" type="text"></td><td id="purple"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool04" id="purple"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="purple" title="<- spase:">temporal</td><td id="purple"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel05" id="purple"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="purple"><input id="purple" name="term6" size="50" type="text"></td><td id="purple"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool05" id="purple"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="skyblue" title="<- spase:"><b>date</b></td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel06" id="skyblue"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="skyblue"><input id="skyblue" name="term6" size="50" type="text"></td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool06" id="skyblue"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="skyblue" title="<- spase:">available</td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel07" id="skyblue"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="skyblue"><input id="skyblue" name="term6" size="50" type="text"></td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool07" id="skyblue"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="skyblue" title="<- spase:">created</td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel08" id="skyblue"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="skyblue"><input id="skyblue" name="term6" size="50" type="text"></td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool08" id="skyblue"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="skyblue" title="<- spase:">dateAccepted</td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel09" id="skyblue"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="skyblue"><input id="skyblue" name="term6" size="50" type="text"></td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool09" id="skyblue"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="skyblue" title="<- spase:">dateCopyrighted</td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel10" id="skyblue"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="skyblue"><input id="skyblue" name="term6" size="50" type="text"></td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool10" id="skyblue"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="skyblue" title="<- spase:">dateSubmitted</td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel11" id="skyblue"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="skyblue"><input id="skyblue" name="term6" size="50" type="text"></td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool11" id="skyblue"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="skyblue" title="<= spase:">issued</td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel12" id="skyblue"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="skyblue"><input id="skyblue" name="term6" size="50" type="text"></td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool12" id="skyblue"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="skyblue" title="<- spase:">modified</td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel13" id="skyblue"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="skyblue"><input id="skyblue" name="term6" size="50" type="text"></td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool13" id="skyblue"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="skyblue">valid</td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel14" id="skyblue"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="skyblue"><input id="skyblue" name="term6" size="50" type="text"></td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool14" id="skyblue"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="purple" title="<- spase:"><b>description</b></td><td id="purple"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel15" id="purple"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="purple"><input id="purple" name="term6" size="50" type="text"></td><td id="purple"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool15" id="purple"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="purple" title="<- spase:">abstract</td><td id="purple"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel16" id="purple"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="purple"><input id="purple" name="term6" size="50" type="text"></td><td id="purple"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool15" id="purple"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="purple" title="<- spase:">tableOfContents</td><td id="purple"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel17" id="purple"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="purple"><input id="purple" name="term6" size="50" type="text"></td><td id="purple"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool16" id="purple"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="skyblue" title="<- spase:"><b>format</b></td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel18" id="skyblue"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="skyblue"><input id="skyblue" name="term6" size="50" type="text"></td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool17" id="skyblue"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="skyblue" title="<- spase:">extent</td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel19" id="skyblue"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="skyblue"><input id="skyblue" name="term6" size="50" type="text"></td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool18" id="skyblue"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="skyblue" title="<- spase:">medium</td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel20" id="skyblue"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="skyblue"><input id="skyblue" name="term6" size="50" type="text"></td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool19" id="skyblue"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="purple" title="<- spase:" ><b>identifier</b></td><td id="purple"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel21" id="purple"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="purple"><input id="purple" name="term6" size="50" type="text"></td><td id="purple"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool20" id="purple"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="purple" title="<- spase:">bibliographicCitation</td><td id="purple"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel22" id="purple"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="purple"><input id="purple" name="term6" size="50" type="text"></td><td id="purple"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool21" id="purple"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="skyblue" title="<- spase:"><b>language</b></td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel23" id="skyblue"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="skyblue"><input id="skyblue" name="term6" size="50" type="text"></td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool22" id="skyblue"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="purple" title="<- spase:"><b>publisher</b></td><td id="purple"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel24" id="purple"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="purple"><input id="purple" name="term6" size="50" type="text"></td><td id="purple"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool23" id="purple"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="skyblue" title="<- spase:"><b>relation</b></td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel25" id="skyblue"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="skyblue"><input id="skyblue" name="term6" size="50" type="text"></td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool24" id="skyblue"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="skyblue" title="<- spase:"><b>source</b></td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel26" id="skyblue"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="skyblue"><input id="skyblue" name="term6" size="50" type="text"></td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool25" id="skyblue"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="skyblue" title="<- spase:">conformsTo</td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel27" id="skyblue"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="skyblue"><input id="skyblue" name="term6" size="50" type="text"></td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool26" id="skyblue"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="skyblue" title="<- spase:">hasFormat</td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel28" id="skyblue"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="skyblue"><input id="skyblue" name="term6" size="50" type="text"></td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool27" id="skyblue"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="skyblue" title="<- spase:">hasPart</td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel29" id="skyblue"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="skyblue"><input id="skyblue" name="term6" size="50" type="text"></td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool28" id="skyblue"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="skyblue" title="<- spase:">hasVersion</td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel30" id="skyblue"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="skyblue"><input id="skyblue" name="term6" size="50" type="text"></td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool29" id="skyblue"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="skyblue" title="<- spase:">isFormatOf</td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel31" id="skyblue"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="skyblue"><input id="skyblue" name="term6" size="50" type="text"></td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool30" id="skyblue"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="skyblue" title="<- spase:">isPartOf</td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel32" id="skyblue"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="skyblue"><input id="skyblue" name="term6" size="50" type="text"></td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool31" id="skyblue"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="skyblue" title="<- spase:">isReferencedBy</td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel33" id="skyblue"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="skyblue"><input id="skyblue" name="term6" size="50" type="text"></td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool32" id="skyblue"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="skyblue" title="<- spase:">isReplacedBy</td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel34" id="skyblue"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="skyblue"><input id="skyblue" name="term6" size="50" type="text"></td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool33" id="skyblue"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="skyblue" title="<- spase:">isRequiredBy</td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel35" id="skyblue"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="skyblue"><input id="skyblue" name="term6" size="50" type="text"></td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool34" id="skyblue"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="skyblue" title="<- spase:">isVersionOf</td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel36" id="skyblue"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="skyblue"><input id="skyblue" name="term6" size="50" type="text"></td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool35" id="skyblue"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="skyblue" title="<- spase:">references</td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel37" id="skyblue"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="skyblue"><input id="skyblue" name="term6" size="50" type="text"></td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool36" id="skyblue"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="skyblue" title="<- spase:">replaces</td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel37" id="skyblue"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="skyblue"><input id="skyblue" name="term6" size="50" type="text"></td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool37" id="skyblue"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="skyblue" title="<- spase:">requires</td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel38" id="skyblue"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="skyblue"><input id="skyblue" name="term6" size="50" type="text"></td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool38" id="skyblue"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="purple" title="<- spase:"><b>rights</b></td><td id="purple"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel39" id="purple"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="purple"><input id="purple" name="term6" size="50" type="text"></td><td id="purple"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool38" id="purple"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="purple" title="<- spase:">accessRights</td><td id="purple"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel40" id="purple"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="purple"><input id="purple" name="term6" size="50" type="text"></td><td id="purple"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool39" id="purple"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="purple" title="<- spase:">license</td><td id="purple"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel41" id="purple"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="purple"><input id="purple" name="term6" size="50" type="text"></td><td id="purple"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool40" id="purple"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="skyblue" title="<- spase:"><b>subject</b></td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel42" id="skyblue"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="skyblue"><input id="skyblue" name="term6" size="50" type="text"></td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool41" id="skyblue"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="skyblue" title="<- spase:"><b>title</b></td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel43" id="skyblue"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="skyblue"><input id="skyblue" name="term6" size="50" type="text"></td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool42" id="skyblue"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="purple" title="<- spase:">alternative</td><td id="purple"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel44" id="purple"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="purple"><input id="purple" name="term6" size="50" type="text"></td><td id="purple"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool43" id="purple"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="skyblue" title="<- spase:"><b>type</b></td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel45" id="skyblue"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="skyblue"><input id="skyblue" name="term6" size="50" type="text"></td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool44" id="skyblue"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="purple" title="<- spase:">audience</td><td id="purple"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel46" id="purple"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="purple"><input id="purple" name="term6" size="50" type="text"></td><td id="purple"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool45" id="purple"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="purple" title="<- spase:">educationLevel</td><td id="purple"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel47" id="purple"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="purple"><input id="purple" name="term6" size="50" type="text"></td><td id="purple"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool46" id="purple"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="purple" title="<- spase:">mediator</td><td id="purple"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel48" id="purple"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="purple"><input id="purple" name="term6" size="50" type="text"></td><td id="purple"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool47" id="purple"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="skyblue" title="<- spase:">accrualMethod</td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel49" id="skyblue"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="skyblue"><input id="skyblue" name="skyblue" size="50" type="text"></td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool48" id="skyblue"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="skyblue" title="<- spase:">accrualPeriodicity</td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel50" id="skyblue"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="skyblue"><input id="skyblue" name="term6" size="50" type="text"></td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool48" id="skyblue"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="skyblue" title="<- spase:">accrualPolicy</td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel51" id="skyblue"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="skyblue"><input id="skyblue" name="skyblue" size="50" type="text"></td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool49" id="skyblue"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="skyblue" title="<- spase">instructionalMethod</td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel52" id="skyblue"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="skyblue"><input id="skyblue" name="term6" size="50" type="text"></td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool50" id="skyblue"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="skyblue" title="<- spase:">provenance</td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel53" id="skyblue"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="skyblue"><input id="skyblue" name="term6" size="50" type="text"></td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool51" id="skyblue"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+
+<tr><td id="skyblue" title="<- spase:">rightsHolder</td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="rel54" id="skyblue"><option selected="selected" value="=">=</option><option value="==">==</option><option value="&lt;&gt;">&lt;&gt;</option><option value="adj">adj</option><option value="all">all</option><option value="any">any</option></select></td><td id="skyblue"><input id="skyblue" name="term6" size="50" type="text"></td><td id="skyblue"><select size="1" style="min-width: 80px; max-width: 80px; width: 80px;" name="bool52" id="skyblue"><option selected="selected" value="AND">AND</option><option value="OR">OR</option><option value="NOT">NOT</option></select></td></tr>
+</tbody></table></form>
+
+
+<br>
+
+<form onsubmit="mungeForm()" name="SRUForm" method="GET">
+<input value="" name="query" type="hidden"><input value="searchRetrieve" name="operation" type="hidden"><table class="formtable" border="0" cellspacing="0"><tbody><tr><th width="50%" id="title">Parameter</th><th width="50%" id="title">Value</th></tr>
+<tr><td width="50%">Media Type: </td><td width="50%"><select id="httpAccept" name="httpAccept"><option value="application/atom+xml">ATOM</option>
+<option value="application/rss+xml">RSS</option><option value="application/sru+xml" selected="selected">SRU</option><!-- <option value="text/turtle">TURTLE</option> --></select></td></tr><tr><td width="50%">Number of Records: </td><td width="50%"><input value="25" name="maximumRecords" id="maximumRecords" type="text"></td></tr><tr><td width="50%">Sort Keys: </td><td width="50%"><select id="sortKeys" name="sortKeys"><option value=",pam,0" selected="selected">Relevance</option><option value="publicationDate,pam,0">Date: Newest</option><option value="publicationDate,pam,1">Date: Oldest</option><option value="title,pam,1">Title</option><option value="articleType,pam,1">Article Type</option></select></td></tr></tbody></table><br><table border="0" cellspacing="0"><tbody><tr><td colspan="4"><input onclick="return mungeForm();" value="Search" type="submit">
+      &nbsp;&nbsp;
+      <input onclick="document.CQLForm.reset();return false" value="Reset" type="button">
+</td>
+</tr>
+</tbody>
+</table>
+</form>
+</td>
+</table>
+</td>
+</tr>
+<tr valign="top">
+<td colspan="2" bgcolor="#e4e4e4" height="2">
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</result>
