@@ -6,7 +6,7 @@
 
   </target>
 
-  <target name="install_git" description="Install Git">
+  <target name="git" description="Install Git">
     <exec executable="sudo">
       <arg value="yum"/>
       <arg value="-y"/>
@@ -27,7 +27,7 @@
     </exec>
   </target>
 
-  <target name="pre_install" description="Install All">
+  <target name="init" description="Install All">
     <antcall target="install_maven"/>
     <antcall target="install_tomcat"/>
     <antcall target="install_g2d"/>
@@ -92,7 +92,7 @@
     </exec>
   </target>
 
-  <target name="install_maven" description="install Apache Maven">
+  <target name="maven" description="install Apache Maven">
     <condition property="have.resources">
       <available file="${TEMP_DIR}/${MAVEN_TGZ}"/>
     </condition>
@@ -136,7 +136,7 @@
     </exec>
   </target>
 
-  <target name="set_maven_proxy" description="set Apache Maven proxy">
+  <target name="maven_proxy" description="set Apache Maven proxy">
     <exec executable="sudo"> <!-- Change permission of ${MAVEN_HOME}/conf/settings.xml -->
       <arg value="chmod"/>
       <arg value="o+w"/>
@@ -160,7 +160,7 @@
     </exec>
   </target>
 
-  <target name="install_tomcat" description="install Apache Tomcat">
+  <target name="tomcat" description="install Apache Tomcat">
     <exec executable="sudo"> <!-- Change permission of ${ENV_SET_FILE} -->
       <arg value="chmod"/>
       <arg value="o+w"/>
@@ -205,7 +205,7 @@
   </target>
 
 
-  <target name="install_g2d" description="Install G2d">
+  <target name="g2d" description="Install G2d">
     <exec executable="git">
       <arg value="clone"/>
       <arg value="ssh://${SSH_SERVER}/~/git/git2dspace/g2d.git"/>
@@ -213,7 +213,7 @@
     </exec>
   </target>
 
-  <target name="install_httpd" description="Install Apache HTTPD">
+  <target name="httpd" description="Install Apache HTTPD">
     <exec executable="sudo"> <!-- Change permission of ${ENV_SET_FILE} -->
       <arg value="chmod"/>
       <arg value="-R"/>
@@ -243,7 +243,7 @@
     </exec>
   </target>
 
-  <target name="install_postgresql_bin" description="Install PostgreSQL Binary">
+  <target name="postgresql_bin" description="Install PostgreSQL Binary">
     <exec executable="sudo"> <!-- Change permission of ${ENV_SET_FILE} -->
       <arg value="chmod"/>
       <arg value="o+w"/>
@@ -315,7 +315,7 @@
     </exec>
   </target>
 
-  <target name="install_postgresql" description="Install PostgreSQL">
+  <target name="postgresql" description="Install PostgreSQL">
     <exec executable="sudo"> <!-- Change permission of ${ENV_SET_FILE} -->
       <arg value="chmod"/>
       <arg value="o+w"/>
@@ -450,7 +450,7 @@
     </exec>
   </target>
 
-  <target name="install_postgresql_bin2" description="Install PostgreSQL Binary2">
+  <target name="postgresql_bin2" description="Install PostgreSQL Binary2">
     <exec executable="sudo">
       <arg value="su"/>
       <arg value="-"/>
@@ -463,7 +463,7 @@
   </target>
 
 
-  <target name="install_mdb" description="Install IUGONET Metadata DB.">
+  <target name="mdb" description="Install IUGONET Metadata DB.">
     <get src="http://ftp.jaist.ac.jp/pub/sourceforge/d/project/ds/dspace/DSpace%20Stable/${DSPACE_VERSION}/${DSPACE_RELEASE_TGZ}" dest="${TEMP_DIR}" usetimestamp="true"/>
     <get src="http://ftp.jaist.ac.jp/pub/sourceforge/d/project/ds/dspace/DSpace%20Stable/${DSPACE_VERSION}/${DSPACE_SRC_TGZ}" dest="${TEMP_DIR}" usetimestamp="true"/>
     <untar src="${TEMP_DIR}/${DSPACE_RELEASE_TGZ}" dest="${WORK}" compression="gzip"/>
@@ -663,7 +663,7 @@
     <copy file="${DSPACE_SRC_RELEASE_DIR}/dspace-jspui/dspace-jspui-api/target/dspace-jspui-api-${DSPACE_VERSION}.jar" todir="${IUGONET_WEBAPPS}/WEB-INF/lib"/>
   </target>
 
-  <target name="set_tomcat_daemon" description="Set Tomcat Daemon">
+  <target name="tomcat_daemon" description="Set Tomcat Daemon">
     <exec executable="cp">
       <arg value="${CATALINA_HOME}/bin/commons-daemon-native.tar.gz"/>
       <arg value="${TEMP_DIR}"/>
