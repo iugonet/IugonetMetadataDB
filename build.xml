@@ -28,11 +28,11 @@
   </target>
 
   <target name="init" description="Install All">
-    <antcall target="install_maven"/>
-    <antcall target="install_tomcat"/>
-    <antcall target="install_g2d"/>
-    <antcall target="install_httpd"/>
-    <antcall target="install_postgresql"/>
+    <antcall target="maven"/>
+    <antcall target="tomcat"/>
+    <antcall target="g2d"/>
+    <antcall target="httpd"/>
+    <antcall target="postgresql"/>
   </target>
 
   <target name="install_packages" description="Install RPM packages">
