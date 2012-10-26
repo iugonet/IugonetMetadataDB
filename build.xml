@@ -35,60 +35,21 @@
     <antcall target="postgresql"/>
   </target>
 
-  <target name="install_packages" description="Install RPM packages">
+  <target name="packages" description="Install RPM packages">
     <exec executable="sudo">
       <arg value="yum"/>
       <arg value="-y"/>
       <arg value="install"/>
       <arg value="emacs"/>
-    </exec>
-    <exec executable="sudo">
-      <arg value="yum"/>
-      <arg value="-y"/>
-      <arg value="install"/>
       <arg value="gcc"/>
-    </exec>
-    <exec executable="sudo">
-      <arg value="yum"/>
-      <arg value="-y"/>
-      <arg value="install"/>
       <arg value="zlib-devel"/>
-    </exec>
-    <exec executable="sudo">
-      <arg value="yum"/>
-      <arg value="-y"/>
-      <arg value="install"/>
       <arg value="readline-devel"/>
-    </exec>
-    <exec executable="sudo">
-      <arg value="yum"/>
-      <arg value="-y"/>
-      <arg value="install"/>
       <arg value="flex"/>
-    </exec>
-    <exec executable="sudo">
-      <arg value="yum"/>
-      <arg value="-y"/>
-      <arg value="install"/>
       <arg value="glibc-headers"/>
-    </exec>
-    <exec executable="sudo">
-      <arg value="yum"/>
-      <arg value="-y"/>
-      <arg value="install"/>
       <arg value="httpd-devel"/>
-    </exec>
-    <exec executable="sudo">
-      <arg value="yum"/>
-      <arg value="-y"/>
-      <arg value="install"/>
       <arg value="gcc-c++"/>
-    </exec>
-    <exec executable="sudo">
-      <arg value="yum"/>
-      <arg value="-y"/>
-      <arg value="install"/>
       <arg value="libstdc++-devel"/>
+      <arg value="java-1.6.0-openjdk-devel"/>
     </exec>
   </target>
 
