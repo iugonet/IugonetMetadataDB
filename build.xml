@@ -75,7 +75,7 @@
     <echo message='### for MAVEN&#10;' file="${ENV_SET_FILE}" append="yes"/>
     <echo message='export MAVEN_HOME=${MAVEN_HOME}&#10;' file="${ENV_SET_FILE}" append="yes"/>
     <echo message='export PATH=${MAVEN_HOME}/bin:$PATH&#10;' file="${ENV_SET_FILE}" append="yes"/>
-    <get src="http://ftp.riken.jp/net/apache/maven/binaries/${MAVEN_TGZ}" dest="${TEMP_DIR}" usetimestamp="true"/>
+    <get src="http://ftp.riken.jp/net/apache/maven/maven-${MAVEN_VER}/${MAVEN_VERSION}/binaries/${MAVEN_TGZ}" dest="${TEMP_DIR}" usetimestamp="true"/>
     <exec executable="sudo">
       <arg value="tar"/>
       <arg value="xvzf"/>
@@ -425,8 +425,8 @@
 
 
   <target name="mdb" description="Install IUGONET Metadata DB.">
-    <get src="http://ftp.jaist.ac.jp/pub/sourceforge/d/project/ds/dspace/DSpace%20Stable/${DSPACE_VERSION}/${DSPACE_RELEASE_TGZ}" dest="${TEMP_DIR}" usetimestamp="true"/>
-    <get src="http://ftp.jaist.ac.jp/pub/sourceforge/d/project/ds/dspace/DSpace%20Stable/${DSPACE_VERSION}/${DSPACE_SRC_TGZ}" dest="${TEMP_DIR}" usetimestamp="true"/>
+    <get src="http://sourceforge.net/projects/dspace/files/DSpace%20Stable/${DSPACE_VERSION}/${DSPACE_RELEASE_TGZ}" dest="${TEMP_DIR}" usetimestamp="true"/>
+    <get src="http://sourceforge.net/projects/dspace/files/DSpace%20Stable/${DSPACE_VERSION}/${DSPACE_SRC_TGZ}" dest="${TEMP_DIR}" usetimestamp="true"/>
     <untar src="${TEMP_DIR}/${DSPACE_RELEASE_TGZ}" dest="${WORK}" compression="gzip"/>
     <untar src="${TEMP_DIR}/${DSPACE_SRC_TGZ}" dest="${WORK}" compression="gzip"/>
 
