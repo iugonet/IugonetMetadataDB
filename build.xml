@@ -6,6 +6,10 @@
 
   </target>
 
+  <target name="proxy">
+    <setproxy proxyhost="${proxy.host}" proxyport="${proxy.port}"/>
+  </target>
+
   <target name="git" description="Install Git">
     <exec executable="sudo">
       <arg value="yum"/>
