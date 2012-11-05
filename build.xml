@@ -2,20 +2,8 @@
 <project name="iugonet" default="all">
   <property file="build.properties"/>
 
-  <condition property="have.proxy.host">
-    <isset property="proxy.host"/>
-  </condition>
-
-  <condition property="have.proxy.port">
-    <isset property="proxy.port"/>
-  </condition>
-
   <target name="all">
 
-  </target>
-
-  <target name="proxy">
-    <setproxy proxyhost="${proxy.host}" proxyport="${proxy.port}"/>
   </target>
 
   <target name="git" description="Install Git">
