@@ -130,7 +130,7 @@
     <echo message='export TOMCAT_USER=dspace&#10;' file="${ENV_SET_FILE}" append="yes"/>
     <echo message='export CATALINA_HOME=${CATALINA_HOME}&#10;' file="${ENV_SET_FILE}" append="yes"/>
     <echo message='export PATH=${CATALINA_HOME}/bin:$PATH&#10;' file="${ENV_SET_FILE}" append="yes"/>
-    <get src="http://ftp.riken.jp/net/apache//tomcat/tomcat-${TOMCAT_VER}/v${TOMCAT_VERSION}/bin/${TOMCAT_TGZ}" dest="${TEMP_DIR}" usetimestamp="true"/>
+    <get src="http://ftp.riken.jp/net/apache//tomcat/tomcat-${TOMCAT_VER}/v${TOMCAT_VERSION}/bin/${TOMCAT_TGZ}" dest="${TEMP_DIR}/${TOMCAT_TGZ}" usetimestamp="true"/>
     <exec executable="sudo">
       <arg value="tar"/>
       <arg value="xvzf"/>
