@@ -202,78 +202,6 @@
     </exec>
   </target>
 
-  <target name="postgresql_bin" description="Install PostgreSQL Binary">
-    <exec executable="sudo"> <!-- Change permission of ${ENV_SET_FILE} -->
-      <arg value="chmod"/>
-      <arg value="o+w"/>
-      <arg value="${ENV_SET_FILE}"/>
-    </exec>
-
-    <echo message='### for PostgreSQL&#10;' file="${ENV_SET_FILE}" append="yes"/>
-    <echo message='export POSTGRES_HOME=${POSTGRESQL_HOME}&#10;' file="${ENV_SET_FILE}" append="yes"/>
-    <echo message='export PGLILB=${POSTGRESQL_HOME}/lib&#10;' file="${ENV_SET_FILE}" append="yes"/>
-    <echo message='export PGDATA=${PGDATA}&#10;' file="${ENV_SET_FILE}" append="yes"/>
-    <echo message='export MANPATH=${MANPATH}:${POSTGRESQL_HOME}/man&#10;' file="${ENV_SET_FILE}" append="yes"/>
-    <echo message='export PATH=${POSTGRESQL_HOME}/bin:$PATH&#10;' file="${ENV_SET_FILE}" append="yes"/>
-    <echo message='export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${PGLIB}&#10;' file="${ENV_SET_FILE}" append="yes"/>
-
-    <exec executable="sudo">  <!-- Change permission of ${ENV_SET_FILE} -->
-      <arg value="chmod"/>
-      <arg value="o-w"/>
-      <arg value="${ENV_SET_FILE}"/>
-    </exec>
-
-    <exec executable="sudo" dir="${TEMP_DIR}">
-      <arg value="yum"/>
-      <arg value="-y"/>
-      <arg value="install"/>
-      <arg value="postgresql84"/>
-    </exec>
-
-    <exec executable="sudo" dir="${TEMP_DIR}">
-      <arg value="yum"/>
-      <arg value="-y"/>
-      <arg value="install"/>
-      <arg value="postgresql84-server"/>
-    </exec>
-
-    <exec executable="sudo" dir="${TEMP_DIR}">
-      <arg value="-u"/>
-      <arg value="postgres"/>
-      <arg value="initdb"/> 
-      <arg value="--pgdata=${PGDATA}"/>
-      <arg value="--no-locale"/> 
-      <arg value="--encoding=UTF-8"/> 
-    </exec>
-
-    <exec executable="sudo"> <!-- Change permission of ${ENV_SET_FILE} -->
-      <arg value="chmod"/>
-      <arg value="-R"/>
-      <arg value="o+rwx"/>
-      <arg value="${PGDATA}"/>
-    </exec>
-
-    <echo message='### for Log&#10;' file="${PGDATA}/postgresql.conf" append="yes"/>
-    <echo message="log_destination = 'syslog'&#10;" file="${PGDATA}/postgresql.conf" append="yes"/>
-    <echo message='### for encryption&#10;' file="${PGDATA}/pg_hba.conf" append="yes"/>
-    <echo message='host dspace dspace 127.0.0.1/32 md5&#10;' file="${PGDATA}/pg_hba.conf" append="yes"/>
-
-    <exec executable="sudo">
-      <arg value="chmod"/>
-      <arg value="-R"/>
-      <arg value="o-rwx"/>
-      <arg value="${PGDATA}"/>
-    </exec>
-
-    <exec executable="sudo" dir="${TEMP_DIR}">
-      <arg value="-u"/>
-      <arg value="pgsql"/>
-      <arg value="pg_ctl"/> 
-      <arg value="--pgdata=${PGDATA}"/>
-      <arg value="start"/> 
-    </exec>
-  </target>
-
   <target name="postgresql" description="Install PostgreSQL">
     <exec executable="sudo"> <!-- Change permission of ${ENV_SET_FILE} -->
       <arg value="chmod"/>
@@ -408,19 +336,6 @@
       <arg value="${ENV_SET_FILE}"/>
     </exec>
   </target>
-
-  <target name="postgresql_bin2" description="Install PostgreSQL Binary2">
-    <exec executable="sudo">
-      <arg value="su"/>
-      <arg value="-"/>
-      <arg value="pgsql"/>
-      <arg line="-c'createuser -d -S -R dspace'"/> 
-    </exec>
-    <exec executable="createdb">
-      <arg value="dspace"/>
-    </exec>
-  </target>
-
 
   <target name="mdb" description="Install IUGONET Metadata DB.">
     <get src="http://sourceforge.net/projects/dspace/files/DSpace%20Stable/${DSPACE_VERSION}/${DSPACE_RELEASE_TGZ}" dest="${TEMP_DIR}" usetimestamp="true"/>
