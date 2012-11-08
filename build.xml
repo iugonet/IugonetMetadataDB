@@ -2,9 +2,7 @@
 <project name="iugonet" default="all">
   <property file="build.properties"/>
 
-  <target name="all">
-
-  </target>
+  <target name="all" depends="init"/>
 
   <target name="git" description="Install Git">
     <exec executable="sudo">
@@ -447,7 +445,7 @@
       <arg value="${DSPACE_INSTALL_DIR}"/>
     </exec>
 
-    <antcall target="cp_conf.sh"/>
+    <antcall target="cp_conf"/>
     <exec executable="mvn" dir="${DSPACE_RELEASE_DIR}/dspace">
       <arg value="package"/>
     </exec>
@@ -455,11 +453,11 @@
       <arg value="fresh_install"/>
     </exec>
     <antcall target="cp_webapps.sh"/>
-    <antcall target="cp_src.sh"/>
-    <antcall target="comp.sh"/>    
+    <antcall target="cp_src"/>
+    <antcall target="comp"/>    
   </target>
 
-  <target name="cp_conf.sh" description="originally cp_conf.sh">
+  <target name="cp_conf" description="Originally cp_conf.sh">
     <copy file="${CUSTOM_DIR}/config/dspace.cfg" todir="${DSPACE_RELEASE_DIR}/dspace/config/"/>
     <copy file="${CUSTOM_DIR}/config/registries/dublin-core-types.xml" todir="${DSPACE_RELEASE_DIR}/dspace/config/registries/"/>
   </target>
@@ -565,7 +563,7 @@
     </exec>
   </target>
 
-  <target name="cp_src.sh" description="originally cp_src.sh">
+  <target name="cp_src" description="Originally cp_src.sh">
     <exec executable="cp">
       <arg value="-rf"/>
       <arg line="${CUSTOM_SRC_DSPACE_API}/resources/Messages.properties ${DSPACE_SRC_RELEASE_API}/resources"/>
@@ -608,7 +606,7 @@
     </exec>
   </target>
 
-  <target name="comp.sh" description="originally comp.sh">
+  <target name="comp" description="Originally comp.sh">
     <exec executable="mvn" dir="${DSPACE_SRC_RELEASE_DIR}/dspace-api">
       <arg value="install"/>
     </exec>
