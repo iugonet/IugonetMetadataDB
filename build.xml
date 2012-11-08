@@ -3,7 +3,7 @@
   <property file="build.properties"/>
 
   <target name="all" depends="init"/>
-
+  
   <target name="git" description="Install Git">
     <exec executable="sudo">
       <arg value="yum"/>
