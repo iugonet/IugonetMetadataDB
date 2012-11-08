@@ -4,6 +4,12 @@
 
   <target name="all" depends="init"/>
 
+  <target name="hoge">
+    <exec executable="cat">
+      <arg line="build.properties"/>
+    </exec>
+  </target>
+
   <target name="git" description="Install Git">
     <exec executable="sudo">
       <arg value="yum"/>
