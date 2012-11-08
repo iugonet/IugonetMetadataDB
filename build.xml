@@ -607,10 +607,13 @@
     </exec>
   </target>
 
-  <target name="hoge">
-    <exec executable="cat">
-      <arg line="build.properties"/>
+  <target name="check_build_properties">
+    <exec executable="/bin/sh" outputproperty="hoge">
+      <arg value="-c"/>
+      <arg value="cat build.properties | grep Your | wc -l"/>
     </exec>
+
+    <fail message="Confirm build.properties"/>
   </target>
 
 </project>
