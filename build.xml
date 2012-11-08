@@ -4,12 +4,6 @@
 
   <target name="all" depends="init"/>
 
-  <target name="hoge">
-    <exec executable="cat">
-      <arg line="build.properties"/>
-    </exec>
-  </target>
-
   <target name="git" description="Install Git">
     <exec executable="sudo">
       <arg value="yum"/>
@@ -373,7 +367,7 @@
     <exec executable="ant" dir="${DSPACE_RELEASE_DIR}/dspace/target/dspace-${DSPACE_VERSION}-build.dir">
       <arg value="fresh_install"/>
     </exec>
-    <antcall target="cp_webapps.sh"/>
+    <antcall target="cp_webapps"/>
     <antcall target="cp_src"/>
     <antcall target="comp"/>    
   </target>
@@ -383,7 +377,7 @@
     <copy file="${CUSTOM_DIR}/config/registries/dublin-core-types.xml" todir="${DSPACE_RELEASE_DIR}/dspace/config/registries/"/>
   </target>
 
-  <target name="cp_webapps.sh" description="originally cp_webapps.sh">
+  <target name="cp_webapps" description="originally cp_webapps.sh">
     <delete dir="${IUGONET_WEBAPPS}"/>
     <copy todir="${IUGONET_WEBAPPS}">
       <fileset dir="${DEFAULT_WEBAPPS}"/>
@@ -610,6 +604,12 @@
       <arg value="rm"/>
       <arg value="-rf"/>
       <arg value="${PGDATA}-${POSTGRESQL_VERSION}"/>
+    </exec>
+  </target>
+
+  <target name="hoge">
+    <exec executable="cat">
+      <arg line="build.properties"/>
     </exec>
   </target>
 
