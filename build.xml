@@ -608,12 +608,13 @@
     </exec>
   </target>
 
-  <target name="check_build_properties">
-    <exec executable="/bin/sh" outputproperty="hoge">
+  <target name="properties">
+    <exec executable="/bin/sh" outputproperty="number.properties">
       <arg value="-c"/>
       <arg value="cat build.properties | grep Your | wc -l"/>
     </exec>
 
+    <echo message="${number.properties}"/>
     <fail message="Confirm build.properties"/>
   </target>
 
