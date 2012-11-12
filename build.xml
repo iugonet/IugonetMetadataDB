@@ -615,7 +615,14 @@
     </exec>
 
     <echo message="${number.properties}"/>
-    <fail message="Confirm build.properties"/>
+    <condition property="isExec" value="true">
+      <equals arg1="${number.properties}" arg2="0"/>
+    </condition>
+
+    <target name="hoge" if="${isExec}">
+      <echo message="${isExec}"/>
+      <fail message="Confirm build.properties"/>
+    </target>
   </target>
 
 </project>
