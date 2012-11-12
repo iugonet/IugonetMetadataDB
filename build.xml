@@ -27,15 +27,19 @@
     </exec>
   </target>
 
-  <target name="init" description="Install All">
-    <exec executable="/usr/sbin/useradd">
-      <arg line="dspace"/>
-    </exec>
+  <target name="init" description="Initialize">
+    <antcall target="useradd"/>
     <antcall target="maven"/>
     <antcall target="tomcat"/>
     <antcall target="g2d"/>
     <antcall target="httpd"/>
     <antcall target="postgresql"/>
+  </target>
+
+  <target name="useradd" description="Create dspace user">
+    <exec executable="/usr/sbin/useradd">
+      <arg line="dspace"/>
+    </exec>
   </target>
 
   <target name="packages" description="Install RPM packages">
