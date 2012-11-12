@@ -219,7 +219,7 @@
     <echo message='export PATH=${POSTGRESQL_HOME}/bin:$PATH&#10;' file="${ENV_SET_FILE}" append="yes"/>
     <echo message='export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${PGLIB}&#10;' file="${ENV_SET_FILE}" append="yes"/>
 
-    <get src="http://ftp.jaist.ac.jp/pub/postgresql/source/v${POSTGRESQL_VERSION}/postgresql-${POSTGRESQL_VERSION}.tar.gz" dest="${TEMP_DIR}"/>
+    <get src="http://ftp.jaist.ac.jp/pub/postgresql/source/v${POSTGRESQL_VERSION}/postgresql-${POSTGRESQL_VERSION}.tar.gz" dest="${TEMP_DIR}/postgresql-${POSTGRESQL_VERSION}.tar.gz"/>
     <exec executable="sudo">
       <arg value="/usr/sbin/useradd"/>
       <arg value="-c"/>
