@@ -4,7 +4,7 @@
   <property file="build.properties"/>
 
 <!--  <target name="all" depends="properties, git, packages, init"/> -->
-  <target name="all" depends="git, packages, init, mdb"/>
+  <target name="all" depends="git, packages, init, mdb, tomcat_daemon"/>
   
   <target name="git" description="Install Git">
     <exec executable="sudo">
