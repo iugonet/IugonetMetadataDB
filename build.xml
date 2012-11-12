@@ -28,6 +28,9 @@
   </target>
 
   <target name="init" description="Install All">
+    <exec executable="/usr/sbin/useradd">
+      <arg line="dspace"/>
+    </exec>
     <antcall target="maven"/>
     <antcall target="tomcat"/>
     <antcall target="g2d"/>
@@ -53,7 +56,7 @@
     </exec>
   </target>
 
-  <target name="maven" description="install Apache Maven">
+  <target name="maven" description="Install Apache Maven">
     <condition property="have.resources">
       <available file="${TEMP_DIR}/${MAVEN_TGZ}"/>
     </condition>
@@ -97,7 +100,7 @@
     </exec>
   </target>
 
-  <target name="maven_proxy" description="set Apache Maven proxy">
+  <target name="maven_proxy" description="Set Apache Maven proxy">
     <exec executable="sudo"> <!-- Change permission of ${MAVEN_HOME}/conf/settings.xml -->
       <arg value="chmod"/>
       <arg value="o+w"/>
@@ -121,7 +124,7 @@
     </exec>
   </target>
 
-  <target name="tomcat" description="install Apache Tomcat">
+  <target name="tomcat" description="Install Apache Tomcat">
     <exec executable="sudo"> <!-- Change permission of ${ENV_SET_FILE} -->
       <arg value="chmod"/>
       <arg value="o+w"/>
