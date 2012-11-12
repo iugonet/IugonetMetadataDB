@@ -100,7 +100,7 @@
     </exec>
   </target>
 
-  <target name="maven_proxy" description="Set Apache Maven proxy">
+  <target name="maven_proxy_setting" description="Set Apache Maven proxy">
     <exec executable="sudo"> <!-- Change permission of ${MAVEN_HOME}/conf/settings.xml -->
       <arg value="chmod"/>
       <arg value="o+w"/>
