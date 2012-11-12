@@ -3,7 +3,8 @@
   <property environment="env"/>
   <property file="build.properties"/>
 
-  <target name="all" depends="properties, git, packages, init"/>
+<!--  <target name="all" depends="properties, git, packages, init"/> -->
+  <target name="all" depends="git, packages, init"/>
   
   <target name="git" description="Install Git">
     <exec executable="sudo">
@@ -74,7 +75,7 @@
     <echo message='### for MAVEN&#10;' file="${ENV_SET_FILE}" append="yes"/>
     <echo message='export MAVEN_HOME=${MAVEN_HOME}&#10;' file="${ENV_SET_FILE}" append="yes"/>
     <echo message='export PATH=${MAVEN_HOME}/bin:$PATH&#10;' file="${ENV_SET_FILE}" append="yes"/>
-    <get src="http://ftp.riken.jp/net/apache/maven/maven-${MAVEN_VER}/${MAVEN_VERSION}/binaries/${MAVEN_TGZ}" dest="${TEMP_DIR}" usetimestamp="true"/>
+    <get src="http://ftp.riken.jp/net/apache/maven/maven-${MAVEN_VER}/${MAVEN_VERSION}/binaries/${MAVEN_TGZ}" dest="${TEMP_DIR}/${MAVEN_TGZ}" usetimestamp="true"/>
     <exec executable="sudo">
       <arg value="tar"/>
       <arg value="xvzf"/>
