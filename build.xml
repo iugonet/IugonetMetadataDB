@@ -4,7 +4,7 @@
   <property file="build.properties"/>
 
 <!--  <target name="all" depends="properties, git, packages, init"/> -->
-  <target name="all" depends="git, packages, init"/>
+  <target name="all" depends="git, packages, init, mdb"/>
   
   <target name="git" description="Install Git">
     <exec executable="sudo">
@@ -340,8 +340,8 @@
   </target>
 
   <target name="mdb" description="Install IUGONET Metadata DB.">
-    <get src="http://sourceforge.net/projects/dspace/files/DSpace%20Stable/${DSPACE_VERSION}/${DSPACE_RELEASE_TGZ}" dest="${TEMP_DIR}" usetimestamp="true"/>
-    <get src="http://sourceforge.net/projects/dspace/files/DSpace%20Stable/${DSPACE_VERSION}/${DSPACE_SRC_TGZ}" dest="${TEMP_DIR}" usetimestamp="true"/>
+    <get src="http://sourceforge.net/projects/dspace/files/DSpace%20Stable/${DSPACE_VERSION}/${DSPACE_RELEASE_TGZ}" dest="${TEMP_DIR}/${DSPACE_RELEASE_TGZ}" usetimestamp="true"/>
+    <get src="http://sourceforge.net/projects/dspace/files/DSpace%20Stable/${DSPACE_VERSION}/${DSPACE_SRC_TGZ}" dest="${TEMP_DIR}/${DSPACE_SRC_TGZ}" usetimestamp="true"/>
     <untar src="${TEMP_DIR}/${DSPACE_RELEASE_TGZ}" dest="${WORK}" compression="gzip"/>
     <untar src="${TEMP_DIR}/${DSPACE_SRC_TGZ}" dest="${WORK}" compression="gzip"/>
 
