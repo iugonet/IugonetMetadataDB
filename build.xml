@@ -3,7 +3,7 @@
   <property environment="env"/>
   <property file="build.properties"/>
 
-  <target name="all" depends="check_build_properties, git, packages, init"/>
+  <target name="all" depends="properties, git, packages, init"/>
   
   <target name="git" description="Install Git">
     <exec executable="sudo">
