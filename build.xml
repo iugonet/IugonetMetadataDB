@@ -333,7 +333,7 @@
       <arg value="${PGDATA}-${POSTGRESQL_VERSION}"/> 
     </exec>
     
-    <exec executable="sudo">
+    <exec executable="sudo" spawn="true">
       <arg value="su"/>
       <arg value="-"/>
       <arg value="pgsql"/>
