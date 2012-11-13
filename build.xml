@@ -371,7 +371,7 @@
     </exec>
 
     <antcall target="cp_conf"/>
-    <exec executable="mvn" dir="${DSPACE_RELEASE_DIR}/dspace">
+    <exec executable="${MAVEN_HOME}/bin/mvn" dir="${DSPACE_RELEASE_DIR}/dspace">
       <arg value="package"/>
     </exec>
     <exec executable="ant" dir="${DSPACE_RELEASE_DIR}/dspace/target/dspace-${DSPACE_VERSION}-build.dir">
@@ -532,14 +532,14 @@
   </target>
 
   <target name="comp" description="Originally comp.sh">
-    <exec executable="mvn" dir="${DSPACE_SRC_RELEASE_DIR}/dspace-api">
+    <exec executable="${MAVEN_HOME}/bin/mvn" dir="${DSPACE_SRC_RELEASE_DIR}/dspace-api">
       <arg value="install"/>
     </exec>
     <!--exec executable="sudo">
       <arg value="su"/>
       <arg line="- dspace -c'rm -rf ~/.m2'"/>
     </exec-->
-    <exec executable="mvn" dir="${DSPACE_SRC_RELEASE_DIR}/dspace-jspui/dspace-jspui-api">
+    <exec executable="${MAVEN_HOME}/bin/mvn" dir="${DSPACE_SRC_RELEASE_DIR}/dspace-jspui/dspace-jspui-api">
       <arg value="install"/>
     </exec>
     <copy file="${DSPACE_SRC_RELEASE_DIR}/dspace-api/target/dspace-api-${DSPACE_VERSION}.jar" todir="${DSPACE_INSTALL_DIR}/lib"/>
