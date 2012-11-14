@@ -111,16 +111,11 @@
       <arg value="o+w"/>
       <arg value="${MAVEN_HOME}/conf/settings.xml"/>
     </exec>
-    <echo message='### for proxy setting &#10;' file="${MAVEN_HOME}/conf/settings.xml" append="yes"/>
-    <echo message="&#60;settings&#62;&#10;" file="${MAVEN_HOME}/conf/settings.xml" append="yes"/>
-    <echo message="&#60;proxies&#62;&#10;" file="${MAVEN_HOME}/conf/settings.xml" append="yes"/>
     <echo message="&#60;proxy&#62;&#10;" file="${MAVEN_HOME}/conf/settings.xml" append="yes"/>
     <echo message="&#60;protocol&#62;http&#60;/protocol&#62;&#10;" file="${MAVEN_HOME}/conf/settings.xml" append="yes"/>
     <echo message="&#60;host&#62;${PROXY_HTTP}&#60;/host&#62;&#10;" file="${MAVEN_HOME}/conf/settings.xml" append="yes"/>
     <echo message="&#60;port&#62;${PROXY_PORT}&#60;/port&#62;&#10;" file="${MAVEN_HOME}/conf/settings.xml" append="yes"/>
     <echo message="&#60;/proxy&#62;&#10;" file="${MAVEN_HOME}/conf/settings.xml" append="yes"/>
-    <echo message="&#60;/proxies&#62;&#10;" file="${MAVEN_HOME}/conf/settings.xml" append="yes"/>
-    <echo message="&#60;/settings&#62;&#10;" file="${MAVEN_HOME}/conf/settings.xml" append="yes"/>
 
     <exec executable="sudo"> <!-- Change permission of ${MAVEN_HOME}/conf/settings.xml -->
       <arg value="chmod"/>
