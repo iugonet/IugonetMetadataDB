@@ -58,6 +58,7 @@
       <arg value="gcc-c++"/>
       <arg value="libstdc++-devel"/>
       <arg value="java-1.6.0-openjdk-devel"/>
+      <arg value="ant-apache-regexp"/>
     </exec>
   </target>
 
