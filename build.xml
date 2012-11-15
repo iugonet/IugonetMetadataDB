@@ -340,6 +340,17 @@
       <arg line="-c'${POSTGRESQL_HOME}/bin/pg_ctl start'"/> 
     </exec>
 
+    <exec executable="sudo">
+      <arg value="su"/>
+      <arg value="-"/>
+      <arg value="pgsql"/>
+      <arg line="createuser -d -S -R dspace"/>
+    </exec>
+
+    <exec executable="createdb">
+      <arg value="dspace"/>
+    </exec>
+
     <exec executable="sudo"> <!-- Change permission of ${ENV_SET_FILE} -->
       <arg value="chmod"/>
       <arg value="o-w"/>
