@@ -112,13 +112,14 @@
       <arg value="${MAVEN_HOME}/conf/settings.xml"/>
     </exec>
     <replace file="${MAVEN_HOME}/conf/settings.xml" token="&#60;proxy&#62;&#10;" value="--&#62;&#10;    &#60;proxy&#62;&#10;"/>
+    <replace file="${MAVEN_HOME}/conf/settings.xml" token="      &#60;active&#62;true&#60;/active&#62;&#10;" value="&#60;active&#62;true&#60;/active&#62;&#10;" />
     <replace file="${MAVEN_HOME}/conf/settings.xml" token="&#60;id&#62;optional&#60;/id&#62;&#10;" value="" />
     <replace file="${MAVEN_HOME}/conf/settings.xml" token="&#60;username&#62;proxyuser&#60;/username&#62;&#10;" value="" />
     <replace file="${MAVEN_HOME}/conf/settings.xml" token="&#60;password&#62;proxypass&#60;/password&#62;&#10;" value="" />
-    <replace file="${MAVEN_HOME}/conf/settings.xml" token="&#60;host&#62;proxy.host.net&#60;/host&#62;&#10;" value="&#60;host&#62;${PROXY_HOST}&#60;/host&#62;&#10;" />
+    <replace file="${MAVEN_HOME}/conf/settings.xml" token="      &#60;host&#62;proxy.host.net&#60;/host&#62;&#10;" value="&#60;host&#62;${PROXY_HOST}&#60;/host&#62;&#10;" />
     <replace file="${MAVEN_HOME}/conf/settings.xml" token="&#60;port&#62;80&#60;/port&#62;&#10;" value="&#60;port&#62;${PROXY_PORT}&#60;/port&#62;&#10;" />
     <replace file="${MAVEN_HOME}/conf/settings.xml" token="&#60;nonProxyHosts&#62;local.net|some.host.com&#60;/nonProxyHosts&#62;&#10;" value="" />
-    <replace file="${MAVEN_HOME}/conf/settings.xml" token="&#60;/proxy&#62;&#10;" value="&#60;/proxy&#62;&#10;&#60;--"/>
+    <replace file="${MAVEN_HOME}/conf/settings.xml" token="&#60;/proxy&#62;&#10;" value="&#60;/proxy&#62;&#10;  &#60;!--"/>
 
     <exec executable="sudo"> <!-- Change permission of ${MAVEN_HOME}/conf/settings.xml -->
       <arg value="chmod"/>
