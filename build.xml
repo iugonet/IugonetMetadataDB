@@ -343,6 +343,7 @@
     <exec executable="sudo">
       <arg value="-u"/>
       <arg value="pgsql"/>
+      <arg value="-i"/>
       <arg value="createuser -d -S -R dspace"/>
     </exec>
 
