@@ -341,16 +341,9 @@
     </exec>
 
     <exec executable="sudo">
-      <arg value="su"/>
-      <arg value="-"/>
+      <arg value="-u"/>
       <arg value="pgsql"/>
-      <arg line="createuser -d -S -R dspace"/>
-    </exec>
-
-    <exec executable="su">
-      <arg value="-"/>
-      <arg value="pgsql"/>
-      <arg line="createdb dspace"/>
+      <arg value="createuser -d -S -R dspace"/>
     </exec>
 
     <exec executable="sudo"> <!-- Change permission of ${ENV_SET_FILE} -->
