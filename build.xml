@@ -242,11 +242,6 @@
       <arg value="${POSTGRESQL_HOME}"/>
     </exec>
     <exec executable="sudo">
-      <arg value="su"/>
-      <arg value="-"/>
-      <arg value="pgsql"/>
-    </exec>
-    <exec executable="sudo">
       <arg value="tar"/>
       <arg value="xvzf"/>
       <arg value="${TEMP_DIR}/${POSTGRESQL_TGZ}"/>
@@ -334,8 +329,7 @@
     </exec>
     
     <exec executable="sudo" spawn="true">
-      <arg value="su"/>
-      <arg value="-"/>
+      <arg value="-u"/>
       <arg value="pgsql"/>
       <arg line="-c'${POSTGRESQL_HOME}/bin/pg_ctl start'"/> 
     </exec>
