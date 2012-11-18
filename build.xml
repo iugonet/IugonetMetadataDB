@@ -79,12 +79,6 @@
 
     <echo message="${have.resources}"/>
 
-    <exec executable="sudo"> <!-- Change permission of ${ENV_SET_FILE} -->
-      <arg value="chmod"/>
-      <arg value="o+w"/>
-      <arg value="${ENV_SET_FILE}"/>
-    </exec>
-
     <echo message='### for MAVEN&#10;' file="${ENV_SET_FILE}" append="yes"/>
     <echo message='export MAVEN_HOME=${MAVEN_HOME}&#10;' file="${ENV_SET_FILE}" append="yes"/>
     <echo message='export PATH=${MAVEN_HOME}/bin:$PATH&#10;' file="${ENV_SET_FILE}" append="yes"/>
