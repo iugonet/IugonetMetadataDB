@@ -209,11 +209,10 @@
       <arg value="${POSTGRESQL_HOME}"/>
     </exec>
     <exec executable="sudo">
-      <arg value="tar"/>
-      <arg value="xvzf"/>
-      <arg value="${TEMP_DIR}/${POSTGRESQL_TGZ}"/>
-      <arg value="--directory"/>
-      <arg value="${TEMP_DIR}"/>
+      <arg value="-u"/>
+      <arg value="pgsql"/>
+      <arg value="-i"/>
+      <arg value="tar xvzf ${TEMP_DIR}/${POSTGRESQL_TGZ} --directory ${TEMP_DIR}"/>
     </exec>
     <exec executable="sudo">
       <arg value="mkdir"/>
@@ -238,14 +237,21 @@
     </exec>
     <!-- -->
     <exec executable="sudo" dir="${TEMP_DIR}/${POSTGRESQL}">
-      <arg value="./configure"/> 
-      <arg value="--prefix=${POSTGRESQL_HOME}"/> 
-      <arg value="--with-pgport=${POSTGRESQL_PORT}"/> 
+      <arg value="-u"/>
+      <arg value="pgsql"/>
+      <arg value="-i"/>
+      <arg value="./configure --prefix=${POSTGRESQL_HOME} --with-pgport=${POSTGRESQL_PORT}"/> 
     </exec>
     <exec executable="sudo" dir="${TEMP_DIR}/${POSTGRESQL}">
+      <arg value="-u"/>
+      <arg value="pgsql"/>
+      <arg value="-i"/>
       <arg value="make"/> 
     </exec>
     <exec executable="sudo" dir="${TEMP_DIR}/${POSTGRESQL}">
+      <arg value="-u"/>
+      <arg value="pgsql"/>
+      <arg value="-i"/>
       <arg value="make"/> 
       <arg value="install"/> 
     </exec>
