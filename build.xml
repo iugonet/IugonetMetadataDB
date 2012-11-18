@@ -3,6 +3,10 @@
   <property environment="env"/>
   <property file="build.properties"/>
 
+  <condition property="have.proxy" value="true">
+     <equals arg1="${HAVE_PROXY}" arg2="yes"/>
+  </condition>
+
 <!--  <target name="all" depends="properties, git, packages, init"/> -->
   <target name="all" depends="git, packages, init, mdb, tomcat_daemon"/>
   
@@ -106,7 +110,7 @@
     </exec>
   </target>
 
-  <target name="maven_proxy_settings" description="Set Apache Maven proxy">
+  <target name="maven_proxy_settings" description="Set Apache Maven proxy" if="have.proxy">
     <exec executable="sudo"> <!-- Change permission of ${MAVEN_HOME}/conf/settings.xml -->
       <arg value="chmod"/>
       <arg value="o+w"/>
