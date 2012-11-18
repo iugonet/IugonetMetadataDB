@@ -81,7 +81,7 @@
 
     <echo message='### for MAVEN&#10;' file="${ENV_SET_FILE}" append="yes"/>
     <echo message='export MAVEN_HOME=${MAVEN_HOME}&#10;' file="${ENV_SET_FILE}" append="yes"/>
-    <echo message='export PATH=${MAVEN_HOME}/bin:$PATH&#10;' file="${ENV_SET_FILE}" append="yes"/>
+    <echo message='export PATH=${MAVEN_HOME}/bin:${PATH}&#10;' file="${ENV_SET_FILE}" append="yes"/>
     <get src="http://ftp.riken.jp/net/apache/maven/maven-${MAVEN_VER}/${MAVEN_VERSION}/binaries/${MAVEN_TGZ}" dest="${TEMP_DIR}/${MAVEN_TGZ}" usetimestamp="true"/>
     <exec executable="sudo">
       <arg value="tar"/>
@@ -122,19 +122,10 @@
   </target>
 
   <target name="tomcat" description="Install Apache Tomcat">
-<!-- Change permission of ${ENV_SET_FILE} -->
-<!--
-    <exec executable="sudo"> 
-      <arg value="chmod"/>
-      <arg value="o+w"/>
-      <arg value="${ENV_SET_FILE}"/>
-    </exec>
--->
-
     <echo message='### for TOMCAT&#10;' file="${ENV_SET_FILE}" append="yes"/>
     <echo message='export TOMCAT_USER=dspace&#10;' file="${ENV_SET_FILE}" append="yes"/>
     <echo message='export CATALINA_HOME=${CATALINA_HOME}&#10;' file="${ENV_SET_FILE}" append="yes"/>
-    <echo message='export PATH=${CATALINA_HOME}/bin:$PATH&#10;' file="${ENV_SET_FILE}" append="yes"/>
+    <echo message='export PATH=${CATALINA_HOME}/bin:${PATH}&#10;' file="${ENV_SET_FILE}" append="yes"/>
     <get src="http://ftp.riken.jp/net/apache//tomcat/tomcat-${TOMCAT_VER}/v${TOMCAT_VERSION}/bin/${TOMCAT_TGZ}" dest="${TEMP_DIR}/${TOMCAT_TGZ}" usetimestamp="true"/>
     <exec executable="sudo">
       <arg value="tar"/>
@@ -160,15 +151,6 @@
       <arg value="${WORK}/${CATALINA_HOME}/conf/server.xml"/>
       <arg value="${CATALINA_HOME}/conf"/>
     </exec>
-
- <!-- Change permission of ${ENV_SET_FILE} -->
-<!--
-    <exec executable="sudo">
-      <arg value="chmod"/>
-      <arg value="o-w"/>
-      <arg value="${ENV_SET_FILE}"/>
-    </exec>
--->
   </target>
 
 
@@ -181,16 +163,6 @@
   </target>
 
   <target name="httpd" description="Install Apache HTTPD">
-<!-- Change permission of ${ENV_SET_FILE} -->
-<!--
-    <exec executable="sudo"> 
-      <arg value="chmod"/>
-      <arg value="-R"/>
-      <arg value="o+rwx"/>
-      <arg value="${HTTP_CONF}"/>
-    </exec>
--->
-
     <echo message='### for Proxy&#10;' file="${HTTP_CONF}/httpd.conf" append="yes"/>
     <echo message="ProxyPass /iugonet/ ajp://localhost:8009/iugonet/&#10;" file="${HTTP_CONF}/httpd.conf" append="yes"/>
 
@@ -214,20 +186,12 @@
   </target>
 
   <target name="postgresql" description="Install PostgreSQL">
- <!-- Change permission of ${ENV_SET_FILE} -->
-<!--
-    <exec executable="sudo">
-      <arg value="chmod"/>
-      <arg value="o+w"/>
-      <arg value="${ENV_SET_FILE}"/>
-    </exec>
--->
     <echo message='### for PostgreSQL&#10;' file="${ENV_SET_FILE}" append="yes"/>
     <echo message='export POSTGRES_HOME=${POSTGRESQL_HOME}&#10;' file="${ENV_SET_FILE}" append="yes"/>
     <echo message='export PGLILB=${POSTGRESQL_HOME}/lib&#10;' file="${ENV_SET_FILE}" append="yes"/>
     <echo message='export PGDATA=${PGDATA}&#10;' file="${ENV_SET_FILE}" append="yes"/>
     <echo message='export MANPATH=${MANPATH}:${POSTGRESQL_HOME}/man&#10;' file="${ENV_SET_FILE}" append="yes"/>
-    <echo message='export PATH=${POSTGRESQL_HOME}/bin:$PATH&#10;' file="${ENV_SET_FILE}" append="yes"/>
+    <echo message='export PATH=${POSTGRESQL_HOME}/bin:${PATH}&#10;' file="${ENV_SET_FILE}" append="yes"/>
     <echo message='export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${PGLIB}&#10;' file="${ENV_SET_FILE}" append="yes"/>
 
     <get src="http://ftp.jaist.ac.jp/pub/postgresql/source/v${POSTGRESQL_VERSION}/postgresql-${POSTGRESQL_VERSION}.tar.gz" dest="${TEMP_DIR}/postgresql-${POSTGRESQL_VERSION}.tar.gz"/>
@@ -312,15 +276,6 @@
       <arg value="initdb --no-locale --encoding=UTF-8"/> 
     </exec>
 
- <!-- Change permission of ${ENV_SET_FILE} -->
-<!--
-    <exec executable="sudo">
-      <arg value="chmod"/>
-      <arg value="-R"/>
-      <arg value="o+rwx"/>
-      <arg value="${PGDATA}-${POSTGRESQL_VERSION}"/> 
-    </exec>
--->
     <echo message='### for Log&#10;' file="${PGDATA}/postgresql.conf" append="yes"/>
     <echo message="log_destination = 'syslog'&#10;" file="${PGDATA}/postgresql.conf" append="yes"/>
     <echo message='### for encryption&#10;' file="${PGDATA}/pg_hba.conf" append="yes"/>
@@ -346,15 +301,6 @@
       <arg value="-i"/>
       <arg value="createuser -d -S -R dspace"/>
     </exec>
-
- <!-- Change permission of ${ENV_SET_FILE} -->
-<!--
-    <exec executable="sudo">
-      <arg value="chmod"/>
-      <arg value="o-w"/>
-      <arg value="${ENV_SET_FILE}"/>
-    </exec>
--->
   </target>
 
   <target name="mdb" description="Install IUGONET Metadata DB.">
