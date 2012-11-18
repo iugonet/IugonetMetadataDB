@@ -96,12 +96,6 @@
       <arg value="${INSTALL_DIR}/${MAVEN}"/>
       <arg value="${MAVEN_HOME}"/>
     </exec>
-
-    <exec executable="sudo"> <!-- Change permission of ${ENV_SET_FILE} -->
-      <arg value="chmod"/>
-      <arg value="o-w"/>
-      <arg value="${ENV_SET_FILE}"/>
-    </exec>
   </target>
 
   <target name="maven_proxy_settings" description="Set Apache Maven proxy" if="have.proxy">
