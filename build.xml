@@ -7,7 +7,6 @@
      <equals arg1="${HAVE_PROXY}" arg2="yes"/>
   </condition>
 
-<!--  <target name="all" depends="properties, git, packages, init"/> -->
   <target name="all" depends="git, packages, init, mdb, tomcat_daemon"/>
   
   <target name="git" description="Install Git">
@@ -83,6 +82,8 @@
     <echo message='export MAVEN_HOME=${MAVEN_HOME}&#10;' file="${ENV_SET_FILE}" append="yes"/>
     <echo message='export PATH=${MAVEN_HOME}/bin:${PATH}&#10;' file="${ENV_SET_FILE}" append="yes"/>
     <get src="http://ftp.riken.jp/net/apache/maven/maven-${MAVEN_VER}/${MAVEN_VERSION}/binaries/${MAVEN_TGZ}" dest="${TEMP_DIR}/${MAVEN_TGZ}" usetimestamp="true"/>
+    <untar src="${TEMP_DIR}/${MAVEN_TGZ}" dest="${WORK}"/>
+<!--
     <exec executable="sudo">
       <arg value="tar"/>
       <arg value="xvzf"/>
@@ -90,6 +91,7 @@
       <arg value="--directory"/>
       <arg value="${INSTALL_DIR}"/>
     </exec>
+-->
     <exec executable="sudo">
       <arg value="ln"/>
       <arg value="-s"/>
