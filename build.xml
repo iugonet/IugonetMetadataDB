@@ -236,6 +236,7 @@
       <arg value="${POSTGRESQL_HOME}-${POSTGRESQL_VERSION}"/>
       <arg value="${POSTGRESQL_HOME}"/>
     </exec>
+    <!-- -->
     <exec executable="sudo" dir="${TEMP_DIR}/${POSTGRESQL}">
       <arg value="./configure"/> 
       <arg value="--prefix=${POSTGRESQL_HOME}"/> 
@@ -248,6 +249,7 @@
       <arg value="make"/> 
       <arg value="install"/> 
     </exec>
+    <!-- -->
     <exec executable="sudo">
       <arg value="mkdir"/> 
       <arg value="${PGDATA}-${POSTGRESQL_VERSION}"/> 
