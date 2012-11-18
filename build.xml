@@ -122,11 +122,14 @@
   </target>
 
   <target name="tomcat" description="Install Apache Tomcat">
-    <exec executable="sudo"> <!-- Change permission of ${ENV_SET_FILE} -->
+<!-- Change permission of ${ENV_SET_FILE} -->
+<!--
+    <exec executable="sudo"> 
       <arg value="chmod"/>
       <arg value="o+w"/>
       <arg value="${ENV_SET_FILE}"/>
     </exec>
+-->
 
     <echo message='### for TOMCAT&#10;' file="${ENV_SET_FILE}" append="yes"/>
     <echo message='export TOMCAT_USER=dspace&#10;' file="${ENV_SET_FILE}" append="yes"/>
@@ -158,11 +161,14 @@
       <arg value="${CATALINA_HOME}/conf"/>
     </exec>
 
-    <exec executable="sudo"> <!-- Change permission of ${ENV_SET_FILE} -->
+ <!-- Change permission of ${ENV_SET_FILE} -->
+<!--
+    <exec executable="sudo">
       <arg value="chmod"/>
       <arg value="o-w"/>
       <arg value="${ENV_SET_FILE}"/>
     </exec>
+-->
   </target>
 
 
@@ -175,12 +181,15 @@
   </target>
 
   <target name="httpd" description="Install Apache HTTPD">
-    <exec executable="sudo"> <!-- Change permission of ${ENV_SET_FILE} -->
+<!-- Change permission of ${ENV_SET_FILE} -->
+<!--
+    <exec executable="sudo"> 
       <arg value="chmod"/>
       <arg value="-R"/>
       <arg value="o+rwx"/>
       <arg value="${HTTP_CONF}"/>
     </exec>
+-->
 
     <echo message='### for Proxy&#10;' file="${HTTP_CONF}/httpd.conf" append="yes"/>
     <echo message="ProxyPass /iugonet/ ajp://localhost:8009/iugonet/&#10;" file="${HTTP_CONF}/httpd.conf" append="yes"/>
@@ -205,12 +214,14 @@
   </target>
 
   <target name="postgresql" description="Install PostgreSQL">
-    <exec executable="sudo"> <!-- Change permission of ${ENV_SET_FILE} -->
+ <!-- Change permission of ${ENV_SET_FILE} -->
+<!--
+    <exec executable="sudo">
       <arg value="chmod"/>
       <arg value="o+w"/>
       <arg value="${ENV_SET_FILE}"/>
     </exec>
-
+-->
     <echo message='### for PostgreSQL&#10;' file="${ENV_SET_FILE}" append="yes"/>
     <echo message='export POSTGRES_HOME=${POSTGRESQL_HOME}&#10;' file="${ENV_SET_FILE}" append="yes"/>
     <echo message='export PGLILB=${POSTGRESQL_HOME}/lib&#10;' file="${ENV_SET_FILE}" append="yes"/>
@@ -301,13 +312,15 @@
       <arg value="initdb --no-locale --encoding=UTF-8"/> 
     </exec>
 
-    <exec executable="sudo"> <!-- Change permission of ${ENV_SET_FILE} -->
+ <!-- Change permission of ${ENV_SET_FILE} -->
+<!--
+    <exec executable="sudo">
       <arg value="chmod"/>
       <arg value="-R"/>
       <arg value="o+rwx"/>
       <arg value="${PGDATA}-${POSTGRESQL_VERSION}"/> 
     </exec>
-
+-->
     <echo message='### for Log&#10;' file="${PGDATA}/postgresql.conf" append="yes"/>
     <echo message="log_destination = 'syslog'&#10;" file="${PGDATA}/postgresql.conf" append="yes"/>
     <echo message='### for encryption&#10;' file="${PGDATA}/pg_hba.conf" append="yes"/>
@@ -334,11 +347,14 @@
       <arg value="createuser -d -S -R dspace"/>
     </exec>
 
-    <exec executable="sudo"> <!-- Change permission of ${ENV_SET_FILE} -->
+ <!-- Change permission of ${ENV_SET_FILE} -->
+<!--
+    <exec executable="sudo">
       <arg value="chmod"/>
       <arg value="o-w"/>
       <arg value="${ENV_SET_FILE}"/>
     </exec>
+-->
   </target>
 
   <target name="mdb" description="Install IUGONET Metadata DB.">
