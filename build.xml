@@ -307,10 +307,10 @@
       <arg value="${PGDATA}"/> 
     </exec>
     <exec executable="sudo">
-      <arg value="su"/>
-      <arg value="-"/>
+      <arg value="-u"/>
       <arg value="pgsql"/>
-      <arg line="-c'initdb --no-locale --encoding=UTF-8'"/> 
+      <arg value="-i"/>
+      <arg value="-c'initdb --no-locale --encoding=UTF-8'"/> 
     </exec>
 
     <exec executable="sudo"> <!-- Change permission of ${ENV_SET_FILE} -->
