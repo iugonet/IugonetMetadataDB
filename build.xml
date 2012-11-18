@@ -120,13 +120,7 @@
     <echo message='export CATALINA_HOME=${CATALINA_HOME}&#10;' file="${ENV_SET_FILE}" append="yes"/>
     <echo message='export PATH=${CATALINA_HOME}/bin:${PATH}&#10;' file="${ENV_SET_FILE}" append="yes"/>
     <get src="http://ftp.riken.jp/net/apache//tomcat/tomcat-${TOMCAT_VER}/v${TOMCAT_VERSION}/bin/${TOMCAT_TGZ}" dest="${TEMP_DIR}/${TOMCAT_TGZ}" usetimestamp="true"/>
-    <exec executable="sudo">
-      <arg value="tar"/>
-      <arg value="xvzf"/>
-      <arg value="${TEMP_DIR}/${TOMCAT_TGZ}"/>
-      <arg value="--directory"/>
-      <arg value="${INSTALL_DIR}"/>
-    </exec>
+    <untar src="${TEMP_DIR}/${TOMCAT_TGZ}" dest="${INSTALL_DIR}" compression="gzip"/>
     <exec executable="sudo">
       <arg value="ln"/>
       <arg value="-s"/>
@@ -509,12 +503,7 @@
       <arg value="${CATALINA_HOME}/bin/commons-daemon-native.tar.gz"/>
       <arg value="${TEMP_DIR}"/>
     </exec>
-    <exec executable="tar">
-      <arg value="xvzf"/>
-      <arg value="${TEMP_DIR}/commons-daemon-native.tar.gz"/>
-      <arg value="--directory"/>
-      <arg value="${TEMP_DIR}"/>
-    </exec>
+    <untar src="${TEMP_DIR}/commons-daemon-native.tar.gz" dest="${TEMP_DIR}" compression="gzip"/>
     <!--exec executable="autoconf" dir="${TEMP_DIR}/commons-daemon-1.0.8-native-src/unix/"/-->
     <exec executable="./configure" dir="${TEMP_DIR}/commons-daemon-1.0.8-native-src/unix/"/>
     <exec executable="make" dir="${TEMP_DIR}/commons-daemon-1.0.8-native-src/unix/">
