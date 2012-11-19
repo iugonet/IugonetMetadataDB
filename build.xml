@@ -195,12 +195,7 @@
       <arg value="-rf"/>
       <arg value="${POSTGRESQL_HOME}"/>
     </exec>
-    <exec executable="sudo">
-      <arg value="-u"/>
-      <arg value="pgsql"/>
-      <arg value="-i"/>
-      <arg value="tar xvzf ${TEMP_DIR}/${POSTGRESQL_TGZ} --directory ${TEMP_DIR}"/>
-    </exec>
+    <untar src="${TEMP_DIR}/${POSTGRESQL_TGZ}" dest="${TEMP_DIR}" compression="gzip"/>
     <exec executable="sudo">
       <arg value="mkdir"/>
       <arg value="${POSTGRESQL_HOME}-${POSTGRESQL_VERSION}"/>
@@ -282,7 +277,7 @@
       <arg value="o-rwx"/>
       <arg value="${PGDATA}-${POSTGRESQL_VERSION}"/> 
     </exec>
-    
+
     <exec executable="sudo" spawn="true">
       <arg value="-u"/>
       <arg value="pgsql"/>
