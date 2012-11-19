@@ -82,7 +82,15 @@
     <echo message='export MAVEN_HOME=${MAVEN_HOME}&#10;' file="${ENV_SET_FILE}" append="yes"/>
     <echo message='export PATH=${MAVEN_HOME}/bin:${PATH}&#10;' file="${ENV_SET_FILE}" append="yes"/>
     <get src="http://ftp.riken.jp/net/apache/maven/maven-${MAVEN_VER}/${MAVEN_VERSION}/binaries/${MAVEN_TGZ}" dest="${TEMP_DIR}/${MAVEN_TGZ}" usetimestamp="true"/>
+<!-- For current JDK 1.6, this sentence don't runs correctly. But if you install JDK 1.7, this sentence will be better than below one.
     <untar src="${TEMP_DIR}/${MAVEN_TGZ}" dest="${INSTALL_DIR}" compression="gzip"/>
+-->
+    <exec executable="tar">
+      <arg value="xvzf"/>
+      <arg value="${TEMP_DIR}/${MAVEN_TGZ}"/>
+      <arg value="--directory ${INSTALL_DIR}"/>
+    </exec>
+
     <exec executable="sudo">
       <arg value="ln"/>
       <arg value="-s"/>
