@@ -258,13 +258,11 @@
     <exec executable="sudo" dir="${TEMP_DIR}/${POSTGRESQL}">
       <arg value="-u"/>
       <arg value="pgsql"/>
-      <arg value="-i"/>
       <arg value="make"/> 
     </exec>
     <exec executable="sudo" dir="${TEMP_DIR}/${POSTGRESQL}">
       <arg value="-u"/>
       <arg value="pgsql"/>
-      <arg value="-i"/>
       <arg value="make"/> 
       <arg value="install"/> 
     </exec>
