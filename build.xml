@@ -215,10 +215,11 @@
 <!--
     <untar src="${TEMP_DIR}/${POSTGRESQL_TGZ}" dest="${TEMP_DIR}" compression="gzip"/>
 -->
-    <exec executable="sudo" dir="${TEMP_DIR}">
-      <arg value="-u"/>
-      <arg value="pgsql"/>
-      <arg value="tar xvzf ${TEMP_DIR}/${POSTGRESQL_TGZ}"/>
+    <exec executable="tar">
+      <arg value="xvzf"/>
+      <arg value="${TEMP_DIR}/${POSTGRESQL_TGZ}"/>
+      <arg value="--directory"/>
+      <arg value="${TEMP_DIR}"/>
     </exec>
     <exec executable="sudo">
       <arg value="chown"/>
