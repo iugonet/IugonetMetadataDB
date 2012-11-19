@@ -218,7 +218,6 @@
     <exec executable="sudo">
       <arg value="-u"/>
       <arg value="pgsql"/>
-      <arg value="-i"/>
       <arg value="tar xvzf ${TEMP_DIR}/${POSTGRESQL_TGZ} --directory ${TEMP_DIR}"/>
     </exec>
     <exec executable="sudo">
