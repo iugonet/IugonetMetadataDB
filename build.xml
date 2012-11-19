@@ -219,7 +219,7 @@
       <arg value="-u"/>
       <arg value="pgsql"/>
       <arg value="-i"/>
-      <arg value="tar xvzf ${TEMP_DIR}/${POSTGRESQL_TGZ} --directory ${TEMP_DIR}" compression="gzip"/>
+      <arg value="tar xvzf ${TEMP_DIR}/${POSTGRESQL_TGZ} --directory ${TEMP_DIR}"/>
     </exec>
     <exec executable="sudo">
       <arg value="chown"/>
@@ -327,8 +327,24 @@
   <target name="mdb" description="Install IUGONET Metadata DB.">
     <get src="http://sourceforge.net/projects/dspace/files/DSpace%20Stable/${DSPACE_VERSION}/${DSPACE_RELEASE_TGZ}" dest="${TEMP_DIR}/${DSPACE_RELEASE_TGZ}" usetimestamp="true"/>
     <get src="http://sourceforge.net/projects/dspace/files/DSpace%20Stable/${DSPACE_VERSION}/${DSPACE_SRC_TGZ}" dest="${TEMP_DIR}/${DSPACE_SRC_TGZ}" usetimestamp="true"/>
+    <!--
     <untar src="${TEMP_DIR}/${DSPACE_RELEASE_TGZ}" dest="${WORK}" compression="gzip"/>
+    -->
+    <exec executable="tar">
+      <arg value="xvzf"/>
+      <arg value="${TEMP_DIR}/${DSPACE_RELEASE_TGZ}"/>
+      <arg value="--directory"/>
+      <arg value="${WORK}"/>
+    </exec>
+    <!--
     <untar src="${TEMP_DIR}/${DSPACE_SRC_TGZ}" dest="${WORK}" compression="gzip"/>
+    -->
+    <exec executable="tar">
+      <arg value="xvzf"/>
+      <arg value="${TEMP_DIR}/${DSPACE_SRC_TGZ}"/>
+      <arg value="--directory"/>
+      <arg value="${WORK}"/>
+    </exec>
 
     <exec executable="sudo">
       <arg value="mkdir"/>
