@@ -379,7 +379,9 @@
   </target>
 
   <target name="cp_webapps" description="originally cp_webapps.sh">
+<!--
     <delete dir="${IUGONET_WEBAPPS}"/>
+-->
     <copy todir="${IUGONET_WEBAPPS}">
       <fileset dir="${DEFAULT_WEBAPPS}"/>
     </copy>
