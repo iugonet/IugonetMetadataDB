@@ -197,6 +197,12 @@
     </exec>
     <untar src="${TEMP_DIR}/${POSTGRESQL_TGZ}" dest="${TEMP_DIR}" compression="gzip"/>
     <exec executable="sudo">
+      <arg value="chown"/>
+      <arg value="-R"/>
+      <arg value="pgsql:pgsql"/>
+      <arg value="${TEMP_DIR}/${POSTGRESQL_TGZ}"/>
+    </exec>
+    <exec executable="sudo">
       <arg value="mkdir"/>
       <arg value="${POSTGRESQL_HOME}-${POSTGRESQL_VERSION}"/>
     </exec>
