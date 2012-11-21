@@ -56,6 +56,7 @@
       <arg value="zlib-devel"/>
       <arg value="readline-devel"/>
       <arg value="flex"/>
+      <arg value="bison"/>
       <arg value="glibc-headers"/>
       <arg value="httpd-devel"/>
       <arg value="gcc-c++"/>
@@ -248,12 +249,8 @@
       <arg value="${POSTGRESQL_HOME}-${POSTGRESQL_VERSION}"/>
       <arg value="${POSTGRESQL_HOME}"/>
     </exec>
-    <!-- -->
-    <exec executable="sudo" dir="${TEMP_DIR}/${POSTGRESQL}">
-      <arg value="-u"/>
-      <arg value="pgsql"/>
-      <arg value="-i"/>
-      <arg value="./configure --prefix=${POSTGRESQL_HOME} --with-pgport=${POSTGRESQL_PORT}"/> 
+    <exec executable="./configure" dir="${TEMP_DIR}/${POSTGRESQL}">
+      <arg line="--prefix=${POSTGRESQL_HOME} --with-pgport=${POSTGRESQL_PORT}"/> 
     </exec>
     <exec executable="sudo" dir="${TEMP_DIR}/${POSTGRESQL}">
       <arg value="-u"/>
@@ -266,7 +263,6 @@
       <arg value="make"/> 
       <arg value="install"/> 
     </exec>
-    <!-- -->
     <exec executable="sudo">
       <arg value="mkdir"/> 
       <arg value="${PGDATA}-${POSTGRESQL_VERSION}"/> 
