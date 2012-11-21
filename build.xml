@@ -102,8 +102,7 @@
   </target>
 
   <target name="maven_proxy_settings" description="Set Apache Maven proxy" if="have.proxy">
-    <exec executable="sudo"> <!-- Change permission of ${MAVEN_HOME}/conf/settings.xml -->
-      <arg value="chmod"/>
+    <exec executable="chmod">
       <arg value="o+w"/>
       <arg value="${MAVEN_HOME}/conf/settings.xml"/>
     </exec>
@@ -117,8 +116,7 @@
     <replace file="${MAVEN_HOME}/conf/settings.xml" token="&#60;nonProxyHosts&#62;local.net|some.host.com&#60;/nonProxyHosts&#62;&#10;" value="" />
     <replace file="${MAVEN_HOME}/conf/settings.xml" token="&#60;/proxy&#62;&#10;" value="&#60;/proxy&#62;&#10;  &#60;!--"/>
 
-    <exec executable="sudo"> <!-- Change permission of ${MAVEN_HOME}/conf/settings.xml -->
-      <arg value="chmod"/>
+    <exec executable="chmod">
       <arg value="o-w"/>
       <arg value="${MAVEN_HOME}/conf/settings.xml"/>
     </exec>
@@ -277,20 +275,18 @@
       <arg value="${PGDATA}-${POSTGRESQL_VERSION}"/> 
       <arg value="${PGDATA}"/> 
     </exec>
-<!--
+    <echo message="HOGE"/>
     <exec executable="sudo">
       <arg value="-u"/>
       <arg value="pgsql"/>
       <arg value="-i"/>
-      <arg value="initdb - -no-locale - -encoding=UTF-8"/> 
-    </exec>
--->
-
+      <arg value="${POSTGRESQL_HOME}/bin/initdb --no-locale --encoding=UTF-8"/>
+     </exec>
+    <echo message="HOGE2"/>
     <echo message='### for Log&#10;' file="${PGDATA}/postgresql.conf" append="yes"/>
     <echo message="log_destination = 'syslog'&#10;" file="${PGDATA}/postgresql.conf" append="yes"/>
     <echo message='### for encryption&#10;' file="${PGDATA}/pg_hba.conf" append="yes"/>
-    <echo message='host dspace dspace 127.0.0.1/32 md5&#10;' file="${PGDATA}/pg_hba.conf" append="yes"/>
-
+    <echo message='host    dspace      dspace      127.0.0.1/32          md5&#10;' file="${PGDATA}/pg_hba.conf" append="yes"/>
     <exec executable="chmod">
       <arg value="-R"/>
       <arg value="o-rwx"/>
@@ -301,7 +297,7 @@
       <arg value="-u"/>
       <arg value="pgsql"/>
 <!--      <arg value="-i"/> -->
-      <arg value="${POSTGRESQL_HOME}/bin/pg_ctl start"/> 
+      <arg value="${POSTGRESQL_HOME}/bin/pg_ctl -D ${PGDATA} start"/> 
     </exec>
 
     <exec executable="sudo">
