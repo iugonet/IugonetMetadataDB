@@ -243,8 +243,7 @@
       <arg value="pgsql:pgsql"/>
       <arg value="${POSTGRESQL_HOME}-${POSTGRESQL_VERSION}"/>
     </exec>
-    <exec executable="sudo">
-      <arg value="ln"/>
+    <exec executable="ln">
       <arg value="-s"/>
       <arg value="${POSTGRESQL_HOME}-${POSTGRESQL_VERSION}"/>
       <arg value="${POSTGRESQL_HOME}"/>
@@ -263,41 +262,36 @@
       <arg value="make"/> 
       <arg value="install"/> 
     </exec>
-    <exec executable="sudo">
-      <arg value="mkdir"/> 
+    <mkdir dir="${PGDATA}-${POSTGRESQL_VERSION}"/> 
+    <exec executable="chmod"> 
+      <arg value="700"/>
       <arg value="${PGDATA}-${POSTGRESQL_VERSION}"/> 
     </exec>
-    <exec executable="sudo">
-      <arg value="chmod"/> 
-      <arg value="700"/> 
-      <arg value="${PGDATA}-${POSTGRESQL_VERSION}"/> 
+    <exec executable="chown"> 
+      <arg value="-R"/>
+      <arg value="pgsql:pgsql"/>
+      <arg value="${PGDATA}-${POSTGRESQL_VERSION}"/>
     </exec>
-    <exec executable="sudo">
-      <arg value="chown"/> 
-      <arg value="-R"/> 
-      <arg value="pgsql:pgsql"/> 
-      <arg value="${PGDATA}-${POSTGRESQL_VERSION}"/> 
-    </exec>
-    <exec executable="sudo">
-      <arg value="ln"/> 
+    <exec executable="ln"> 
       <arg value="-s"/> 
       <arg value="${PGDATA}-${POSTGRESQL_VERSION}"/> 
       <arg value="${PGDATA}"/> 
     </exec>
+<!--
     <exec executable="sudo">
       <arg value="-u"/>
       <arg value="pgsql"/>
       <arg value="-i"/>
-      <arg value="initdb --no-locale --encoding=UTF-8"/> 
+      <arg value="initdb - -no-locale - -encoding=UTF-8"/> 
     </exec>
+-->
 
     <echo message='### for Log&#10;' file="${PGDATA}/postgresql.conf" append="yes"/>
     <echo message="log_destination = 'syslog'&#10;" file="${PGDATA}/postgresql.conf" append="yes"/>
     <echo message='### for encryption&#10;' file="${PGDATA}/pg_hba.conf" append="yes"/>
     <echo message='host dspace dspace 127.0.0.1/32 md5&#10;' file="${PGDATA}/pg_hba.conf" append="yes"/>
 
-    <exec executable="sudo">
-      <arg value="chmod"/>
+    <exec executable="chmod">
       <arg value="-R"/>
       <arg value="o-rwx"/>
       <arg value="${PGDATA}-${POSTGRESQL_VERSION}"/> 
