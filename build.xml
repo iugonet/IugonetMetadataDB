@@ -616,6 +616,14 @@
     <exec executable="rm">
       <arg line="${POSTGRESQL_HOME} ${PGDATA}"/>
     </exec>
+
+    <exec executable="userdel">
+      <arg line="-f pgsql"/>
+    </exec>
+    
+    <exec executable="userdel">
+      <arg line="-f dspace"/>
+    </exec>
   </target>
 
   <target name="properties">
