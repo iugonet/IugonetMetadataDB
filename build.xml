@@ -310,7 +310,7 @@
     <exec executable="sudo" spawn="true">
       <arg value="-u"/>
       <arg value="pgsql"/>
-      <arg value="-i"/>
+<!--      <arg value="-i"/> -->
       <arg value="${POSTGRESQL_HOME}/bin/pg_ctl start"/> 
     </exec>
 
@@ -610,6 +610,11 @@
       <arg value="rm"/>
       <arg value="-rf"/>
       <arg value="${PGDATA}-${POSTGRESQL_VERSION}"/>
+    </exec>
+
+    <!-- can't detect symbolic link by using ant -->
+    <exec executable="rm">
+      <arg line="${POSTGRESQL_HOME} ${PGDATA}"/>
     </exec>
   </target>
 
