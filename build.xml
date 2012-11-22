@@ -281,6 +281,7 @@
       <arg value="-i"/>
       <arg value="${POSTGRESQL_HOME}/bin/initdb --no-locale --encoding=UTF-8"/>
      </exec>
+
     <echo message='### for Log&#10;' file="${PGDATA}/postgresql.conf" append="yes"/>
     <echo message="log_destination = 'syslog'&#10;" file="${PGDATA}/postgresql.conf" append="yes"/>
     <echo message='### for encryption&#10;' file="${PGDATA}/pg_hba.conf" append="yes"/>
@@ -298,6 +299,9 @@
       <arg value="${POSTGRESQL_HOME}/bin/pg_ctl -D ${PGDATA} start"/> 
     </exec>
     <echo message="hoge"/>
+    <waitfor maxwait="30" maxwaitunit="second">
+      <socket server="localhost" port="5432"/>
+    </waitfor>
     <exec executable="sudo">
       <arg value="-u"/>
       <arg value="pgsql"/>
