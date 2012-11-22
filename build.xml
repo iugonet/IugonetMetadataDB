@@ -275,14 +275,12 @@
       <arg value="${PGDATA}-${POSTGRESQL_VERSION}"/> 
       <arg value="${PGDATA}"/> 
     </exec>
-    <echo message="HOGE"/>
     <exec executable="sudo">
       <arg value="-u"/>
       <arg value="pgsql"/>
       <arg value="-i"/>
       <arg value="${POSTGRESQL_HOME}/bin/initdb --no-locale --encoding=UTF-8"/>
      </exec>
-    <echo message="HOGE2"/>
     <echo message='### for Log&#10;' file="${PGDATA}/postgresql.conf" append="yes"/>
     <echo message="log_destination = 'syslog'&#10;" file="${PGDATA}/postgresql.conf" append="yes"/>
     <echo message='### for encryption&#10;' file="${PGDATA}/pg_hba.conf" append="yes"/>
@@ -299,13 +297,14 @@
       <arg value="-i"/>
       <arg value="${POSTGRESQL_HOME}/bin/pg_ctl -D ${PGDATA} start"/> 
     </exec>
-
+    <echo message="hoge"/>
     <exec executable="sudo">
       <arg value="-u"/>
       <arg value="pgsql"/>
       <arg value="-i"/>
       <arg value="createuser -d -S -R dspace"/>
     </exec>
+    <echo message="hoge2"/>
   </target>
 
   <target name="mdb" description="Install IUGONET Metadata DB.">
