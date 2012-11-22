@@ -296,7 +296,7 @@
     <exec executable="sudo" spawn="true">
       <arg value="-u"/>
       <arg value="pgsql"/>
-<!--      <arg value="-i"/> -->
+      <arg value="-i"/>
       <arg value="${POSTGRESQL_HOME}/bin/pg_ctl -D ${PGDATA} start"/> 
     </exec>
 
