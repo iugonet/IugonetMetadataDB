@@ -298,7 +298,7 @@
       <arg value="-i"/>
       <arg value="${POSTGRESQL_HOME}/bin/pg_ctl -D ${PGDATA} start"/> 
     </exec>
-    <echo message="Wait for 30 seconds or establishment of the socket connection to 5432 port..."/>
+    <echo message="&#xA;Wait for 30 seconds or establishment of the socket connection to 5432 port...&#xA;"/>
     <waitfor maxwait="30" maxwaitunit="second">
       <socket server="localhost" port="5432"/>
     </waitfor>
