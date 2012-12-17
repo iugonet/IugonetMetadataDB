@@ -299,18 +299,15 @@
       <arg value="${POSTGRESQL_HOME}/bin/pg_ctl -D ${PGDATA} start"/> 
     </exec>
     <echo message="&#xA;Wait for 30 seconds or establishment of the socket connection to 5432 port...&#xA;"/>
-    <exec executable="date"/>
     <waitfor maxwait="30" maxwaitunit="second">
       <socket server="localhost" port="5432"/>
     </waitfor>
-    <exec executable="date"/>
     <exec executable="sudo">
       <arg value="-u"/>
       <arg value="pgsql"/>
       <arg value="-i"/>
       <arg value="createuser -d -S -R dspace"/>
     </exec>
-    <echo message="hoge2"/>
   </target>
 
   <target name="mdb" description="Install IUGONET Metadata DB.">
