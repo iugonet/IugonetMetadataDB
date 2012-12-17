@@ -348,6 +348,12 @@
       <arg value="${DSPACE_INSTALL_DIR}-${DSPACE_VERSION}/"/>
       <arg value="${DSPACE_INSTALL_DIR}"/>
     </exec>
+    <exec executable="sudo">
+      <arg value="-u"/>
+      <arg value="dspace"/>
+      <arg value="-i"/>
+      <arg value="createdb dspace"/>
+    </exec>
 
     <antcall target="cp_conf"/>
     <exec executable="${MAVEN_HOME}/bin/mvn" dir="${DSPACE_RELEASE_DIR}/dspace">
