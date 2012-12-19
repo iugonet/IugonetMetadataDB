@@ -364,7 +364,9 @@
     </exec>
     <antcall target="cp_webapps"/>
     <antcall target="cp_src"/>
+    <echo message="HOGE1"/>
     <antcall target="comp"/>    
+    <echo message="HOGE2"/>
   </target>
 
   <target name="cp_conf" description="Originally cp_conf.sh">
@@ -522,10 +524,6 @@
     <exec executable="${MAVEN_HOME}/bin/mvn" dir="${DSPACE_SRC_RELEASE_DIR}/dspace-api">
       <arg value="install"/>
     </exec>
-    <!--exec executable="sudo">
-      <arg value="su"/>
-      <arg line="- dspace -c'rm -rf ~/.m2'"/>
-    </exec-->
     <exec executable="${MAVEN_HOME}/bin/mvn" dir="${DSPACE_SRC_RELEASE_DIR}/dspace-jspui/dspace-jspui-api">
       <arg value="install"/>
     </exec>
