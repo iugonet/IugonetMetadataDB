@@ -367,9 +367,7 @@
     </exec>
     <antcall target="cp_webapps"/>
     <antcall target="cp_src"/>
-    <echo message="HOGE1"/>
     <antcall target="comp"/>    
-    <echo message="HOGE2"/>
   </target>
 
   <target name="cp_conf" description="Originally cp_conf.sh">
