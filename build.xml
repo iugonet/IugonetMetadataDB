@@ -7,15 +7,9 @@
      <equals arg1="${HAVE_PROXY}" arg2="yes"/>
   </condition>
 
-  <target name="all" depends="git, packages, init, mdb, tomcat_daemon"/>
+  <target name="all" depends="packages, git, init, mdb, tomcat_daemon"/>
   
   <target name="git" description="Install Git">
-    <exec executable="sudo">
-      <arg value="yum"/>
-      <arg value="-y"/>
-      <arg value="install"/>
-      <arg value="git"/>
-    </exec>
     <exec executable="git">
       <arg value="config"/>
       <arg value="--global"/>
@@ -51,6 +45,7 @@
       <arg value="yum"/>
       <arg value="-y"/>
       <arg value="install"/>
+      <arg value="git"/>
       <arg value="emacs"/>
       <arg value="gcc"/>
       <arg value="zlib-devel"/>
@@ -376,9 +371,6 @@
   </target>
 
   <target name="cp_webapps" description="originally cp_webapps.sh">
-<!--
-    <delete dir="${IUGONET_WEBAPPS}"/>
--->
     <copy todir="${IUGONET_WEBAPPS}">
       <fileset dir="${DEFAULT_WEBAPPS}"/>
     </copy>
@@ -396,22 +388,41 @@
       <arg value="-rf"/>
       <arg line="${CUSTOM_IUGONET_WEBAPPS}/index.jsp ${IUGONET_WEBAPPS}"/>
     </exec>
+    <for list="collection-home.jsp,community-home.jsp,community-list.jsp,display-item.jsp" param="jsp">
+      <sequential>
+<!--
+	<echo message="@{jsp}"/>
+	<exec executable="bash" dir="${src}/${ipadic_prefix}">
+	  <arg value="-c"/>
+	  <arg value="cat @{jsp} | iconv -f EUC-JP -t UTF8 -o @{dic}"/>
+	</exec>
+-->
+      </sequential>
+    </for>
+<!--
     <exec executable="cp">
       <arg value="-rf"/>
       <arg line="${CUSTOM_IUGONET_WEBAPPS}/collection-home.jsp ${IUGONET_WEBAPPS}"/>
     </exec>
+-->
+<!--
     <exec executable="cp">
       <arg value="-rf"/>
       <arg line="${CUSTOM_IUGONET_WEBAPPS}/community-home.jsp ${IUGONET_WEBAPPS}"/>
     </exec>
+-->
+<!--
     <exec executable="cp">
       <arg value="-rf"/>
       <arg line="${CUSTOM_IUGONET_WEBAPPS}/community-list.jsp ${IUGONET_WEBAPPS}"/>
     </exec>
+-->
+<!--
     <exec executable="cp">
       <arg value="-rf"/>
       <arg line="${CUSTOM_IUGONET_WEBAPPS}/display-item.jsp ${IUGONET_WEBAPPS}"/>
     </exec>
+-->
     <exec executable="cp">
       <arg value="-rf"/>
       <arg line="${CUSTOM_IUGONET_WEBAPPS}/utils.js ${IUGONET_WEBAPPS}"/>
