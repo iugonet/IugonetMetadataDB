@@ -356,7 +356,9 @@
     </exec>
 
     <antcall target="cp_conf"/>
-    <exec executable="${MAVEN_HOME}/bin/mvn" dir="${DSPACE_RELEASE_DIR}/dspace">
+    <exec executable="sudo" dir="${DSPACE_RELEASE_DIR}/dspace">
+      <arg value="-u dspace"/>
+      <arg value="${MAVEN_HOME}/bin/mvn"/>
       <arg value="package"/>
     </exec>
     <exec executable="ant" dir="${DSPACE_RELEASE_DIR}/dspace/target/dspace-${DSPACE_VERSION}-build.dir">
