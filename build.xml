@@ -374,6 +374,7 @@
   <target name="cp_conf" description="Originally cp_conf.sh">
     <copy file="${CUSTOM_DIR}/config/dspace.cfg" todir="${DSPACE_RELEASE_DIR}/dspace/config/"/>
     <copy file="${CUSTOM_DIR}/config/registries/dublin-core-types.xml" todir="${DSPACE_RELEASE_DIR}/dspace/config/registries/"/>
+    <echo message="&#10;"/>
   </target>
 
   <target name="cp_webapps" description="originally cp_webapps.sh">
