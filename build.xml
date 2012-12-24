@@ -362,6 +362,7 @@
       <arg value="${MAVEN_HOME}/bin/mvn"/>
       <arg value="package"/>
     </exec>
+<!--
     <exec executable="sudo" dir="${DSPACE_RELEASE_DIR}/dspace/target/dspace-${DSPACE_VERSION}-build.dir">
       <arg value="-u dspace"/>
       <arg value="ant fresh_install"/>
@@ -369,6 +370,7 @@
     <antcall target="cp_webapps"/>
     <antcall target="cp_src"/>
     <antcall target="comp"/>    
+-->
   </target>
 
   <target name="cp_conf" description="Originally cp_conf.sh">
