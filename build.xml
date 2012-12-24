@@ -337,14 +337,12 @@
       <arg value="mkdir"/>
       <arg value="${DSPACE_INSTALL_DIR}-${DSPACE_VERSION}/"/>
     </exec>
-    <exec executable="sudo">
-      <arg value="chown"/>
+    <exec executable="chown">
       <arg value="-R"/>
       <arg value="dspace:dspace"/>
       <arg value="${DSPACE_INSTALL_DIR}-${DSPACE_VERSION}/"/>
     </exec>
-    <exec executable="sudo">
-      <arg value="ln"/>
+    <exec executable="ln">
       <arg value="-s"/>
       <arg value="${DSPACE_INSTALL_DIR}-${DSPACE_VERSION}/"/>
       <arg value="${DSPACE_INSTALL_DIR}"/>
