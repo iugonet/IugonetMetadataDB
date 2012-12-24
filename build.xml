@@ -306,23 +306,23 @@
   </target>
 
   <target name="mdb" description="Install IUGONET Metadata DB.">
-    <get src="http://sourceforge.net/projects/dspace/files/DSpace%20Stable/${DSPACE_VERSION}/${DSPACE_RELEASE_TGZ}" dest="${TMP_DIR}/${DSPACE_RELEASE_TGZ}" usetimestamp="true"/>
-    <get src="http://sourceforge.net/projects/dspace/files/DSpace%20Stable/${DSPACE_VERSION}/${DSPACE_SRC_TGZ}" dest="${TMP_DIR}/${DSPACE_SRC_TGZ}" usetimestamp="true"/>
+    <get src="http://sourceforge.net/projects/dspace/files/DSpace%20Stable/${DSPACE_VERSION}/${DSPACE_RELEASE_TGZ}" dest="${TEMP_DIR}/${DSPACE_RELEASE_TGZ}" usetimestamp="true"/>
+    <get src="http://sourceforge.net/projects/dspace/files/DSpace%20Stable/${DSPACE_VERSION}/${DSPACE_SRC_TGZ}" dest="${TEMP_DIR}/${DSPACE_SRC_TGZ}" usetimestamp="true"/>
     <!--
-    <untar src="${DSPACE_USER_HOME}/${TMP_DIR}" dest="${DSPATE_USER_HOME}" compression="gzip"/>
+    <untar src="${DSPACE_USER_HOME}/${TEMP_DIR}" dest="${DSPATE_USER_HOME}" compression="gzip"/>
     -->
     <exec executable="tar">
       <arg value="xvzf"/>
-      <arg value="${TMP_DIR}/${DSPACE_RELEASE_TGZ}"/>
+      <arg value="${TEMP_DIR}/${DSPACE_RELEASE_TGZ}"/>
       <arg value="--directory"/>
       <arg value="${DSPACE_USER_HOME}"/>
     </exec>
     <!--
-    <untar src="${DSPACE_USER_HOME}/${TMP_DIR}" dest="${DSPACE_USER_HOME}" compression="gzip"/>
+    <untar src="${DSPACE_USER_HOME}/${TEMP_DIR}" dest="${DSPACE_USER_HOME}" compression="gzip"/>
     -->
     <exec executable="tar">
       <arg value="xvzf"/>
-      <arg value="${TMP_DIR}/${DSPACE_SRC_TGZ}"/>
+      <arg value="${TEMP_DIR}/${DSPACE_SRC_TGZ}"/>
       <arg value="--directory"/>
       <arg value="${DSPACE_USER_HOME}"/>
     </exec>
