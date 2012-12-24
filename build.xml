@@ -325,6 +325,7 @@
     -->
     <exec executable="sudo">
       <arg value="-u"/>
+      <arg value="dspace"/>
       <arg value="tar"/>
       <arg value="xvzf"/>
       <arg value="${TEMP_DIR}/${DSPACE_SRC_TGZ}"/>
