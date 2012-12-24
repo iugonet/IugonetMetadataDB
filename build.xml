@@ -363,8 +363,10 @@
       <arg value="package"/>
     </exec>
     <exec executable="sudo" dir="${DSPACE_RELEASE_DIR}/dspace/target/dspace-${DSPACE_VERSION}-build.dir">
-      <arg value="-u dspace"/>
-      <arg value="ant fresh_install"/>
+      <arg value="-u"/>
+      <arg value="dspace"/>
+      <arg value="ant"/>
+      <arg value="fresh_install"/>
     </exec>
     <antcall target="cp_webapps"/>
     <antcall target="cp_src"/>
