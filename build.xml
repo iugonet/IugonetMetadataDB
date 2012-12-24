@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<project name="iugonet" default="all">
+<project name="IugonetMetadataDB" default="all" basedir="." xmlns:ac="antlib:net.sf.antcontlib">
   <property environment="env"/>
   <property file="build.properties"/>
+
+  <taskdef resource="net/sf/antcontrib/antlib.xml">
+    <classpath>
+      <pathelement location="/usr/share/java/lib/ant-contrib.jar"/>
+    </classpath>
+  </taskdef>
 
   <condition property="have.proxy" value="true">
      <equals arg1="${HAVE_PROXY}" arg2="yes"/>
