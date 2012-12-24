@@ -399,6 +399,10 @@
     </exec>
     <for list="collection-home.jsp,community-home.jsp,community-list.jsp,display-item.jsp" param="jsp">
       <sequential>
+	<exec executable="cp">
+	  <arg value="-rf"/>
+	  <arg line="${CUSTOM_IUGONET_WEBAPPS}/@{jsp} ${IUGONET_WEBAPPS}"/>
+	</exec>
 <!--
 	<echo message="@{jsp}"/>
 	<exec executable="bash" dir="${src}/${ipadic_prefix}">
