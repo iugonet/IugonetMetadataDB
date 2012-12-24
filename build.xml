@@ -311,7 +311,10 @@
     <!--
     <untar src="${DSPACE_USER_HOME}/${TEMP_DIR}" dest="${DSPATE_USER_HOME}" compression="gzip"/>
     -->
-    <exec executable="tar">
+    <exec executable="sudo">
+      <arg value="-u"/>
+      <arg value="dspace"/>
+      <arg value="tar"/>
       <arg value="xvzf"/>
       <arg value="${TEMP_DIR}/${DSPACE_RELEASE_TGZ}"/>
       <arg value="--directory"/>
@@ -320,7 +323,9 @@
     <!--
     <untar src="${DSPACE_USER_HOME}/${TEMP_DIR}" dest="${DSPACE_USER_HOME}" compression="gzip"/>
     -->
-    <exec executable="tar">
+    <exec executable="sudo">
+      <arg value="-u"/>
+      <arg value="tar"/>
       <arg value="xvzf"/>
       <arg value="${TEMP_DIR}/${DSPACE_SRC_TGZ}"/>
       <arg value="--directory"/>
