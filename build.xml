@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<project name="IugonetMetadataDB" default="all" basedir="." xmlns:ac="antlib:net.sf.antcontlib">
+<project name="IugonetMetadataDB" default="all" xmlns:ac="antlib:net.sf.antcontlib">
   <property environment="env"/>
   <property file="build.properties"/>
 
