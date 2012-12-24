@@ -355,8 +355,10 @@
     </exec>
 
     <antcall target="cp_conf"/>
+
     <exec executable="sudo" dir="${DSPACE_RELEASE_DIR}/dspace">
-      <arg value="-u dspace"/>
+      <arg value="-u"/>
+      <arg value="dspace"/>
       <arg value="${MAVEN_HOME}/bin/mvn"/>
       <arg value="package"/>
     </exec>
