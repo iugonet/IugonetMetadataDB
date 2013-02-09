@@ -69,7 +69,7 @@
 
   <target name="maven" description="Install Apache Maven">
     <condition property="have.resources">
-      <available file="${TEMP_DIR}/${MAVEN_TGZ}"/>
+      <available file="${TEMP_DIR}/${maven}"/>
     </condition>
 
     <echo message="${have.resources}"/>
