@@ -80,9 +80,9 @@
 
     <echo message="${have.resources}"/>
 
-    <echo message='### for MAVEN&#10;' file="${ENV_SET_FILE}" append="yes"/>
-    <echo message='export MAVEN_HOME=${MAVEN_HOME}&#10;' file="${ENV_SET_FILE}" append="yes"/>
-    <echo message='export PATH=${MAVEN_HOME}/bin:${PATH}&#10;' file="${ENV_SET_FILE}" append="yes"/>
+    <echo message='### for MAVEN&#10;' file="${env_set_file}" append="yes"/>
+    <echo message='export MAVEN_HOME=${MAVEN_HOME}&#10;' file="${env_set_file}" append="yes"/>
+    <echo message='export PATH=${MAVEN_HOME}/bin:${PATH}&#10;' file="${env_set_file}" append="yes"/>
     <get src="${src_maven}" dest="${dst_maven}" usetimestamp="true"/>
     <unzip src="${dst_maven}" dest="${install_dir}"/>
     <exec executable="sudo">
@@ -116,10 +116,10 @@
   </target>
 
   <target name="tomcat" description="Install Apache Tomcat">
-    <echo message='### for TOMCAT&#10;' file="${ENV_SET_FILE}" append="yes"/>
-    <echo message='export TOMCAT_USER=dspace&#10;' file="${ENV_SET_FILE}" append="yes"/>
-    <echo message='export CATALINA_HOME=${CATALINA_HOME}&#10;' file="${ENV_SET_FILE}" append="yes"/>
-    <echo message='export PATH=${CATALINA_HOME}/bin:${PATH}&#10;' file="${ENV_SET_FILE}" append="yes"/>
+    <echo message='### for TOMCAT&#10;' file="${env_set_file}" append="yes"/>
+    <echo message='export TOMCAT_USER=dspace&#10;' file="${env_set_file}" append="yes"/>
+    <echo message='export CATALINA_HOME=${CATALINA_HOME}&#10;' file="${env_set_file}" append="yes"/>
+    <echo message='export PATH=${CATALINA_HOME}/bin:${PATH}&#10;' file="${env_set_file}" append="yes"/>
     <get src="${src_tomcat}" dest="${dst_tomcat}" usetimestamp="true"/>
     <unzip src="${dst_tomcat}" dest="${install_dir}"/>
     <exec executable="sudo">
@@ -303,9 +303,9 @@
       <arg value="dspace"/>
       <arg value="tar"/>
       <arg value="xvzf"/>
-      <arg value="${tmp}/${dspace_src}"/>
+      <arg value="${tmp}/${dspace_src_release}"/>
       <arg value="--directory"/>
-      <arg value="${dspace_src_release}"/>
+      <arg value="${dspace_src_release_prefix}"/>
     </exec>
 
     <exec executable="sudo">
