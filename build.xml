@@ -286,40 +286,40 @@
   </target>
 
   <target name="mdb" description="Install IUGONET Metadata DB.">
-    <get src="http://sourceforge.net/projects/dspace/files/DSpace%20Stable/${DSPACE_VERSION}/${DSPACE_RELEASE_TGZ}" dest="${tmp}/${DSPACE_RELEASE_TGZ}" usetimestamp="true"/>
-    <get src="http://sourceforge.net/projects/dspace/files/DSpace%20Stable/${DSPACE_VERSION}/${DSPACE_SRC_TGZ}" dest="${tmp}/${DSPACE_SRC_TGZ}" usetimestamp="true"/>
+    <get src="${src_dspace_release}" dest="${dst_dspace_release}" usetimestamp="true"/>
+    <get src="${src_dspace_src_release}" dest="${dst_dspace_src_release}" usetimestamp="true"/>
     <exec executable="sudo">
       <arg value="-u"/>
       <arg value="dspace"/>
       <arg value="tar"/>
       <arg value="xvzf"/>
-      <arg value="${tmp}/${DSPACE_RELEASE_TGZ}"/>
+      <arg value="${tmp}/${dspace_release}"/>
       <arg value="--directory"/>
-      <arg value="${DSPACE_USER_HOME}"/>
+      <arg value="${dspace_user_home}"/>
     </exec>
     <exec executable="sudo">
       <arg value="-u"/>
       <arg value="dspace"/>
       <arg value="tar"/>
       <arg value="xvzf"/>
-      <arg value="${tmp}/${DSPACE_SRC_TGZ}"/>
+      <arg value="${tmp}/${dspace_src_tgz}"/>
       <arg value="--directory"/>
-      <arg value="${DSPACE_USER_HOME}"/>
+      <arg value="${dspace_src_release}"/>
     </exec>
 
     <exec executable="sudo">
       <arg value="mkdir"/>
-      <arg value="${DSPACE_INSTALL_DIR}-${DSPACE_VERSION}/"/>
+      <arg value="${dspace_install_dir}-${dspace_version}/"/>
     </exec>
     <exec executable="chown">
       <arg value="-R"/>
       <arg value="dspace:dspace"/>
-      <arg value="${DSPACE_INSTALL_DIR}-${DSPACE_VERSION}/"/>
+      <arg value="${dspace_install_dir}-${dspace_version}/"/>
     </exec>
     <exec executable="ln">
       <arg value="-s"/>
-      <arg value="${DSPACE_INSTALL_DIR}-${DSPACE_VERSION}/"/>
-      <arg value="${DSPACE_INSTALL_DIR}"/>
+      <arg value="${dspace_install_dir}-${dspace_version}/"/>
+      <arg value="${dspace_install_dir}"/>
     </exec>
     <exec executable="sudo">
       <arg value="-u"/>
@@ -330,13 +330,13 @@
 
     <antcall target="cp_conf"/>
 
-    <exec executable="sudo" dir="${DSPACE_RELEASE_DIR}/dspace">
+    <exec executable="sudo" dir="${dspace_release_dir}/dspace">
       <arg value="-u"/>
       <arg value="dspace"/>
       <arg value="${maven_home}/bin/mvn"/>
       <arg value="package"/>
     </exec>
-    <exec executable="sudo" dir="${DSPACE_RELEASE_DIR}/dspace/target/dspace-${DSPACE_VERSION}-build.dir">
+    <exec executable="sudo" dir="${dspace_release_dir}/dspace/target/dspace-${dspace_version}-build.dir">
       <arg value="-u"/>
       <arg value="dspace"/>
       <arg value="ant"/>
@@ -348,34 +348,34 @@
   </target>
 
   <target name="cp_conf" description="Originally cp_conf.sh">
-    <copy file="${CUSTOM_DIR}/config/dspace.cfg" todir="${DSPACE_RELEASE_DIR}/dspace/config/"/>
-    <copy file="${CUSTOM_DIR}/config/registries/dublin-core-types.xml" todir="${DSPACE_RELEASE_DIR}/dspace/config/registries/"/>
+    <copy file="${custom_dir}/config/dspace.cfg" todir="${dspace_release_dir}/dspace/config/"/>
+    <copy file="${custom_dir}/config/registries/dublin-core-types.xml" todir="${dspace_release_dir}/dspace/config/registries/"/>
     <echo message="&#10;"/>
   </target>
 
   <target name="cp_webapps" description="originally cp_webapps.sh">
-    <copy todir="${IUGONET_WEBAPPS}">
-      <fileset dir="${DEFAULT_WEBAPPS}"/>
+    <copy todir="${iugonet_webapps}">
+      <fileset dir="${default_webapps}"/>
     </copy>
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg value="${CUSTOM_IUGONET_WEBAPPS}/iugonet"/>
-      <arg value="${IUGONET_WEBAPPS}"/>
+      <arg value="${custom_iugonet_webapps}/iugonet"/>
+      <arg value="${iugonet_webapps}"/>
     </exec>
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg value="${CUSTOM_DIR}/webapps/iphone"/>
-      <arg value="${DSPACE_INSTALL_DIR}/webapps"/>
+      <arg value="${custom_dir}/webapps/iphone"/>
+      <arg value="${dspace_install_dir}/webapps"/>
     </exec>
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${CUSTOM_IUGONET_WEBAPPS}/index.jsp ${IUGONET_WEBAPPS}"/>
+      <arg line="${custom_iugonet_webapps}/index.jsp ${iugonet_webapps}"/>
     </exec>
     <for list="collection-home.jsp,community-home.jsp,community-list.jsp,display-item.jsp" param="jsp">
       <sequential>
 	<exec executable="cp">
 	  <arg value="-rf"/>
-	  <arg line="${CUSTOM_IUGONET_WEBAPPS}/@{jsp} ${IUGONET_WEBAPPS}"/>
+	  <arg line="${custom_iugonet_webapps}/@{jsp} ${iugonet_webapps}"/>
 	</exec>
 <!--
 	<echo message="@{jsp}"/>
