@@ -69,7 +69,7 @@
 
   <target name="maven" description="Install Apache Maven">
     <condition property="have.resources">
-      <available file="${temp_dir}/${maven}"/>
+      <available file="${tmp}/${maven}"/>
     </condition>
 
     <echo message="${have.resources}"/>
@@ -176,7 +176,7 @@
     <echo message='export PATH=${POSTGRESQL_HOME}/bin:${PATH}&#10;' file="${ENV_SET_FILE}" append="yes"/>
     <echo message='export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${PGLIB}&#10;' file="${ENV_SET_FILE}" append="yes"/>
 
-    <get src="http://ftp.jaist.ac.jp/pub/postgresql/source/v${POSTGRESQL_VERSION}/postgresql-${POSTGRESQL_VERSION}.tar.gz" dest="${TEMP_DIR}/postgresql-${POSTGRESQL_VERSION}.tar.gz"/>
+    <get src="http://ftp.jaist.ac.jp/pub/postgresql/source/v${POSTGRESQL_VERSION}/postgresql-${POSTGRESQL_VERSION}.tar.gz" dest="${tmp}/postgresql-${POSTGRESQL_VERSION}.tar.gz"/>
     <exec executable="sudo">
       <arg value="/usr/sbin/useradd"/>
       <arg value="-c"/>
@@ -195,15 +195,15 @@
 -->
     <exec executable="tar">
       <arg value="xvzf"/>
-      <arg value="${TEMP_DIR}/${POSTGRESQL_TGZ}"/>
+      <arg value="${tmp}/${POSTGRESQL_TGZ}"/>
       <arg value="--directory"/>
-      <arg value="${TEMP_DIR}"/>
+      <arg value="${tmp}"/>
     </exec>
     <exec executable="sudo">
       <arg value="chown"/>
       <arg value="-R"/>
       <arg value="pgsql:pgsql"/>
-      <arg value="${TEMP_DIR}/${POSTGRESQL_TGZ}"/>
+      <arg value="${tmp}/${POSTGRESQL_TGZ}"/>
     </exec>
     <exec executable="sudo">
       <arg value="mkdir"/>
@@ -225,15 +225,15 @@
       <arg value="${POSTGRESQL_HOME}-${POSTGRESQL_VERSION}"/>
       <arg value="${POSTGRESQL_HOME}"/>
     </exec>
-    <exec executable="./configure" dir="${TEMP_DIR}/${POSTGRESQL}">
+    <exec executable="./configure" dir="${tmp}/${POSTGRESQL}">
       <arg line="--prefix=${POSTGRESQL_HOME} --with-pgport=${POSTGRESQL_PORT}"/> 
     </exec>
-    <exec executable="sudo" dir="${TEMP_DIR}/${POSTGRESQL}">
+    <exec executable="sudo" dir="${tmp}/${POSTGRESQL}">
       <arg value="-u"/>
       <arg value="pgsql"/>
       <arg value="make"/> 
     </exec>
-    <exec executable="sudo" dir="${TEMP_DIR}/${POSTGRESQL}">
+    <exec executable="sudo" dir="${tmp}/${POSTGRESQL}">
       <arg value="-u"/>
       <arg value="pgsql"/>
       <arg value="make"/> 
@@ -290,29 +290,29 @@
   </target>
 
   <target name="mdb" description="Install IUGONET Metadata DB.">
-    <get src="http://sourceforge.net/projects/dspace/files/DSpace%20Stable/${DSPACE_VERSION}/${DSPACE_RELEASE_TGZ}" dest="${TEMP_DIR}/${DSPACE_RELEASE_TGZ}" usetimestamp="true"/>
-    <get src="http://sourceforge.net/projects/dspace/files/DSpace%20Stable/${DSPACE_VERSION}/${DSPACE_SRC_TGZ}" dest="${TEMP_DIR}/${DSPACE_SRC_TGZ}" usetimestamp="true"/>
+    <get src="http://sourceforge.net/projects/dspace/files/DSpace%20Stable/${DSPACE_VERSION}/${DSPACE_RELEASE_TGZ}" dest="${tmp}/${DSPACE_RELEASE_TGZ}" usetimestamp="true"/>
+    <get src="http://sourceforge.net/projects/dspace/files/DSpace%20Stable/${DSPACE_VERSION}/${DSPACE_SRC_TGZ}" dest="${tmp}/${DSPACE_SRC_TGZ}" usetimestamp="true"/>
     <!--
-    <untar src="${DSPACE_USER_HOME}/${TEMP_DIR}" dest="${DSPATE_USER_HOME}" compression="gzip"/>
+    <untar src="${DSPACE_USER_HOME}/${tmp}" dest="${DSPATE_USER_HOME}" compression="gzip"/>
     -->
     <exec executable="sudo">
       <arg value="-u"/>
       <arg value="dspace"/>
       <arg value="tar"/>
       <arg value="xvzf"/>
-      <arg value="${TEMP_DIR}/${DSPACE_RELEASE_TGZ}"/>
+      <arg value="${tmp}/${DSPACE_RELEASE_TGZ}"/>
       <arg value="--directory"/>
       <arg value="${DSPACE_USER_HOME}"/>
     </exec>
     <!--
-    <untar src="${DSPACE_USER_HOME}/${TEMP_DIR}" dest="${DSPACE_USER_HOME}" compression="gzip"/>
+    <untar src="${DSPACE_USER_HOME}/${tmp}" dest="${DSPACE_USER_HOME}" compression="gzip"/>
     -->
     <exec executable="sudo">
       <arg value="-u"/>
       <arg value="dspace"/>
       <arg value="tar"/>
       <arg value="xvzf"/>
-      <arg value="${TEMP_DIR}/${DSPACE_SRC_TGZ}"/>
+      <arg value="${tmp}/${DSPACE_SRC_TGZ}"/>
       <arg value="--directory"/>
       <arg value="${DSPACE_USER_HOME}"/>
     </exec>
@@ -544,35 +544,35 @@
   <target name="tomcat_daemon" description="Set Tomcat Daemon">
     <exec executable="cp">
       <arg value="${CATALINA_HOME}/bin/commons-daemon-native.tar.gz"/>
-      <arg value="${TEMP_DIR}"/>
+      <arg value="${tmp}"/>
     </exec>
 <!-- 
-    <untar src="${TEMP_DIR}/commons-daemon-native.tar.gz" dest="${TEMP_DIR}" compression="gzip"/>
+    <untar src="${tmp}/commons-daemon-native.tar.gz" dest="${tmp}" compression="gzip"/>
 -->
     <exec executable="tar">
       <arg value="xvzf"/>
-      <arg value="${TEMP_DIR}/commons-daemon-native.tar.gz"/>
+      <arg value="${tmp}/commons-daemon-native.tar.gz"/>
       <arg value="--directory"/>
-      <arg value="${TEMP_DIR}"/>
+      <arg value="${tmp}"/>
     </exec>
-    <!--exec executable="autoconf" dir="${TEMP_DIR}/commons-daemon-1.0.8-native-src/unix/"/-->
-    <exec executable="./configure" dir="${TEMP_DIR}/commons-daemon-1.0.8-native-src/unix/"/>
-    <exec executable="make" dir="${TEMP_DIR}/commons-daemon-1.0.8-native-src/unix/">
+    <!--exec executable="autoconf" dir="${tmp}/commons-daemon-1.0.8-native-src/unix/"/-->
+    <exec executable="./configure" dir="${tmp}/commons-daemon-1.0.8-native-src/unix/"/>
+    <exec executable="make" dir="${tmp}/commons-daemon-1.0.8-native-src/unix/">
       <arg value="clean"/> 
     </exec>
-    <exec executable="make" dir="${TEMP_DIR}/commons-daemon-1.0.8-native-src/unix/"/>
-    <exec executable="cp" dir="${TEMP_DIR}/commons-daemon-1.0.8-native-src/unix/">
+    <exec executable="make" dir="${tmp}/commons-daemon-1.0.8-native-src/unix/"/>
+    <exec executable="cp" dir="${tmp}/commons-daemon-1.0.8-native-src/unix/">
       <arg value="jsvc"/> 
       <arg value="${CATALINA_HOME}/bin"/>
     </exec>
   </target>
 
   <target name="clean" description="Clean Everything">
-    <delete dir="${TEMP_DIR}/${POSTGRESQL}" quiet="true"/>
-    <delete file="${TEMP_DIR}/${MAVEN_TGZ}" quiet="true"/>
-    <delete file="${TEMP_DIR}/${TOMCAT_TGZ}" quiet="true"/>
-    <delete file="${TEMP_DIR}/${TOMCAT_CNT_TGZ}" quiet="true"/>
-    <delete file="${TEMP_DIR}/${POSTGRESQL_TGZ}" quiet="true"/>
+    <delete dir="${tmp}/${POSTGRESQL}" quiet="true"/>
+    <delete file="${tmp}/${MAVEN_TGZ}" quiet="true"/>
+    <delete file="${tmp}/${TOMCAT_TGZ}" quiet="true"/>
+    <delete file="${tmp}/${TOMCAT_CNT_TGZ}" quiet="true"/>
+    <delete file="${tmp}/${POSTGRESQL_TGZ}" quiet="true"/>
 
     <delete file="${maven_home}" quiet="true"/>
     <exec executable="sudo">
@@ -590,16 +590,16 @@
     <exec executable="sudo">
       <arg value="rm"/>
       <arg value="-rf"/>
-      <arg value="${TEMP_DIR}/${TOMCAT_CNT}"/>
+      <arg value="${tmp}/${TOMCAT_CNT}"/>
     </exec>
 
     <delete dir="${work}/${DSPACE_RELEASE}" quiet="true" />
     <delete dir="${work}/${DSPACE_SRC}" quiet="true" />
-    <delete file="${temp_dir}/${DSPACE_RELEASE_TGZ}" quiet="true" />
-    <delete file="${temp_dir}/${DSPACE_SRC_TGZ}" quiet="true" />
+    <delete file="${tmp}/${DSPACE_RELEASE_TGZ}" quiet="true" />
+    <delete file="${tmp}/${DSPACE_SRC_TGZ}" quiet="true" />
 
-    <delete dir="${temp_dir}/${POSTGRESQL}" quiet="true"/>
-    <delete file="${temp_dir}/${POSTGRESQL_TGZ}" quiet="true"/>
+    <delete dir="${tmp}/${POSTGRESQL}" quiet="true"/>
+    <delete file="${tmp}/${POSTGRESQL_TGZ}" quiet="true"/>
     <delete file="${POSTGRESQL_HOME}" quiet="true"/>
     <delete file="${PGDATA}" quiet="true"/>
     <exec executable="sudo">
