@@ -140,7 +140,7 @@
     <exec executable="git">
       <arg value="clone"/>
       <arg value="ssh://${GIT_SERVER}/~/git/git2dspace/g2d.git"/>
-      <arg value="${WORK}/g2d"/>
+      <arg value="${work}/g2d"/>
     </exec>
   </target>
 
@@ -593,13 +593,13 @@
       <arg value="${TEMP_DIR}/${TOMCAT_CNT}"/>
     </exec>
 
-    <delete dir="${WORK}/${DSPACE_RELEASE}" quiet="true" />
-    <delete dir="${WORK}/${DSPACE_SRC}" quiet="true" />
-    <delete file="${TEMP_DIR}/${DSPACE_RELEASE_TGZ}" quiet="true" />
-    <delete file="${TEMP_DIR}/${DSPACE_SRC_TGZ}" quiet="true" />
+    <delete dir="${work}/${DSPACE_RELEASE}" quiet="true" />
+    <delete dir="${work}/${DSPACE_SRC}" quiet="true" />
+    <delete file="${temp_dir}/${DSPACE_RELEASE_TGZ}" quiet="true" />
+    <delete file="${temp_dir}/${DSPACE_SRC_TGZ}" quiet="true" />
 
-    <delete dir="${TEMP_DIR}/${POSTGRESQL}" quiet="true"/>
-    <delete file="${TEMP_DIR}/${POSTGRESQL_TGZ}" quiet="true"/>
+    <delete dir="${temp_dir}/${POSTGRESQL}" quiet="true"/>
+    <delete file="${temp_dir}/${POSTGRESQL_TGZ}" quiet="true"/>
     <delete file="${POSTGRESQL_HOME}" quiet="true"/>
     <delete file="${PGDATA}" quiet="true"/>
     <exec executable="sudo">
