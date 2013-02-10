@@ -128,35 +128,22 @@
     <echo message='export TOMCAT_USER=dspace&#10;' file="${ENV_SET_FILE}" append="yes"/>
     <echo message='export CATALINA_HOME=${CATALINA_HOME}&#10;' file="${ENV_SET_FILE}" append="yes"/>
     <echo message='export PATH=${CATALINA_HOME}/bin:${PATH}&#10;' file="${ENV_SET_FILE}" append="yes"/>
-    <get src="http://ftp.riken.jp/net/apache//tomcat/tomcat-${TOMCAT_VER}/v${TOMCAT_VERSION}/bin/${TOMCAT_TGZ}" dest="${TEMP_DIR}/${TOMCAT_TGZ}" usetimestamp="true"/>
-<!--
-    <untar src="${TEMP_DIR}/${TOMCAT_TGZ}" dest="${INSTALL_DIR}" compression="gzip"/>
--->
-    <exec executable="tar">
-      <arg value="xvzf"/>
-      <arg value="${TEMP_DIR}/${TOMCAT_TGZ}"/>
-      <arg value="--directory"/>
-      <arg value="${INSTALL_DIR}"/>
-    </exec>
+    <get src="${src_tomcat}" dest="${dst_tomcat}" usetimestamp="true"/>
+    <unzip src="${dst_tomcat}" dest="${install_dir}"/>
     <exec executable="sudo">
       <arg value="ln"/>
       <arg value="-s"/>
-      <arg value="${INSTALL_DIR}/${TOMCAT}"/>
-      <arg value="${CATALINA_HOME}"/>
+      <arg value="${install_dir}/${tomcat_prefix}"/>
+      <arg value="${catalina_home}"/>
     </exec>
+    <copy file="${work}/${catalina_home}/conf/server.xml" todir="${catalina_home}/conf" overwrite="yes"/>
     <exec executable="sudo">
       <arg value="chown"/>
       <arg value="-R"/>
       <arg value="dspace:dspace"/>
-      <arg value="${INSTALL_DIR}/${TOMCAT}"/>
-    </exec>
-    <exec executable="sudo">
-      <arg value="cp"/>
-      <arg value="${WORK}/${CATALINA_HOME}/conf/server.xml"/>
-      <arg value="${CATALINA_HOME}/conf"/>
+      <arg value="${install_dir}/${tomcat_prefix}"/>
     </exec>
   </target>
-
 
   <target name="g2d" description="Install G2d">
     <exec executable="git">
