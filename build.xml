@@ -169,11 +169,11 @@
 
   <target name="postgresql" description="Install PostgreSQL">
     <echo message='### for PostgreSQL&#10;' file="${ENV_SET_FILE}" append="yes"/>
-    <echo message='export POSTGRES_HOME=${POSTGRESQL_HOME}&#10;' file="${ENV_SET_FILE}" append="yes"/>
-    <echo message='export PGLILB=${POSTGRESQL_HOME}/lib&#10;' file="${ENV_SET_FILE}" append="yes"/>
+    <echo message='export POSTGRES_HOME=${postgresql_home}&#10;' file="${ENV_SET_FILE}" append="yes"/>
+    <echo message='export PGLILB=${postgresql_home}/lib&#10;' file="${ENV_SET_FILE}" append="yes"/>
     <echo message='export PGDATA=${PGDATA}&#10;' file="${ENV_SET_FILE}" append="yes"/>
-    <echo message='export MANPATH=${MANPATH}:${POSTGRESQL_HOME}/man&#10;' file="${ENV_SET_FILE}" append="yes"/>
-    <echo message='export PATH=${POSTGRESQL_HOME}/bin:${PATH}&#10;' file="${ENV_SET_FILE}" append="yes"/>
+    <echo message='export MANPATH=${MANPATH}:${postgresql_home}/man&#10;' file="${ENV_SET_FILE}" append="yes"/>
+    <echo message='export PATH=${postgresql_home}/bin:${PATH}&#10;' file="${ENV_SET_FILE}" append="yes"/>
     <echo message='export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${PGLIB}&#10;' file="${ENV_SET_FILE}" append="yes"/>
     <get src="${src_postgresql}" dest="${dst_postgresql}"/>
     <exec executable="sudo">
@@ -181,20 +181,20 @@
       <arg value="-c"/>
       <arg value="Server"/>
       <arg value="-d"/>
-      <arg value="${POSTGRESQL_HOME}"/>
+      <arg value="${postgresql_home}"/>
       <arg value="pgsql"/>
     </exec>
     <exec executable="sudo">
       <arg value="rm"/>
       <arg value="-rf"/>
-      <arg value="${POSTGRESQL_HOME}"/>
+      <arg value="${postgresql_home}"/>
     </exec>
 <!--
     <untar src="${TEMP_DIR}/${POSTGRESQL_TGZ}" dest="${TEMP_DIR}" compression="gzip"/>
 -->
     <exec executable="tar">
-      <arg value="xvzf"/>
-      <arg value="${tmp}/${POSTGRESQL_TGZ}"/>
+      <arg value="xvjf"/>
+      <arg value="${dst_postgresql}"/>
       <arg value="--directory"/>
       <arg value="${tmp}"/>
     </exec>
@@ -202,37 +202,37 @@
       <arg value="chown"/>
       <arg value="-R"/>
       <arg value="pgsql:pgsql"/>
-      <arg value="${tmp}/${POSTGRESQL_TGZ}"/>
+      <arg value="${tmp}/${postgresql_prefix}"/>
     </exec>
     <exec executable="sudo">
       <arg value="mkdir"/>
-      <arg value="${POSTGRESQL_HOME}-${POSTGRESQL_VERSION}"/>
+      <arg value="${postgresql_home}-${postgresql_version}"/>
     </exec>
     <exec executable="sudo">
       <arg value="chmod"/>
       <arg value="755"/>
-      <arg value="${POSTGRESQL_HOME}-${POSTGRESQL_VERSION}"/>
+      <arg value="${postgresql_home}-${postgresql_version}"/>
     </exec>
     <exec executable="sudo">
       <arg value="chown"/>
       <arg value="-R"/>
       <arg value="pgsql:pgsql"/>
-      <arg value="${POSTGRESQL_HOME}-${POSTGRESQL_VERSION}"/>
+      <arg value="${postgresql_home}-${postgresql_version}"/>
     </exec>
     <exec executable="ln">
       <arg value="-s"/>
-      <arg value="${POSTGRESQL_HOME}-${POSTGRESQL_VERSION}"/>
-      <arg value="${POSTGRESQL_HOME}"/>
+      <arg value="${postgresql_home}-${postgresql_version}"/>
+      <arg value="${postgresql_home}"/>
     </exec>
-    <exec executable="./configure" dir="${tmp}/${POSTGRESQL}">
-      <arg line="--prefix=${POSTGRESQL_HOME} --with-pgport=${POSTGRESQL_PORT}"/> 
+    <exec executable="./configure" dir="${tmp}/${postgresql_prefix}">
+      <arg line="--prefix=${postgresql_home} --with-pgport=${POSTGRESQL_PORT}"/> 
     </exec>
-    <exec executable="sudo" dir="${tmp}/${POSTGRESQL}">
+    <exec executable="sudo" dir="${tmp}/${postgresql_prefix}">
       <arg value="-u"/>
       <arg value="pgsql"/>
       <arg value="make"/> 
     </exec>
-    <exec executable="sudo" dir="${tmp}/${POSTGRESQL}">
+    <exec executable="sudo" dir="${tmp}/${postgresql_prefix}">
       <arg value="-u"/>
       <arg value="pgsql"/>
       <arg value="make"/> 
@@ -257,7 +257,7 @@
       <arg value="-u"/>
       <arg value="pgsql"/>
       <arg value="-i"/>
-      <arg value="${POSTGRESQL_HOME}/bin/initdb --no-locale --encoding=UTF-8"/>
+      <arg value="${postgresql_home}/bin/initdb --no-locale --encoding=UTF-8"/>
      </exec>
 
     <echo message='### for Log&#10;' file="${PGDATA}/postgresql.conf" append="yes"/>
@@ -274,7 +274,7 @@
       <arg value="-u"/>
       <arg value="pgsql"/>
       <arg value="-i"/>
-      <arg value="${POSTGRESQL_HOME}/bin/pg_ctl -D ${PGDATA} start"/> 
+      <arg value="${postgresql_home}/bin/pg_ctl -D ${PGDATA} start"/> 
     </exec>
     <echo message="&#xA;Wait for 30 seconds or establishment of the socket connection to 5432 port...&#xA;"/>
     <waitfor maxwait="30" maxwaitunit="second">
@@ -599,12 +599,12 @@
 
     <delete dir="${tmp}/${POSTGRESQL}" quiet="true"/>
     <delete file="${tmp}/${POSTGRESQL_TGZ}" quiet="true"/>
-    <delete file="${POSTGRESQL_HOME}" quiet="true"/>
+    <delete file="${postgresql_home}" quiet="true"/>
     <delete file="${PGDATA}" quiet="true"/>
     <exec executable="sudo">
       <arg value="rm"/>
       <arg value="-rf"/>
-      <arg value="${POSTGRESQL_HOME}-${POSTGRESQL_VERSION}"/>
+      <arg value="${postgresql_home}-${postgresql_version}"/>
     </exec>
     <exec executable="sudo">
       <arg value="rm"/>
@@ -614,7 +614,7 @@
 
     <!-- can't detect symbolic link by using ant -->
     <exec executable="rm">
-      <arg line="${POSTGRESQL_HOME} ${PGDATA}"/>
+      <arg line="${postgresql_home} ${PGDATA}"/>
     </exec>
 
     <exec executable="userdel">
