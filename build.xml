@@ -91,6 +91,7 @@
       <arg value="${install_dir}/${maven_prefix}"/>
       <arg value="${maven_home}"/>
     </exec>
+    <chmod file="${maven_home}/bin/mvn" perm="gou+x"/>
   </target>
 
   <target name="maven_proxy_settings" description="Set Apache Maven proxy" if="have.proxy">
@@ -302,7 +303,7 @@
       <arg value="dspace"/>
       <arg value="tar"/>
       <arg value="xvzf"/>
-      <arg value="${tmp}/${dspace_src_tgz}"/>
+      <arg value="${tmp}/${dspace_src}"/>
       <arg value="--directory"/>
       <arg value="${dspace_src_release}"/>
     </exec>
