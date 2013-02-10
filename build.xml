@@ -82,7 +82,7 @@
 
     <echo message='### for MAVEN&#10;' file="${env_set_file}" append="yes"/>
     <echo message='export MAVEN_HOME=${MAVEN_HOME}&#10;' file="${env_set_file}" append="yes"/>
-    <echo message='export PATH=${MAVEN_HOME}/bin:${PATH}&#10;' file="${env_set_file}" append="yes"/>
+    <echo message='export PATH=${maven_home}/bin:${PATH}&#10;' file="${env_set_file}" append="yes"/>
     <get src="${src_maven}" dest="${dst_maven}" usetimestamp="true"/>
     <unzip src="${dst_maven}" dest="${install_dir}"/>
     <exec executable="sudo">
@@ -119,7 +119,7 @@
     <echo message='### for TOMCAT&#10;' file="${env_set_file}" append="yes"/>
     <echo message='export TOMCAT_USER=dspace&#10;' file="${env_set_file}" append="yes"/>
     <echo message='export CATALINA_HOME=${CATALINA_HOME}&#10;' file="${env_set_file}" append="yes"/>
-    <echo message='export PATH=${CATALINA_HOME}/bin:${PATH}&#10;' file="${env_set_file}" append="yes"/>
+    <echo message='export PATH=${catalina_home}/bin:${PATH}&#10;' file="${env_set_file}" append="yes"/>
     <get src="${src_tomcat}" dest="${dst_tomcat}" usetimestamp="true"/>
     <unzip src="${dst_tomcat}" dest="${install_dir}"/>
     <exec executable="sudo">
@@ -173,9 +173,9 @@
     <echo message='export POSTGRES_HOME=${postgresql_home}&#10;' file="${env_set_file}" append="yes"/>
     <echo message='export PGLILB=${postgresql_home}/lib&#10;' file="${env_set_file}" append="yes"/>
     <echo message='export PGDATA=${PGDATA}&#10;' file="${env_set_file}" append="yes"/>
-    <echo message='export MANPATH=${MANPATH}:${postgresql_home}/man&#10;' file="${env_set_file}" append="yes"/>
+    <echo message='export MANPATH=${manpath}:${postgresql_home}/man&#10;' file="${env_set_file}" append="yes"/>
     <echo message='export PATH=${postgresql_home}/bin:${PATH}&#10;' file="${env_set_file}" append="yes"/>
-    <echo message='export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${PGLIB}&#10;' file="${env_set_file}" append="yes"/>
+    <echo message='export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${pglib}&#10;' file="${env_set_file}" append="yes"/>
     <get src="${src_postgresql}" dest="${dst_postgresql}"/>
     <exec executable="sudo">
       <arg value="/usr/sbin/useradd"/>
