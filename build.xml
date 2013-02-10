@@ -523,7 +523,7 @@
     <exec executable="${maven_home}/bin/mvn" dir="${DSPACE_SRC_RELEASE_DIR}/dspace-api">
       <arg value="install"/>
     </exec>
-    <exec executable="${MAVEN_HOME}/bin/mvn" dir="${DSPACE_SRC_RELEASE_DIR}/dspace-jspui/dspace-jspui-api">
+    <exec executable="${maven_home}/bin/mvn" dir="${DSPACE_SRC_RELEASE_DIR}/dspace-jspui/dspace-jspui-api">
       <arg value="install"/>
     </exec>
     <copy file="${DSPACE_SRC_RELEASE_DIR}/dspace-api/target/dspace-api-${DSPACE_VERSION}.jar" todir="${DSPACE_INSTALL_DIR}/lib"/>
@@ -554,11 +554,10 @@
   </target>
 
   <target name="clean" description="Clean Everything">
-    <delete dir="${tmp}/${POSTGRESQL}" quiet="true"/>
-    <delete file="${tmp}/${MAVEN_TGZ}" quiet="true"/>
-    <delete file="${tmp}/${TOMCAT_TGZ}" quiet="true"/>
-    <delete file="${tmp}/${TOMCAT_CNT_TGZ}" quiet="true"/>
-    <delete file="${tmp}/${POSTGRESQL_TGZ}" quiet="true"/>
+    <delete dir="${tmp}/${postgresql}" quiet="true"/>
+    <delete file="${tmp}/${maven}" quiet="true"/>
+    <delete file="${tmp}/${tomcat}" quiet="true"/>
+    <delete file="${tmp}/${tomcat_cnt}" quiet="true"/>
 
     <delete file="${maven_home}" quiet="true"/>
     <exec executable="sudo">
@@ -576,7 +575,7 @@
     <exec executable="sudo">
       <arg value="rm"/>
       <arg value="-rf"/>
-      <arg value="${tmp}/${TOMCAT_CNT}"/>
+      <arg value="${tmp}/${tomcat_cnt_prefix}"/>
     </exec>
 
     <delete dir="${work}/${DSPACE_RELEASE}" quiet="true" />
