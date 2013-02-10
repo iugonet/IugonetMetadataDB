@@ -272,7 +272,7 @@
       <arg value="-u"/>
       <arg value="pgsql"/>
       <arg value="-i"/>
-      <arg value="${postgresql_home}/bin/pg_ctl -D ${PGDATA} start"/> 
+      <arg value="${postgresql_home}/bin/pg_ctl -D ${pgdata} start"/> 
     </exec>
     <echo message="&#xA;Wait for 30 seconds or establishment of the socket connection to 5432 port...&#xA;"/>
     <waitfor maxwait="30" maxwaitunit="second">
