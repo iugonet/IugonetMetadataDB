@@ -69,13 +69,13 @@
 
   <target name="maven" description="Install Apache Maven">
     <condition property="have.resources">
-      <available file="${TEMP_DIR}/${maven}"/>
+      <available file="${temp_dir}/${maven}"/>
     </condition>
 
     <echo message="${have.resources}"/>
 
     <condition property="have.resources">
-      <available file="${MAVEN_HOME}"/>
+      <available file="${maven_home}"/>
     </condition>
 
     <echo message="${have.resources}"/>
@@ -83,43 +83,34 @@
     <echo message='### for MAVEN&#10;' file="${ENV_SET_FILE}" append="yes"/>
     <echo message='export MAVEN_HOME=${MAVEN_HOME}&#10;' file="${ENV_SET_FILE}" append="yes"/>
     <echo message='export PATH=${MAVEN_HOME}/bin:${PATH}&#10;' file="${ENV_SET_FILE}" append="yes"/>
-    <get src="http://ftp.riken.jp/net/apache/maven/maven-${MAVEN_VER}/${MAVEN_VERSION}/binaries/${MAVEN_TGZ}" dest="${TEMP_DIR}/${MAVEN_TGZ}" usetimestamp="true"/>
-<!-- For current JDK 1.6, this sentence don't runs correctly. But if you install JDK 1.7, this sentence will be better than below one.
-    <untar src="${TEMP_DIR}/${MAVEN_TGZ}" dest="${INSTALL_DIR}" compression="gzip"/>
--->
-    <exec executable="tar">
-      <arg value="xvzf"/>
-      <arg value="${TEMP_DIR}/${MAVEN_TGZ}"/>
-      <arg value="--directory"/>
-      <arg value="${INSTALL_DIR}"/>
-    </exec>
-
+    <get src="${src_maven}" dest="${dst_maven}" usetimestamp="true"/>
+    <unzip src="${dst_maven}" dest="${install_dir}"/>
     <exec executable="sudo">
       <arg value="ln"/>
       <arg value="-s"/>
-      <arg value="${INSTALL_DIR}/${MAVEN}"/>
-      <arg value="${MAVEN_HOME}"/>
+      <arg value="${install_dir}/${maven_prefix}"/>
+      <arg value="${maven_home}"/>
     </exec>
   </target>
 
   <target name="maven_proxy_settings" description="Set Apache Maven proxy" if="have.proxy">
     <exec executable="chmod">
       <arg value="o+w"/>
-      <arg value="${MAVEN_HOME}/conf/settings.xml"/>
+      <arg value="${maven_home}/conf/settings.xml"/>
     </exec>
-    <replace file="${MAVEN_HOME}/conf/settings.xml" token="&#60;proxy&#62;&#10;" value="--&#62;&#10;    &#60;proxy&#62;&#10;"/>
-    <replace file="${MAVEN_HOME}/conf/settings.xml" token="      &#60;active&#62;true&#60;/active&#62;&#10;" value="&#60;active&#62;true&#60;/active&#62;&#10;" />
-    <replace file="${MAVEN_HOME}/conf/settings.xml" token="&#60;id&#62;optional&#60;/id&#62;&#10;" value="" />
-    <replace file="${MAVEN_HOME}/conf/settings.xml" token="&#60;username&#62;proxyuser&#60;/username&#62;&#10;" value="" />
-    <replace file="${MAVEN_HOME}/conf/settings.xml" token="&#60;password&#62;proxypass&#60;/password&#62;&#10;" value="" />
-    <replace file="${MAVEN_HOME}/conf/settings.xml" token="      &#60;host&#62;proxy.host.net&#60;/host&#62;&#10;" value="&#60;host&#62;${PROXY_HOST}&#60;/host&#62;&#10;" />
-    <replace file="${MAVEN_HOME}/conf/settings.xml" token="&#60;port&#62;80&#60;/port&#62;&#10;" value="&#60;port&#62;${PROXY_PORT}&#60;/port&#62;&#10;" />
-    <replace file="${MAVEN_HOME}/conf/settings.xml" token="&#60;nonProxyHosts&#62;local.net|some.host.com&#60;/nonProxyHosts&#62;&#10;" value="" />
-    <replace file="${MAVEN_HOME}/conf/settings.xml" token="&#60;/proxy&#62;&#10;" value="&#60;/proxy&#62;&#10;  &#60;!--"/>
+    <replace file="${maven_home}/conf/settings.xml" token="&#60;proxy&#62;&#10;" value="--&#62;&#10;    &#60;proxy&#62;&#10;"/>
+    <replace file="${maven_home}/conf/settings.xml" token="      &#60;active&#62;true&#60;/active&#62;&#10;" value="&#60;active&#62;true&#60;/active&#62;&#10;" />
+    <replace file="${maven_home}/conf/settings.xml" token="&#60;id&#62;optional&#60;/id&#62;&#10;" value="" />
+    <replace file="${maven_home}/conf/settings.xml" token="&#60;username&#62;proxyuser&#60;/username&#62;&#10;" value="" />
+    <replace file="${maven_home}/conf/settings.xml" token="&#60;password&#62;proxypass&#60;/password&#62;&#10;" value="" />
+    <replace file="${maven_home}/conf/settings.xml" token="      &#60;host&#62;proxy.host.net&#60;/host&#62;&#10;" value="&#60;host&#62;${PROXY_HOST}&#60;/host&#62;&#10;" />
+    <replace file="${maven_home}/conf/settings.xml" token="&#60;port&#62;80&#60;/port&#62;&#10;" value="&#60;port&#62;${PROXY_PORT}&#60;/port&#62;&#10;" />
+    <replace file="${maven_home}/conf/settings.xml" token="&#60;nonProxyHosts&#62;local.net|some.host.com&#60;/nonProxyHosts&#62;&#10;" value="" />
+    <replace file="${maven_home}/conf/settings.xml" token="&#60;/proxy&#62;&#10;" value="&#60;/proxy&#62;&#10;  &#60;!--"/>
 
     <exec executable="chmod">
       <arg value="o-w"/>
-      <arg value="${MAVEN_HOME}/conf/settings.xml"/>
+      <arg value="${maven_home}/conf/settings.xml"/>
     </exec>
   </target>
 
@@ -352,7 +343,7 @@
     <exec executable="sudo" dir="${DSPACE_RELEASE_DIR}/dspace">
       <arg value="-u"/>
       <arg value="dspace"/>
-      <arg value="${MAVEN_HOME}/bin/mvn"/>
+      <arg value="${maven_home}/bin/mvn"/>
       <arg value="package"/>
     </exec>
     <exec executable="sudo" dir="${DSPACE_RELEASE_DIR}/dspace/target/dspace-${DSPACE_VERSION}-build.dir">
@@ -539,7 +530,7 @@
   </target>
 
   <target name="comp" description="Originally comp.sh">
-    <exec executable="${MAVEN_HOME}/bin/mvn" dir="${DSPACE_SRC_RELEASE_DIR}/dspace-api">
+    <exec executable="${maven_home}/bin/mvn" dir="${DSPACE_SRC_RELEASE_DIR}/dspace-api">
       <arg value="install"/>
     </exec>
     <exec executable="${MAVEN_HOME}/bin/mvn" dir="${DSPACE_SRC_RELEASE_DIR}/dspace-jspui/dspace-jspui-api">
@@ -583,7 +574,7 @@
     <delete file="${TEMP_DIR}/${TOMCAT_CNT_TGZ}" quiet="true"/>
     <delete file="${TEMP_DIR}/${POSTGRESQL_TGZ}" quiet="true"/>
 
-    <delete file="${MAVEN_HOME}" quiet="true"/>
+    <delete file="${maven_home}" quiet="true"/>
     <exec executable="sudo">
       <arg value="rm"/>
       <arg value="-rf"/>
