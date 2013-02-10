@@ -189,9 +189,6 @@
       <arg value="-rf"/>
       <arg value="${postgresql_home}"/>
     </exec>
-<!--
-    <untar src="${TEMP_DIR}/${POSTGRESQL_TGZ}" dest="${TEMP_DIR}" compression="gzip"/>
--->
     <exec executable="tar">
       <arg value="xvjf"/>
       <arg value="${dst_postgresql}"/>
@@ -238,15 +235,15 @@
       <arg value="make"/> 
       <arg value="install"/> 
     </exec>
-    <mkdir dir="${PGDATA}-${POSTGRESQL_VERSION}"/> 
+    <mkdir dir="${pgdata}-${postgresql_version}"/> 
     <exec executable="chmod"> 
       <arg value="700"/>
-      <arg value="${PGDATA}-${POSTGRESQL_VERSION}"/> 
+      <arg value="${pgdata}-${postgresql_version}"/> 
     </exec>
     <exec executable="chown"> 
       <arg value="-R"/>
       <arg value="pgsql:pgsql"/>
-      <arg value="${PGDATA}-${POSTGRESQL_VERSION}"/>
+      <arg value="${pgdata}-${postgresql_version}"/>
     </exec>
     <exec executable="ln"> 
       <arg value="-s"/> 
@@ -291,9 +288,6 @@
   <target name="mdb" description="Install IUGONET Metadata DB.">
     <get src="http://sourceforge.net/projects/dspace/files/DSpace%20Stable/${DSPACE_VERSION}/${DSPACE_RELEASE_TGZ}" dest="${tmp}/${DSPACE_RELEASE_TGZ}" usetimestamp="true"/>
     <get src="http://sourceforge.net/projects/dspace/files/DSpace%20Stable/${DSPACE_VERSION}/${DSPACE_SRC_TGZ}" dest="${tmp}/${DSPACE_SRC_TGZ}" usetimestamp="true"/>
-    <!--
-    <untar src="${DSPACE_USER_HOME}/${tmp}" dest="${DSPATE_USER_HOME}" compression="gzip"/>
-    -->
     <exec executable="sudo">
       <arg value="-u"/>
       <arg value="dspace"/>
@@ -303,9 +297,6 @@
       <arg value="--directory"/>
       <arg value="${DSPACE_USER_HOME}"/>
     </exec>
-    <!--
-    <untar src="${DSPACE_USER_HOME}/${tmp}" dest="${DSPACE_USER_HOME}" compression="gzip"/>
-    -->
     <exec executable="sudo">
       <arg value="-u"/>
       <arg value="dspace"/>
@@ -545,16 +536,12 @@
       <arg value="${CATALINA_HOME}/bin/commons-daemon-native.tar.gz"/>
       <arg value="${tmp}"/>
     </exec>
-<!-- 
-    <untar src="${tmp}/commons-daemon-native.tar.gz" dest="${tmp}" compression="gzip"/>
--->
     <exec executable="tar">
       <arg value="xvzf"/>
       <arg value="${tmp}/commons-daemon-native.tar.gz"/>
       <arg value="--directory"/>
       <arg value="${tmp}"/>
     </exec>
-    <!--exec executable="autoconf" dir="${tmp}/commons-daemon-1.0.8-native-src/unix/"/-->
     <exec executable="./configure" dir="${tmp}/commons-daemon-1.0.8-native-src/unix/"/>
     <exec executable="make" dir="${tmp}/commons-daemon-1.0.8-native-src/unix/">
       <arg value="clean"/> 
@@ -609,7 +596,7 @@
     <exec executable="sudo">
       <arg value="rm"/>
       <arg value="-rf"/>
-      <arg value="${PGDATA}-${POSTGRESQL_VERSION}"/>
+      <arg value="${pgdata}-${postgresql_version}"/>
     </exec>
 
     <!-- can't detect symbolic link by using ant -->
