@@ -223,7 +223,7 @@
       <arg value="${postgresql_home}"/>
     </exec>
     <exec executable="./configure" dir="${tmp}/${postgresql_prefix}">
-      <arg line="--prefix=${postgresql_home} --with-pgport=${POSTGRESQL_PORT}"/> 
+      <arg line="--prefix=${postgresql_home} --with-pgport=${postgresql_port}"/> 
     </exec>
     <exec executable="sudo" dir="${tmp}/${postgresql_prefix}">
       <arg value="-u"/>
