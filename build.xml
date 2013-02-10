@@ -175,8 +175,7 @@
     <echo message='export MANPATH=${MANPATH}:${POSTGRESQL_HOME}/man&#10;' file="${ENV_SET_FILE}" append="yes"/>
     <echo message='export PATH=${POSTGRESQL_HOME}/bin:${PATH}&#10;' file="${ENV_SET_FILE}" append="yes"/>
     <echo message='export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${PGLIB}&#10;' file="${ENV_SET_FILE}" append="yes"/>
-
-    <get src="http://ftp.jaist.ac.jp/pub/postgresql/source/v${POSTGRESQL_VERSION}/postgresql-${POSTGRESQL_VERSION}.tar.gz" dest="${tmp}/postgresql-${POSTGRESQL_VERSION}.tar.gz"/>
+    <get src="${src_postgresql}" dest="${dst_postgresql}"/>
     <exec executable="sudo">
       <arg value="/usr/sbin/useradd"/>
       <arg value="-c"/>
