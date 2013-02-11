@@ -390,39 +390,9 @@
 	  <arg value="-rf"/>
 	  <arg line="${custom_iugonet_webapps}/@{jsp} ${iugonet_webapps}"/>
 	</exec>
-<!--
-	<echo message="@{jsp}"/>
-	<exec executable="bash" dir="${src}/${ipadic_prefix}">
-	  <arg value="-c"/>
-	  <arg value="cat @{jsp} | iconv -f EUC-JP -t UTF8 -o @{dic}"/>
-	</exec>
--->
       </sequential>
     </for>
-<!--
-    <exec executable="cp">
-      <arg value="-rf"/>
-      <arg line="${custom_iugonet_webapps}/collection-home.jsp ${iugonet_webapps}"/>
-    </exec>
--->
-<!--
-    <exec executable="cp">
-      <arg value="-rf"/>
-      <arg line="${custom_iugonet_webapps}/community-home.jsp ${iugonet_webapps}"/>
-    </exec>
--->
-<!--
-    <exec executable="cp">
-      <arg value="-rf"/>
-      <arg line="${custom_iugonet_webapps}/community-list.jsp ${iugonet_webapps}"/>
-    </exec>
--->
-<!--
-    <exec executable="cp">
-      <arg value="-rf"/>
-      <arg line="${custom_iugonet_webapps}/display-item.jsp ${iugonet_webapps}"/>
-    </exec>
--->
+
     <exec executable="cp">
       <arg value="-rf"/>
       <arg line="${custom_iugonet_webapps}/utils.js ${iugonet_webapps}"/>
@@ -441,7 +411,7 @@
     </exec>
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${custom_iugonet_webapps}/static/js/helpResourcetype.js ${iugonet_webapps}/static/js"/>
+      <arg line="${custom_iugonet_webapps}/static/js/helpResourceType.js ${iugonet_webapps}/static/js"/>
     </exec>
     <exec executable="cp">
       <arg value="-rf"/>
