@@ -392,6 +392,10 @@
 	</exec>
       </sequential>
     </for>
+    
+    <copy todir="${iugonet_webapps}">
+      <fileset dir="${custom_iugonet_webapps}"/>
+    </copy>
 
     <exec executable="cp">
       <arg value="-rf"/>
