@@ -184,7 +184,7 @@
     <echo message='### for PostgreSQL&#10;' file="${env_set_file}" append="yes"/>
     <echo message='export POSTGRES_HOME=${postgresql_home}&#10;' file="${env_set_file}" append="yes"/>
     <echo message='export PGLILB=${postgresql_home}/lib&#10;' file="${env_set_file}" append="yes"/>
-    <echo message='export PGDATA=${PGDATA}&#10;' file="${env_set_file}" append="yes"/>
+    <echo message='export PGDATA=${pgdata}&#10;' file="${env_set_file}" append="yes"/>
     <echo message='export MANPATH=${manpath}:${postgresql_home}/man&#10;' file="${env_set_file}" append="yes"/>
     <echo message='export PATH=${postgresql_home}/bin:${PATH}&#10;' file="${env_set_file}" append="yes"/>
     <echo message='export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${pglib}&#10;' file="${env_set_file}" append="yes"/>
