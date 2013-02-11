@@ -16,7 +16,7 @@
   <target name="all" depends="initial_message, packages, git, init, mdb, tomcat_daemon, final_message"/>
 
     <target name="initial_message" description="Display initial message">
-    <echo message="###&#x0A;###&#x0A;This installation process takes 20 minutes at least.&#x0A;###&#x0A;###&#x0A;"/>
+    <echo message="###&#x0A;###&#x0A;This installation process takes 60 minutes at least.&#x0A;###&#x0A;###&#x0A;"/>
   </target>
 
   <target name="final_message" description="Display final message">
