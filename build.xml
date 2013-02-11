@@ -130,7 +130,7 @@
   <target name="tomcat" description="Install Apache Tomcat">
     <echo message='### for TOMCAT&#10;' file="${env_set_file}" append="yes"/>
     <echo message='export TOMCAT_USER=dspace&#10;' file="${env_set_file}" append="yes"/>
-    <echo message='export CATALINA_HOME=${CATALINA_HOME}&#10;' file="${env_set_file}" append="yes"/>
+    <echo message='export CATALINA_HOME=${catalina_home}&#10;' file="${env_set_file}" append="yes"/>
     <echo message='export PATH=${catalina_home}/bin:${PATH}&#10;' file="${env_set_file}" append="yes"/>
     <get src="${src_tomcat}" dest="${dst_tomcat}" usetimestamp="true"/>
     <unzip src="${dst_tomcat}" dest="${install_dir}"/>
@@ -402,151 +402,151 @@
 <!--
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${CUSTOM_IUGONET_WEBAPPS}/collection-home.jsp ${IUGONET_WEBAPPS}"/>
+      <arg line="${custom_iugonet_webapps}/collection-home.jsp ${iugonet_webapps}"/>
     </exec>
 -->
 <!--
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${CUSTOM_IUGONET_WEBAPPS}/community-home.jsp ${IUGONET_WEBAPPS}"/>
+      <arg line="${custom_iugonet_webapps}/community-home.jsp ${iugonet_webapps}"/>
     </exec>
 -->
 <!--
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${CUSTOM_IUGONET_WEBAPPS}/community-list.jsp ${IUGONET_WEBAPPS}"/>
+      <arg line="${custom_iugonet_webapps}/community-list.jsp ${iugonet_webapps}"/>
     </exec>
 -->
 <!--
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${CUSTOM_IUGONET_WEBAPPS}/display-item.jsp ${IUGONET_WEBAPPS}"/>
+      <arg line="${custom_iugonet_webapps}/display-item.jsp ${iugonet_webapps}"/>
     </exec>
 -->
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${CUSTOM_IUGONET_WEBAPPS}/utils.js ${IUGONET_WEBAPPS}"/>
+      <arg line="${custom_iugonet_webapps}/utils.js ${iugonet_webapps}"/>
     </exec>
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${CUSTOM_IUGONET_WEBAPPS}/apple-touch-icon.png ${IUGONET_WEBAPPS}"/>
+      <arg line="${custom_iugonet_webapps}/apple-touch-icon.png ${iugonet_webapps}"/>
     </exec>
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${CUSTOM_IUGONET_WEBAPPS}/static/js/helpFreeWord.js ${IUGONET_WEBAPPS}/static/js"/>
+      <arg line="${custom_iugonet_webapps}/static/js/helpFreeWord.js ${iugonet_webapps}/static/js"/>
     </exec>
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${CUSTOM_IUGONET_WEBAPPS}/static/js/helpTime.js ${IUGONET_WEBAPPS}/static/js"/>
+      <arg line="${custom_iugonet_webapps}/static/js/helpTime.js ${iugonet_webapps}/static/js"/>
     </exec>
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${CUSTOM_IUGONET_WEBAPPS}/static/js/helpResourceType.js ${IUGONET_WEBAPPS}/static/js"/>
+      <arg line="${custom_iugonet_webapps}/static/js/helpResourcetype.js ${iugonet_webapps}/static/js"/>
     </exec>
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${CUSTOM_IUGONET_WEBAPPS}/static/js/gmaps.js ${IUGONET_WEBAPPS}/static/js"/>
+      <arg line="${custom_iugonet_webapps}/static/js/gmaps.js ${iugonet_webapps}/static/js"/>
     </exec>
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${CUSTOM_IUGONET_WEBAPPS}/static/js/searchbox.js ${IUGONET_WEBAPPS}/static/js"/>
+      <arg line="${custom_iugonet_webapps}/static/js/searchbox.js ${iugonet_webapps}/static/js"/>
     </exec>
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${CUSTOM_IUGONET_WEBAPPS}/styles.css ${IUGONET_WEBAPPS}"/>
+      <arg line="${custom_iugonet_webapps}/styles.css ${iugonet_webapps}"/>
     </exec>
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${CUSTOM_IUGONET_WEBAPPS}/favicon.ico ${IUGONET_WEBAPPS}"/>
+      <arg line="${custom_iugonet_webapps}/favicon.ico ${iugonet_webapps}"/>
     </exec>
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${CUSTOM_IUGONET_WEBAPPS}/browse/full.jsp ${IUGONET_WEBAPPS}/browse"/>
+      <arg line="${custom_iugonet_webapps}/browse/full.jsp ${iugonet_webapps}/browse"/>
     </exec>
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${CUSTOM_IUGONET_WEBAPPS}/layout/header-default.jsp ${IUGONET_WEBAPPS}/layout"/>
+      <arg line="${custom_iugonet_webapps}/layout/header-default.jsp ${iugonet_webapps}/layout"/>
     </exec>
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${CUSTOM_IUGONET_WEBAPPS}/layout/footer-default.jsp ${IUGONET_WEBAPPS}/layout"/>
+      <arg line="${custom_iugonet_webapps}/layout/footer-default.jsp ${iugonet_webapps}/layout"/>
     </exec>
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${CUSTOM_IUGONET_WEBAPPS}/layout/navbar-default.jsp ${IUGONET_WEBAPPS}/layout"/>
+      <arg line="${custom_iugonet_webapps}/layout/navbar-default.jsp ${iugonet_webapps}/layout"/>
     </exec>
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${CUSTOM_IUGONET_WEBAPPS}/layout/location-bar.jsp ${IUGONET_WEBAPPS}/layout"/>
+      <arg line="${custom_iugonet_webapps}/layout/location-bar.jsp ${iugonet_webapps}/layout"/>
     </exec>
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${CUSTOM_IUGONET_WEBAPPS}/search/results.jsp ${IUGONET_WEBAPPS}/search"/>
+      <arg line="${custom_iugonet_webapps}/search/results.jsp ${iugonet_webapps}/search"/>
     </exec>
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${CUSTOM_IUGONET_WEBAPPS}/WEB-INF/web.xml ${IUGONET_WEBAPPS}/WEB-INF"/>
+      <arg line="${custom_iugonet_webapps}/WEB-INF/web.xml ${iugonet_webapps}/WEB-INF"/>
     </exec>
   </target>
 
   <target name="cp_src" description="Originally cp_src.sh">
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${CUSTOM_SRC_DSPACE_API}/resources/Messages.properties ${DSPACE_SRC_RELEASE_API}/resources"/>
+      <arg line="${custom_src_dspace_api}/resources/Messages.properties ${dspace_src_release_api}/resources"/>
     </exec>
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${CUSTOM_SRC_DSPACE_API}/java/org/dspace/administer/StructBuilder.java ${DSPACE_SRC_RELEASE_API}/java/org/dspace/administer"/>
+      <arg line="${custom_src_dspace_api}/java/org/dspace/administer/StructBuilder.java ${dspace_src_release_api}/java/org/dspace/administer"/>
     </exec>
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${CUSTOM_SRC_DSPACE_API}/java/org/dspace/app/util/SyndicationFeed.java ${DSPACE_SRC_RELEASE_API}/java/org/dspace/app/util"/>
+      <arg line="${custom_src_dspace_api}/java/org/dspace/app/util/SyndicationFeed.java ${dspace_src_release_api}/java/org/dspace/app/util"/>
     </exec>
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${CUSTOM_SRC_DSPACE_API}/java/org/dspace/app/statistics/ReportGenerator.java ${DSPACE_SRC_RELEASE_API}/java/org/dspace/app/statistics"/>
+      <arg line="${custom_src_dspace_api}/java/org/dspace/app/statistics/ReportGenerator.java ${dspace_src_release_api}/java/org/dspace/app/statistics"/>
     </exec>
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${CUSTOM_SRC_DSPACE_JSPUI}/servlet/SearchServlet.java ${DSPACE_SRC_RELEASE_JSPUI}/servlet"/>
+      <arg line="${custom_src_dspace_jspui}/servlet/SearchServlet.java ${dspace_src_release_jspui}/servlet"/>
     </exec>
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${CUSTOM_SRC_DSPACE_JSPUI}/servlet/OpenURLServlet.java ${DSPACE_SRC_RELEASE_JSPUI}/servlet"/>
+      <arg line="${custom_src_dspace_jspui}/servlet/OpenURLServlet.java ${dspace_src_release_jspui}/servlet"/>
     </exec>
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${CUSTOM_SRC_DSPACE_JSPUI}/servlet/HandleServlet.java ${DSPACE_SRC_RELEASE_JSPUI}/servlet"/>
+      <arg line="${custom_src_dspace_jspui}/servlet/HandleServlet.java ${dspace_src_release_jspui}/servlet"/>
     </exec>
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${CUSTOM_SRC_DSPACE_JSPUI}/jsptag/ItemListTag.java ${DSPACE_SRC_RELEASE_JSPUI}/jsptag"/>
+      <arg line="${custom_src_dspace_jspui}/jsptag/ItemListTag.java ${dspace_src_release_jspui}/jsptag"/>
     </exec>
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${CUSTOM_SRC_DSPACE_JSPUI}/jsptag/BrowseListTag.java ${DSPACE_SRC_RELEASE_JSPUI}/jsptag"/>
+      <arg line="${custom_src_dspace_jspui}/jsptag/BrowseListTag.java ${dspace_src_release_jspui}/jsptag"/>
     </exec>
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${CUSTOM_SRC_DSPACE_JSPUI}/jsptag/ItemTag.java ${DSPACE_SRC_RELEASE_JSPUI}/jsptag"/>
+      <arg line="${custom_src_dspace_jspui}/jsptag/ItemTag.java ${dspace_src_release_jspui}/jsptag"/>
     </exec>
   </target>
 
   <target name="comp" description="Originally comp.sh">
-    <exec executable="${maven_home}/bin/mvn" dir="${DSPACE_SRC_RELEASE_DIR}/dspace-api">
+    <exec executable="${maven_home}/bin/mvn" dir="${dspace_src_release_dir}/dspace-api">
       <arg value="install"/>
     </exec>
-    <exec executable="${maven_home}/bin/mvn" dir="${DSPACE_SRC_RELEASE_DIR}/dspace-jspui/dspace-jspui-api">
+    <exec executable="${maven_home}/bin/mvn" dir="${dspace_src_release_dir}/dspace-jspui/dspace-jspui-api">
       <arg value="install"/>
     </exec>
-    <copy file="${DSPACE_SRC_RELEASE_DIR}/dspace-api/target/dspace-api-${DSPACE_VERSION}.jar" todir="${DSPACE_INSTALL_DIR}/lib"/>
-    <copy file="${DSPACE_SRC_RELEASE_DIR}/dspace-api/target/dspace-api-${DSPACE_VERSION}.jar" todir="${IUGONET_WEBAPPS}/WEB-INF/lib"/>
-    <copy file="${DSPACE_SRC_RELEASE_DIR}/dspace-jspui/dspace-jspui-api/target/dspace-jspui-api-${DSPACE_VERSION}.jar" todir="${IUGONET_WEBAPPS}/WEB-INF/lib"/>
+    <copy file="${dspace_src_release_dir}/dspace-api/target/dspace-api-${dspace_version}.jar" todir="${dspace_install_dir}/lib"/>
+    <copy file="${dspace_src_release_dir}/dspace-api/target/dspace-api-${dspace_version}.jar" todir="${iugonet_webapps}/WEB-INF/lib"/>
+    <copy file="${dspace_src_release_dir}/dspace-jspui/dspace-jspui-api/target/dspace-jspui-api-${dspace_version}.jar" todir="${iugonet_webapps}/WEB-INF/lib"/>
   </target>
 
   <target name="tomcat_daemon" description="Set Tomcat Daemon">
     <exec executable="cp">
-      <arg value="${CATALINA_HOME}/bin/commons-daemon-native.tar.gz"/>
+      <arg value="${catalina_home}/bin/commons-daemon-native.tar.gz"/>
       <arg value="${tmp}"/>
     </exec>
     <exec executable="tar">
@@ -562,7 +562,7 @@
     <exec executable="make" dir="${tmp}/commons-daemon-1.0.8-native-src/unix/"/>
     <exec executable="cp" dir="${tmp}/commons-daemon-1.0.8-native-src/unix/">
       <arg value="jsvc"/> 
-      <arg value="${CATALINA_HOME}/bin"/>
+      <arg value="${catalina_home}/bin"/>
     </exec>
   </target>
 
@@ -579,7 +579,7 @@
       <arg value="${install_dir}/${maven}"/>
     </exec>
 
-    <delete file="${CATALINA_HOME}" quiet="true"/>
+    <delete file="${catalina_home}" quiet="true"/>
     <exec executable="sudo">
       <arg value="rm"/>
       <arg value="-rf"/>
@@ -591,15 +591,15 @@
       <arg value="${tmp}/${tomcat_cnt_prefix}"/>
     </exec>
 
-    <delete dir="${work}/${DSPACE_RELEASE}" quiet="true" />
-    <delete dir="${work}/${DSPACE_SRC}" quiet="true" />
-    <delete file="${tmp}/${DSPACE_RELEASE_TGZ}" quiet="true" />
-    <delete file="${tmp}/${DSPACE_SRC_TGZ}" quiet="true" />
+    <delete dir="${work}/${dspace_release_prefix}" quiet="true" />
+    <delete dir="${work}/${dspace_src_prefix}" quiet="true" />
+    <delete file="${tmp}/${dspace_release}" quiet="true" />
+    <delete file="${tmp}/${dspace_src_release}" quiet="true" />
 
-    <delete dir="${tmp}/${POSTGRESQL}" quiet="true"/>
-    <delete file="${tmp}/${POSTGRESQL_TGZ}" quiet="true"/>
+    <delete dir="${tmp}/${postgresql_prefix}" quiet="true"/>
+    <delete file="${tmp}/${postgresql}" quiet="true"/>
     <delete file="${postgresql_home}" quiet="true"/>
-    <delete file="${PGDATA}" quiet="true"/>
+    <delete file="${pgdata}" quiet="true"/>
     <exec executable="sudo">
       <arg value="rm"/>
       <arg value="-rf"/>
@@ -613,7 +613,7 @@
 
     <!-- can't detect symbolic link by using ant -->
     <exec executable="rm">
-      <arg line="${postgresql_home} ${PGDATA}"/>
+      <arg line="${postgresql_home} ${pgdata}"/>
     </exec>
 
     <exec executable="userdel">
