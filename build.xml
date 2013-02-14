@@ -603,7 +603,7 @@
     </exec>
   </target>
 
-  <target name="properties">
+  <target name="properties" description="Check properties.">
     <exec executable="/bin/sh" outputproperty="number.properties">
       <arg value="-c"/>
       <arg value="cat build.properties | grep Your | wc -l"/>
