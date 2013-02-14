@@ -202,6 +202,7 @@
       <arg value="-rf"/>
       <arg value="${postgresql_home}"/>
     </exec>
+    <!-- To stay away to use untar task because untar task for ant 1.7.1 is buggy. -->
     <exec executable="tar">
       <arg value="xvjf"/>
       <arg value="${dst_postgresql}"/>
@@ -304,6 +305,7 @@
     <exec executable="sudo">
       <arg value="-u"/>
       <arg value="dspace"/>
+    <!-- To stay away to use untar task because untar task for ant 1.7.1 is buggy. -->
       <arg value="tar"/>
       <arg value="xvzf"/>
       <arg value="${tmp}/${dspace_release}"/>
@@ -313,6 +315,7 @@
     <exec executable="sudo">
       <arg value="-u"/>
       <arg value="dspace"/>
+    <!-- To stay away to use untar task because untar task for ant 1.7.1 is buggy. -->
       <arg value="tar"/>
       <arg value="xvzf"/>
       <arg value="${tmp}/${dspace_src_release}"/>
@@ -523,6 +526,7 @@
       <arg value="${catalina_home}/bin/commons-daemon-native.tar.gz"/>
       <arg value="${tmp}"/>
     </exec>
+    <!-- To stay away to use untar task because untar task for ant 1.7.1 is buggy. -->
     <exec executable="tar">
       <arg value="xvzf"/>
       <arg value="${tmp}/commons-daemon-native.tar.gz"/>
