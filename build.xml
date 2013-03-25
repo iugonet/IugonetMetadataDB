@@ -152,7 +152,7 @@
   <target name="g2d" description="Install G2d">
     <exec executable="git">
       <arg value="clone"/>
-      <arg value="ssh://${GIT_SERVER}/~/git/git2dspace/g2d.git"/>
+      <arg value="ssh://${git_server}/~/git/git2dspace/g2d.git"/>
       <arg value="${work}/g2d"/>
     </exec>
   </target>
