@@ -268,8 +268,8 @@
       <arg value="-u"/>
       <arg value="pgsql"/>
       <arg value="-i"/>
-      <arg value="${postgresql_home}/bin/initdb --no-locale --encoding=UTF-8"/>
-     </exec>
+      <arg line="${postgresql_home}/bin/initdb --no-locale --encoding=UTF-8"/>
+    </exec>
 
     <echo message='### for Log&#10;' file="${pgdata}/postgresql.conf" append="yes"/>
     <echo message="log_destination = 'syslog'&#10;" file="${pgdata}/postgresql.conf" append="yes"/>
