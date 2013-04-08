@@ -295,7 +295,7 @@
       <arg value="-u"/>
       <arg value="pgsql"/>
       <arg value="-i"/>
-      <arg value="${postgresql_home}/bin/createuser -d -S -R dspace"/>
+      <arg line="${postgresql_home}/bin/createuser -d -S -R dspace"/>
     </exec>
   </target>
 
