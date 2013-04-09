@@ -288,6 +288,7 @@
       <arg line="${postgresql_home}/bin/pg_ctl -D ${pgdata} start"/> 
     </exec>
     <echo message="&#xA;Wait for 30 seconds or establishment of the socket connection to 5432 port...&#xA;"/>
+    <sleep seconds="50" />
     <antcall target="check-port"/>
     <echo message="hoge=${postgresql.running}"/>
     <exec executable="sudo">
@@ -301,9 +302,13 @@
   <target name="check-port" description="Check whether PostgreSQL is running">
     <echo message="Checking whether PostgreSQL is running"/>
     <condition property="postgresql.running">
+<!--
       <waitfor maxwait="30" maxwaitunit="second">
+-->
 	<socket server="localhost" port="5432"/>
+<!--
       </waitfor>
+-->
     </condition>
   </target>
 
