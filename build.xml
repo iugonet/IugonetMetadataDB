@@ -354,7 +354,7 @@
       <arg value="-u"/>
       <arg value="dspace"/>
       <arg value="-i"/>
-      <arg value="createdb dspace"/>
+      <arg line="createdb dspace"/>
     </exec>
 
     <antcall target="cp_conf"/>
