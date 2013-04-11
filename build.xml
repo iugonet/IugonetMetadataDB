@@ -288,9 +288,7 @@
       <arg line="${postgresql_home}/bin/pg_ctl -D ${pgdata} start"/> 
     </exec>
     <echo message="&#xA;Wait for 30 seconds or establishment of the socket connection to 5432 port...&#xA;"/>
-    <exec executable="date"/>
-    <sleep seconds="50" />
-    <exec executable="date"/>
+    <sleep seconds="60" />
     <antcall target="check-port"/>
     <exec executable="sudo">
       <arg value="-u"/>
