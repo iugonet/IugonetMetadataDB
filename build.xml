@@ -481,19 +481,19 @@
   <target name="cp_src" description="Originally cp_src.sh">
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${custom_src_dspace_api}/resources/Messages.properties ${dspace_src_release_api}/resources"/>
+      <arg line="${custom_src_dspace_api}/resources/Messages.properties ${src_dspace_src_release_api}/resources"/>
     </exec>
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${custom_src_dspace_api}/java/org/dspace/administer/StructBuilder.java ${dspace_src_release_api}/java/org/dspace/administer"/>
+      <arg line="${custom_src_dspace_api}/java/org/dspace/administer/StructBuilder.java ${src_dspace_src_release_api}/java/org/dspace/administer"/>
     </exec>
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${custom_src_dspace_api}/java/org/dspace/app/util/SyndicationFeed.java ${dspace_src_release_api}/java/org/dspace/app/util"/>
+      <arg line="${custom_src_dspace_api}/java/org/dspace/app/util/SyndicationFeed.java ${src_dspace_src_release_api}/java/org/dspace/app/util"/>
     </exec>
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${custom_src_dspace_api}/java/org/dspace/app/statistics/ReportGenerator.java ${dspace_src_release_api}/java/org/dspace/app/statistics"/>
+      <arg line="${custom_src_dspace_api}/java/org/dspace/app/statistics/ReportGenerator.java ${src_dspace_src_release_api}/java/org/dspace/app/statistics"/>
     </exec>
     <exec executable="cp">
       <arg value="-rf"/>
