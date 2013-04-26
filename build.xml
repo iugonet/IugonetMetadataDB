@@ -10,7 +10,7 @@
   </taskdef>
 
   <condition property="have.proxy" value="true">
-     <equals arg1="${HAVE_PROXY}" arg2="yes"/>
+     <equals arg1="${have_proxy}" arg2="yes"/>
   </condition>
 
   <target name="all" depends="initial_message, packages, git, init, mdb, tomcat_daemon, final_message"/>
@@ -32,13 +32,13 @@
       <arg value="config"/>
       <arg value="--global"/>
       <arg value="user.name"/>
-      <arg value="${GIT_USER_NAME}"/>
+      <arg value="${git_user_name}"/>
     </exec>
     <exec executable="git">
       <arg value="config"/>
       <arg value="--global"/>
       <arg value="user.email"/>
-      <arg value="${GIT_USER_EMAIL}"/>
+      <arg value="${git_user_email}"/>
     </exec>
   </target>
 
@@ -116,8 +116,8 @@
     <replace file="${maven_home}/conf/settings.xml" token="&#60;id&#62;optional&#60;/id&#62;&#10;" value="" />
     <replace file="${maven_home}/conf/settings.xml" token="&#60;username&#62;proxyuser&#60;/username&#62;&#10;" value="" />
     <replace file="${maven_home}/conf/settings.xml" token="&#60;password&#62;proxypass&#60;/password&#62;&#10;" value="" />
-    <replace file="${maven_home}/conf/settings.xml" token="      &#60;host&#62;proxy.host.net&#60;/host&#62;&#10;" value="&#60;host&#62;${PROXY_HOST}&#60;/host&#62;&#10;" />
-    <replace file="${maven_home}/conf/settings.xml" token="&#60;port&#62;80&#60;/port&#62;&#10;" value="&#60;port&#62;${PROXY_PORT}&#60;/port&#62;&#10;" />
+    <replace file="${maven_home}/conf/settings.xml" token="      &#60;host&#62;proxy.host.net&#60;/host&#62;&#10;" value="&#60;host&#62;${proxy_host}&#60;/host&#62;&#10;" />
+    <replace file="${maven_home}/conf/settings.xml" token="&#60;port&#62;80&#60;/port&#62;&#10;" value="&#60;port&#62;${proxy_port}&#60;/port&#62;&#10;" />
     <replace file="${maven_home}/conf/settings.xml" token="&#60;nonProxyHosts&#62;local.net|some.host.com&#60;/nonProxyHosts&#62;&#10;" value="" />
     <replace file="${maven_home}/conf/settings.xml" token="&#60;/proxy&#62;&#10;" value="&#60;/proxy&#62;&#10;  &#60;!--"/>
 
