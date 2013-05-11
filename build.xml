@@ -497,27 +497,27 @@
     </exec>
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${custom_src_dspace_jspui}/servlet/SearchServlet.java ${dspace_src_release_jspui}/servlet"/>
+      <arg line="${custom_src_dspace_jspui}/servlet/SearchServlet.java ${src_dspace_src_release_jspui}/servlet"/>
     </exec>
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${custom_src_dspace_jspui}/servlet/OpenURLServlet.java ${dspace_src_release_jspui}/servlet"/>
+      <arg line="${custom_src_dspace_jspui}/servlet/OpenURLServlet.java ${src_dspace_src_release_jspui}/servlet"/>
     </exec>
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${custom_src_dspace_jspui}/servlet/HandleServlet.java ${dspace_src_release_jspui}/servlet"/>
+      <arg line="${custom_src_dspace_jspui}/servlet/HandleServlet.java ${src_dspace_src_release_jspui}/servlet"/>
     </exec>
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${custom_src_dspace_jspui}/jsptag/ItemListTag.java ${dspace_src_release_jspui}/jsptag"/>
+      <arg line="${custom_src_dspace_jspui}/jsptag/ItemListTag.java ${src_dspace_src_release_jspui}/jsptag"/>
     </exec>
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${custom_src_dspace_jspui}/jsptag/BrowseListTag.java ${dspace_src_release_jspui}/jsptag"/>
+      <arg line="${custom_src_dspace_jspui}/jsptag/BrowseListTag.java ${src_dspace_src_release_jspui}/jsptag"/>
     </exec>
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${custom_src_dspace_jspui}/jsptag/ItemTag.java ${dspace_src_release_jspui}/jsptag"/>
+      <arg line="${custom_src_dspace_jspui}/jsptag/ItemTag.java ${src_dspace_src_release_jspui}/jsptag"/>
     </exec>
   </target>
 
