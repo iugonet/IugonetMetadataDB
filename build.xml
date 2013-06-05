@@ -10,7 +10,7 @@
   </taskdef>
 
   <condition property="have.proxy" value="true">
-     <equals arg1="${have_proxy}" arg2="yes"/>
+     <equals arg1="${HAVE_PROXY}" arg2="yes"/>
   </condition>
 
   <target name="all" depends="initial_message, packages, git, init, mdb, tomcat_daemon, final_message"/>
@@ -116,8 +116,8 @@
     <replace file="${maven_home}/conf/settings.xml" token="&#60;id&#62;optional&#60;/id&#62;&#10;" value="" />
     <replace file="${maven_home}/conf/settings.xml" token="&#60;username&#62;proxyuser&#60;/username&#62;&#10;" value="" />
     <replace file="${maven_home}/conf/settings.xml" token="&#60;password&#62;proxypass&#60;/password&#62;&#10;" value="" />
-    <replace file="${maven_home}/conf/settings.xml" token="      &#60;host&#62;proxy.host.net&#60;/host&#62;&#10;" value="&#60;host&#62;${proxy_host}&#60;/host&#62;&#10;" />
-    <replace file="${maven_home}/conf/settings.xml" token="&#60;port&#62;80&#60;/port&#62;&#10;" value="&#60;port&#62;${proxy_port}&#60;/port&#62;&#10;" />
+    <replace file="${maven_home}/conf/settings.xml" token="      &#60;host&#62;proxy.host.net&#60;/host&#62;&#10;" value="&#60;host&#62;${PROXY_HOST}&#60;/host&#62;&#10;" />
+    <replace file="${maven_home}/conf/settings.xml" token="&#60;port&#62;80&#60;/port&#62;&#10;" value="&#60;port&#62;${PROXY_PORT}&#60;/port&#62;&#10;" />
     <replace file="${maven_home}/conf/settings.xml" token="&#60;nonProxyHosts&#62;local.net|some.host.com&#60;/nonProxyHosts&#62;&#10;" value="" />
     <replace file="${maven_home}/conf/settings.xml" token="&#60;/proxy&#62;&#10;" value="&#60;/proxy&#62;&#10;  &#60;!--"/>
 
@@ -268,8 +268,8 @@
       <arg value="-u"/>
       <arg value="pgsql"/>
       <arg value="-i"/>
-      <arg line="${postgresql_home}/bin/initdb --no-locale --encoding=UTF-8"/>
-    </exec>
+      <arg value="${postgresql_home}/bin/initdb --no-locale --encoding=UTF-8"/>
+     </exec>
 
     <echo message='### for Log&#10;' file="${pgdata}/postgresql.conf" append="yes"/>
     <echo message="log_destination = 'syslog'&#10;" file="${pgdata}/postgresql.conf" append="yes"/>
@@ -285,30 +285,18 @@
       <arg value="-u"/>
       <arg value="pgsql"/>
       <arg value="-i"/>
-      <arg line="${postgresql_home}/bin/pg_ctl -D ${pgdata} start"/> 
+      <arg value="${postgresql_home}/bin/pg_ctl -D ${pgdata} start"/> 
     </exec>
     <echo message="&#xA;Wait for 30 seconds or establishment of the socket connection to 5432 port...&#xA;"/>
-    <sleep seconds="60" />
-    <antcall target="check-port"/>
+    <waitfor maxwait="30" maxwaitunit="second">
+      <socket server="localhost" port="5432"/>
+    </waitfor>
     <exec executable="sudo">
       <arg value="-u"/>
       <arg value="pgsql"/>
       <arg value="-i"/>
-      <arg line="${postgresql_home}/bin/createuser -d -S -R dspace"/>
+      <arg value="createuser -d -S -R dspace"/>
     </exec>
-  </target>
-
-  <target name="check-port" description="Check whether PostgreSQL is running">
-    <echo message="Checking whether PostgreSQL is running"/>
-    <condition property="postgresql.running">
-<!--
-      <waitfor maxwait="30" maxwaitunit="second">
--->
-	<socket server="localhost" port="5432"/>
-<!--
-      </waitfor>
--->
-    </condition>
   </target>
 
   <target name="mdb" description="Install IUGONET Metadata DB.">
@@ -353,7 +341,7 @@
       <arg value="-u"/>
       <arg value="dspace"/>
       <arg value="-i"/>
-      <arg line="createdb dspace"/>
+      <arg value="createdb dspace"/>
     </exec>
 
     <antcall target="cp_conf"/>
@@ -381,7 +369,7 @@
     <echo message="&#10;"/>
   </target>
 
-  <target name="cp_webapps" description="originally cp_webapps.sh">
+  <target name="cp_webapps" description="Originally cp_webapps.sh">
     <copy todir="${iugonet_webapps}">
       <fileset dir="${default_webapps}"/>
     </copy>
@@ -481,56 +469,56 @@
   <target name="cp_src" description="Originally cp_src.sh">
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${custom_src_dspace_api}/resources/Messages.properties ${src_dspace_src_release_api}/resources"/>
+      <arg line="${custom_src_dspace_api}/resources/Messages.properties ${dspace_src_release_api}/resources"/>
     </exec>
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${custom_src_dspace_api}/java/org/dspace/administer/StructBuilder.java ${src_dspace_src_release_api}/java/org/dspace/administer"/>
+      <arg line="${custom_src_dspace_api}/java/org/dspace/administer/StructBuilder.java ${dspace_src_release_api}/java/org/dspace/administer"/>
     </exec>
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${custom_src_dspace_api}/java/org/dspace/app/util/SyndicationFeed.java ${src_dspace_src_release_api}/java/org/dspace/app/util"/>
+      <arg line="${custom_src_dspace_api}/java/org/dspace/app/util/SyndicationFeed.java ${dspace_src_release_api}/java/org/dspace/app/util"/>
     </exec>
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${custom_src_dspace_api}/java/org/dspace/app/statistics/ReportGenerator.java ${src_dspace_src_release_api}/java/org/dspace/app/statistics"/>
+      <arg line="${custom_src_dspace_api}/java/org/dspace/app/statistics/ReportGenerator.java ${dspace_src_release_api}/java/org/dspace/app/statistics"/>
     </exec>
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${custom_src_dspace_jspui}/servlet/SearchServlet.java ${src_dspace_src_release_jspui}/servlet"/>
+      <arg line="${custom_src_dspace_jspui}/servlet/SearchServlet.java ${dspace_src_release_jspui}/servlet"/>
     </exec>
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${custom_src_dspace_jspui}/servlet/OpenURLServlet.java ${src_dspace_src_release_jspui}/servlet"/>
+      <arg line="${custom_src_dspace_jspui}/servlet/OpenURLServlet.java ${dspace_src_release_jspui}/servlet"/>
     </exec>
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${custom_src_dspace_jspui}/servlet/HandleServlet.java ${src_dspace_src_release_jspui}/servlet"/>
+      <arg line="${custom_src_dspace_jspui}/servlet/HandleServlet.java ${dspace_src_release_jspui}/servlet"/>
     </exec>
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${custom_src_dspace_jspui}/jsptag/ItemListTag.java ${src_dspace_src_release_jspui}/jsptag"/>
+      <arg line="${custom_src_dspace_jspui}/jsptag/ItemListTag.java ${dspace_src_release_jspui}/jsptag"/>
     </exec>
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${custom_src_dspace_jspui}/jsptag/BrowseListTag.java ${src_dspace_src_release_jspui}/jsptag"/>
+      <arg line="${custom_src_dspace_jspui}/jsptag/BrowseListTag.java ${dspace_src_release_jspui}/jsptag"/>
     </exec>
     <exec executable="cp">
       <arg value="-rf"/>
-      <arg line="${custom_src_dspace_jspui}/jsptag/ItemTag.java ${src_dspace_src_release_jspui}/jsptag"/>
+      <arg line="${custom_src_dspace_jspui}/jsptag/ItemTag.java ${dspace_src_release_jspui}/jsptag"/>
     </exec>
   </target>
 
-  <target name="comp" description="Originally comp.sh">
-    <exec executable="${maven_home}/bin/mvn" dir="${src_dspace_src_release_dir}/dspace-api">
+  <target name="comp" description="Originally comp_all.sh">
+    <exec executable="${maven_home}/bin/mvn" dir="${dspace_src_release_dir}/dspace-api">
       <arg value="install"/>
     </exec>
-    <exec executable="${maven_home}/bin/mvn" dir="${src_dspace_src_release_dir}/dspace-jspui/dspace-jspui-api">
+    <exec executable="${maven_home}/bin/mvn" dir="${dspace_src_release_dir}/dspace-jspui/dspace-jspui-api">
       <arg value="install"/>
     </exec>
-    <copy file="${src_dspace_src_release_dir}/dspace-api/target/dspace-api-${dspace_version}.jar" todir="${dspace_install_dir}/lib"/>
-    <copy file="${src_dspace_src_release_dir}/dspace-api/target/dspace-api-${dspace_version}.jar" todir="${iugonet_webapps}/WEB-INF/lib"/>
-    <copy file="${src_dspace_src_release_dir}/dspace-jspui/dspace-jspui-api/target/dspace-jspui-api-${dspace_version}.jar" todir="${iugonet_webapps}/WEB-INF/lib"/>
+    <copy file="${dspace_src_release_dir}/dspace-api/target/dspace-api-${dspace_version}.jar" todir="${dspace_install_dir}/lib"/>
+    <copy file="${dspace_src_release_dir}/dspace-api/target/dspace-api-${dspace_version}.jar" todir="${iugonet_webapps}/WEB-INF/lib"/>
+    <copy file="${dspace_src_release_dir}/dspace-jspui/dspace-jspui-api/target/dspace-jspui-api-${dspace_version}.jar" todir="${iugonet_webapps}/WEB-INF/lib"/>
   </target>
 
   <target name="tomcat_daemon" description="Set Tomcat Daemon">
