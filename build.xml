@@ -47,7 +47,7 @@
     <antcall target="maven"/>
     <antcall target="maven_proxy_settings"/>
     <antcall target="tomcat"/>
-    <antcall target="g2d"/>
+<!--    <antcall target="g2d"/> -->
     <antcall target="httpd"/>
     <antcall target="postgresql"/>
   </target>
