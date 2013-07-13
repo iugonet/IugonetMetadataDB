@@ -249,6 +249,7 @@
       <arg value="make"/> 
       <arg value="install"/> 
     </exec>
+    <!-- -->
     <mkdir dir="${pgdata}-${postgresql_version}"/> 
     <exec executable="chmod"> 
       <arg value="700"/>
@@ -270,7 +271,6 @@
       <arg value="-i"/>
       <arg value="${postgresql_home}/bin/initdb --no-locale --encoding=UTF-8"/>
      </exec>
-
     <echo message='### for Log&#10;' file="${pgdata}/postgresql.conf" append="yes"/>
     <echo message="log_destination = 'syslog'&#10;" file="${pgdata}/postgresql.conf" append="yes"/>
     <echo message='### for encryption&#10;' file="${pgdata}/pg_hba.conf" append="yes"/>
