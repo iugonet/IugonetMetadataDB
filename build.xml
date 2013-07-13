@@ -249,6 +249,11 @@
       <arg value="make"/> 
       <arg value="install"/> 
     </exec>
+    <echo message="TEST1" />
+    <exec executable="ls">
+      <arg line="-s /usr/local/pgsql/bin/initdb" />
+    </exec>
+    <echo message="TEST2" />
     <!-- -->
     <mkdir dir="${pgdata}-${postgresql_version}"/> 
     <exec executable="chmod"> 
