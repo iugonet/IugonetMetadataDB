@@ -251,7 +251,7 @@
     </exec>
     <echo message="TEST1" />
     <exec executable="ls">
-      <arg line="-s /usr/local/pgsql/bin/initdb" />
+      <arg line="-alg /usr/local/pgsql/bin/initdb" />
     </exec>
     <echo message="TEST2" />
     <!-- -->
