@@ -249,21 +249,24 @@
       <arg value="make"/> 
       <arg value="install"/> 
     </exec>
-    <echo message="TEST1" />
     <mkdir dir="${pgdata}-${postgresql_version}"/> 
     <exec executable="chmod"> 
       <arg value="700"/>
       <arg value="${pgdata}-${postgresql_version}"/> 
     </exec>
+    <echo message="TEST1" />
     <exec executable="ls" >
-      <arg line="${pgdata}-${postgresql_version}" />
+      <arg line="-a ${pgdata}-${postgresql_version}" />
     </exec>
-    <echo message="TEST2" />
     <exec executable="chown"> 
       <arg value="-R"/>
       <arg value="pgsql:pgsql"/>
       <arg value="${pgdata}-${postgresql_version}"/>
     </exec>
+    <exec executable="ls" >
+      <arg line="-a ${pgdata}-${postgresql_version}" />
+    </exec>
+    <echo message="TEST2" />
     <exec executable="ln"> 
       <arg value="-s"/> 
       <arg value="${pgdata}-${postgresql_version}"/> 
