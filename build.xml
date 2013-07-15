@@ -250,16 +250,15 @@
       <arg value="install"/> 
     </exec>
     <echo message="TEST1" />
-    <exec executable="ls">
-      <arg line="-alg /usr/local/pgsql/bin/initdb" />
-    </exec>
-    <echo message="TEST2" />
-    <!-- -->
     <mkdir dir="${pgdata}-${postgresql_version}"/> 
     <exec executable="chmod"> 
       <arg value="700"/>
       <arg value="${pgdata}-${postgresql_version}"/> 
     </exec>
+    <exec executable="ls" >
+      <arg line="${pgdata}-${postgresql_version}" />
+    </exec>
+    <echo message="TEST2" />
     <exec executable="chown"> 
       <arg value="-R"/>
       <arg value="pgsql:pgsql"/>
