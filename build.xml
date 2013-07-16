@@ -345,17 +345,13 @@
 
     <antcall target="cp_conf"/>
 
-    <exec executable="sudo" dir="${dspace_release_dir}/dspace">
-      <arg value="-u"/>
-      <arg value="dspace"/>
-      <arg value="${maven_home}/bin/mvn"/>
-      <arg value="package"/>
+    <exec executable="bash" dir="${dspace_release_dir}/dspace">
+      <arg value="-c" />
+      <arg value="sudo -u dspace ${maven_home}/bin/mvn package" />
     </exec>
-    <exec executable="sudo" dir="${dspace_release_dir}/dspace/target/dspace-${dspace_version}-build.dir">
-      <arg value="-u"/>
-      <arg value="dspace"/>
-      <arg value="ant"/>
-      <arg value="fresh_install"/>
+    <exec executable="bash" dir="${dspace_release_dir}/dspace/target/dspace-${dspace_version}-build.dir">
+      <arg value="-c" />
+      <arg value="sudo -u dspace ant fresh_install" />
     </exec>
     <antcall target="cp_webapps"/>
     <antcall target="cp_src"/>
@@ -550,22 +546,19 @@
     <delete file="${tmp}/${tomcat_cnt}" quiet="true"/>
 
     <delete file="${maven_home}" quiet="true"/>
-    <exec executable="sudo">
-      <arg value="rm"/>
-      <arg value="-rf"/>
-      <arg value="${install_dir}/${maven}"/>
+    <exec executable="bash">
+      <arg value="-c" />
+      <arg value="sudo rm -rf ${install_dir}/${maven}"/>
     </exec>
 
     <delete file="${catalina_home}" quiet="true"/>
-    <exec executable="sudo">
-      <arg value="rm"/>
-      <arg value="-rf"/>
-      <arg value="${install_dir}/${tomcat}"/>
+    <exec executable="bash">
+      <arg value="-c" />
+      <arg value="sudo rm -rf ${install_dir}/${tomcat}"/>
     </exec>
-    <exec executable="sudo">
-      <arg value="rm"/>
-      <arg value="-rf"/>
-      <arg value="${tmp}/${tomcat_cnt_prefix}"/>
+    <exec executable="bash">
+      <arg value="-c" />
+      <arg value="sudo rm -rf ${tmp}/${tomcat_cnt_prefix}"/>
     </exec>
 
     <delete dir="${work}/${dspace_release_prefix}" quiet="true" />
@@ -577,15 +570,13 @@
     <delete file="${tmp}/${postgresql}" quiet="true"/>
     <delete file="${postgresql_home}" quiet="true"/>
     <delete file="${pgdata}" quiet="true"/>
-    <exec executable="sudo">
-      <arg value="rm"/>
-      <arg value="-rf"/>
-      <arg value="${postgresql_home}-${postgresql_version}"/>
+    <exec executable="bash">
+      <arg value="-c" />
+      <arg value="sudo rm -rf ${postgresql_home}-${postgresql_version}"/>
     </exec>
-    <exec executable="sudo">
-      <arg value="rm"/>
-      <arg value="-rf"/>
-      <arg value="${pgdata}-${postgresql_version}"/>
+    <exec executable="bash">
+      <arg value="-c" />
+      <arg value="sudo rm -rf ${pgdata}-${postgresql_version}"/>
     </exec>
 
     <!-- can't detect symbolic link by using ant -->
