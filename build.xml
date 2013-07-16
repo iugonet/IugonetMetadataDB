@@ -337,7 +337,7 @@
       <arg value="-s"/>
       <arg value="${dspace_install_dir}-${dspace_version}/"/>
       <arg value="${dspace_install_dir}"/>
-    </exec>u
+    </exec>
     <exec executable="bash">
       <arg value="-c" />
       <arg value="sudo -u dspace -i createdb dspace"/>
