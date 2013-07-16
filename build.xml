@@ -272,11 +272,9 @@
       <arg value="${pgdata}-${postgresql_version}"/> 
       <arg value="${pgdata}"/> 
     </exec>
-    <exec executable="sudo">
-      <arg value="-u"/>
-      <arg value="pgsql"/>
-      <arg value="-i"/>
-      <arg value="${postgresql_home}/bin/initdb --no-locale --encoding=UTF-8"/>
+    <exec executable="bash">
+      <arg value="-c" />
+      <arg value="sudo -u pgsql -i ${postgresql_home}/bin/initdb --no-locale --encoding=UTF-8"/>
      </exec>
     <echo message='### for Log&#10;' file="${pgdata}/postgresql.conf" append="yes"/>
     <echo message="log_destination = 'syslog'&#10;" file="${pgdata}/postgresql.conf" append="yes"/>
@@ -611,7 +609,7 @@
   </target>
 
   <target name="properties" description="Check properties.">
-    <exec executable="/bin/sh" outputproperty="number.properties">
+    <exec executable="/bin/bash" outputproperty="number.properties">
       <arg value="-c"/>
       <arg value="cat build.properties | grep Your | wc -l"/>
     </exec>
