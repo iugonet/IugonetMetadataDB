@@ -254,7 +254,6 @@
       <arg value="700"/>
       <arg value="${pgdata}-${postgresql_version}"/> 
     </exec>
-    <echo message="TEST1" />
     <exec executable="ls" >
       <arg line="-a ${pgdata}-${postgresql_version}" />
     </exec>
@@ -266,7 +265,6 @@
     <exec executable="ls" >
       <arg line="-a ${pgdata}-${postgresql_version}" />
     </exec>
-    <echo message="TEST2" />
     <exec executable="ln"> 
       <arg value="-s"/> 
       <arg value="${pgdata}-${postgresql_version}"/> 
@@ -286,11 +284,9 @@
       <arg value="${pgdata}-${postgresql_version}"/> 
     </exec>
 
-    <exec executable="sudo" spawn="true">
-      <arg value="-u"/>
-      <arg value="pgsql"/>
-      <arg value="-i"/>
-      <arg value="${postgresql_home}/bin/pg_ctl -D ${pgdata} start"/> 
+    <exec executable="bash" spawn="true">
+      <arg value="-c" />
+      <arg value="sudo -u pgsql -i ${postgresql_home}/bin/pg_ctl -D ${pgdata} start"/> 
     </exec>
     <echo message="&#xA;Wait for 30 seconds or establishment of the socket connection to 5432 port...&#xA;"/>
     <waitfor maxwait="30" maxwaitunit="second">
