@@ -292,26 +292,19 @@
     <waitfor maxwait="30" maxwaitunit="second">
       <socket server="localhost" port="5432"/>
     </waitfor>
-    <exec executable="sudo">
-      <arg value="-u"/>
-      <arg value="pgsql"/>
-      <arg value="-i"/>
-      <arg value="createuser -d -S -R dspace"/>
+    <exec executable="bash">
+      <arg value="-c" />
+      <arg value="sudo -u pgsql -i createuser -d -S -R dspace"/>
     </exec>
   </target>
 
   <target name="mdb" description="Install IUGONET Metadata DB.">
     <get src="${src_dspace_release}" dest="${dst_dspace_release}" usetimestamp="true"/>
     <get src="${src_dspace_src_release}" dest="${dst_dspace_src_release}" usetimestamp="true"/>
-    <exec executable="sudo">
-      <arg value="-u"/>
-      <arg value="dspace"/>
     <!-- To stay away to use untar task because untar task for ant 1.7.1 is buggy. -->
-      <arg value="tar"/>
-      <arg value="xvzf"/>
-      <arg value="${tmp}/${dspace_release}"/>
-      <arg value="--directory"/>
-      <arg value="${dspace_user_home}"/>
+    <exec executable="bash">
+      <arg value="-c" />
+      <arg value="sudo -u dspace tar xvzf ${tmp}/${dspace_release} --directory ${dspace_user_home}"/>
     </exec>
     <exec executable="sudo">
       <arg value="-u"/>
