@@ -116,8 +116,8 @@
     <replace file="${maven_home}/conf/settings.xml" token="&#60;id&#62;optional&#60;/id&#62;&#10;" value="" />
     <replace file="${maven_home}/conf/settings.xml" token="&#60;username&#62;proxyuser&#60;/username&#62;&#10;" value="" />
     <replace file="${maven_home}/conf/settings.xml" token="&#60;password&#62;proxypass&#60;/password&#62;&#10;" value="" />
-    <replace file="${maven_home}/conf/settings.xml" token="      &#60;host&#62;proxy.host.net&#60;/host&#62;&#10;" value="&#60;host&#62;${PROXY_HOST}&#60;/host&#62;&#10;" />
-    <replace file="${maven_home}/conf/settings.xml" token="&#60;port&#62;80&#60;/port&#62;&#10;" value="&#60;port&#62;${PROXY_PORT}&#60;/port&#62;&#10;" />
+    <replace file="${maven_home}/conf/settings.xml" token="      &#60;host&#62;proxy.host.net&#60;/host&#62;&#10;" value="&#60;host&#62;${proxy_host}&#60;/host&#62;&#10;" />
+    <replace file="${maven_home}/conf/settings.xml" token="&#60;port&#62;80&#60;/port&#62;&#10;" value="&#60;port&#62;${proxy_port}&#60;/port&#62;&#10;" />
     <replace file="${maven_home}/conf/settings.xml" token="&#60;nonProxyHosts&#62;local.net|some.host.com&#60;/nonProxyHosts&#62;&#10;" value="" />
     <replace file="${maven_home}/conf/settings.xml" token="&#60;/proxy&#62;&#10;" value="&#60;/proxy&#62;&#10;  &#60;!--" />
 
@@ -335,7 +335,7 @@
       <arg value="-c" />
       <arg value="sudo -u dspace -i createdb dspace" />
     </exec>
-    <echo message="TEST2 />
+    <echo message="TEST2" />
 
     <antcall target="cp_conf" />
 
