@@ -106,7 +106,7 @@
     <chmod file="${maven_home}/bin/mvn" perm="gou+x"/>
   </target>
 
-  <target name="maven_proxy_settings" description="Set Apache Maven proxy" if="have.proxy">
+  <target name="maven_proxy_settings" description="Set Apache Maven proxy" if="${HAVE_PROXY}">
     <exec executable="chmod">
       <arg value="o+w"/>
       <arg value="${maven_home}/conf/settings.xml"/>
