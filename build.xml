@@ -1,117 +1,117 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <project name="IugonetMetadataDB" default="all" xmlns:ac="antlib:net.sf.antcontlib">
-  <property environment="env"/>
-  <property file="build.properties"/>
+  <property environment="env" />
+  <property file="build.properties" />
 
   <taskdef resource="net/sf/antcontrib/antlib.xml">
     <classpath>
-      <pathelement location="/usr/share/java/lib/ant-contrib.jar"/>
+      <pathelement location="/usr/share/java/lib/ant-contrib.jar" />
     </classpath>
   </taskdef>
 
-  <condition property="have.proxy" value="true">
-     <equals arg1="${HAVE_PROXY}" arg2="yes"/>
+  <condition property="have.proxy">
+    <equals arg1="${have_proxy}" arg2="yes" />
   </condition>
 
-  <target name="all" depends="initial_message, packages, git, init, mdb, tomcat_daemon, final_message"/>
+  <target name="all" depends="initial_message, packages, git, init, mdb, tomcat_daemon, final_message" />
 
   <target name="initial_message" description="Display initial message">
-    <echo message="###&#x0A;###&#x0A;This installation process takes 60 minutes at least.&#x0A;###&#x0A;###&#x0A;"/>
+    <echo message="###&#x0A;###&#x0A;This installation process takes 60 minutes at least.&#x0A;###&#x0A;###&#x0A;" />
   </target>
 
   <target name="final_message" description="Display final message">
     <exec executable="/bin/bash" outputproperty="ip_address">
-      <arg value="-c"/>
-      <arg value="/sbin/ifconfig | awk '{if (NR==2){sub(&quot;addr:&quot;,&quot;&quot;,$2);print $2}}'"/>
+      <arg value="-c" />
+      <arg value="/sbin/ifconfig | awk '{if (NR==2){sub(&quot;addr:&quot;,&quot;&quot;,$2);print $2}}'" />
     </exec>
-    <echo message="###&#x0A;###&#x0A;Access to http://${ip_address}/geta_client/gss3.html&#x0A;&#x0A; and&#x0A;&#x0A;Access to http://${ip_address}/index.html&#x0A;###&#x0A;###&#x0A;"/>
+    <echo message="###&#x0A;###&#x0A;Access to http://${ip_address}/geta_client/gss3.html&#x0A;&#x0A; and&#x0A;&#x0A;Access to http://${ip_address}/index.html&#x0A;###&#x0A;###&#x0A;" />
   </target>
   
   <target name="git" description="Install Git">
     <exec executable="git">
-      <arg value="config"/>
-      <arg value="--global"/>
-      <arg value="user.name"/>
-      <arg value="${git_user_name}"/>
+      <arg value="config" />
+      <arg value="--global" />
+      <arg value="user.name" />
+      <arg value="${git_user_name}" />
     </exec>
     <exec executable="git">
-      <arg value="config"/>
-      <arg value="--global"/>
-      <arg value="user.email"/>
-      <arg value="${git_user_email}"/>
+      <arg value="config" />
+      <arg value="--global" />
+      <arg value="user.email" />
+      <arg value="${git_user_email}" />
     </exec>
   </target>
 
   <target name="init" description="Initialize">
-    <antcall target="useradd"/>
-    <antcall target="maven"/>
-    <antcall target="maven_proxy_settings"/>
-    <antcall target="tomcat"/>
-<!--    <antcall target="g2d"/> -->
-    <antcall target="httpd"/>
-    <antcall target="postgresql"/>
+    <antcall target="useradd" />
+    <antcall target="maven" />
+    <antcall target="maven_proxy_settings" />
+    <antcall target="tomcat" />
+<!--    <antcall target="g2d" /> -->
+    <antcall target="httpd" />
+    <antcall target="postgresql" />
   </target>
 
   <target name="useradd" description="Create dspace user">
     <exec executable="/usr/sbin/useradd">
-      <arg line="dspace"/>
+      <arg line="dspace" />
     </exec>
   </target>
 
   <target name="packages" description="Install RPM packages">
     <exec executable="sudo">
-      <arg value="yum"/>
-      <arg value="-y"/>
-      <arg value="install"/>
-      <arg value="git"/>
-      <arg value="emacs"/>
-      <arg value="gcc"/>
-      <arg value="zlib-devel"/>
-      <arg value="readline-devel"/>
-      <arg value="flex"/>
-      <arg value="bison"/>
-      <arg value="glibc-headers"/>
-      <arg value="httpd-devel"/>
-      <arg value="gcc-c++"/>
-      <arg value="libstdc++-devel"/>
-      <arg value="java-1.6.0-openjdk-devel"/>
-      <arg value="ant-apache-regexp"/>
+      <arg value="yum" />
+      <arg value="-y" />
+      <arg value="install" />
+      <arg value="git" />
+      <arg value="emacs" />
+      <arg value="gcc" />
+      <arg value="zlib-devel" />
+      <arg value="readline-devel" />
+      <arg value="flex" />
+      <arg value="bison" />
+      <arg value="glibc-headers" />
+      <arg value="httpd-devel" />
+      <arg value="gcc-c++" />
+      <arg value="libstdc++-devel" />
+      <arg value="java-1.6.0-openjdk-devel" />
+      <arg value="ant-apache-regexp" />
     </exec>
   </target>
 
   <target name="maven" description="Install Apache Maven">
     <condition property="have.resources">
-      <available file="${tmp}/${maven}"/>
+      <available file="${tmp}/${maven}" />
     </condition>
 
-    <echo message="${have.resources}"/>
+    <echo message="${have.resources}" />
 
     <condition property="have.resources">
-      <available file="${maven_home}"/>
+      <available file="${maven_home}" />
     </condition>
 
-    <echo message="${have.resources}"/>
+    <echo message="${have.resources}" />
 
-    <echo message='### for MAVEN&#10;' file="${env_set_file}" append="yes"/>
-    <echo message='export MAVEN_HOME=${MAVEN_HOME}&#10;' file="${env_set_file}" append="yes"/>
-    <echo message='export PATH=${maven_home}/bin:${PATH}&#10;' file="${env_set_file}" append="yes"/>
-    <get src="${src_maven}" dest="${dst_maven}" usetimestamp="true"/>
-    <unzip src="${dst_maven}" dest="${install_dir}"/>
+    <echo message='### for MAVEN&#10;' file="${env_set_file}" append="yes" />
+    <echo message='export MAVEN_HOME=${MAVEN_HOME}&#10;' file="${env_set_file}" append="yes" />
+    <echo message='export PATH=${maven_home}/bin:${PATH}&#10;' file="${env_set_file}" append="yes" />
+    <get src="${src_maven}" dest="${dst_maven}" usetimestamp="true" />
+    <unzip src="${dst_maven}" dest="${install_dir}" />
     <exec executable="sudo">
-      <arg value="ln"/>
-      <arg value="-s"/>
-      <arg value="${install_dir}/${maven_prefix}"/>
-      <arg value="${maven_home}"/>
+      <arg value="ln" />
+      <arg value="-s" />
+      <arg value="${install_dir}/${maven_prefix}" />
+      <arg value="${maven_home}" />
     </exec>
-    <chmod file="${maven_home}/bin/mvn" perm="gou+x"/>
+    <chmod file="${maven_home}/bin/mvn" perm="gou+x" />
   </target>
 
-  <target name="maven_proxy_settings" description="Set Apache Maven proxy" if="${HAVE_PROXY}">
+  <target name="maven_proxy_settings" description="Set Apache Maven proxy" if="have.proxy">
     <exec executable="chmod">
-      <arg value="o+w"/>
-      <arg value="${maven_home}/conf/settings.xml"/>
+      <arg value="o+w" />
+      <arg value="${maven_home}/conf/settings.xml" />
     </exec>
-    <replace file="${maven_home}/conf/settings.xml" token="&#60;proxy&#62;&#10;" value="--&#62;&#10;    &#60;proxy&#62;&#10;"/>
+    <replace file="${maven_home}/conf/settings.xml" token="&#60;proxy&#62;&#10;" value="--&#62;&#10;    &#60;proxy&#62;&#10;" />
     <replace file="${maven_home}/conf/settings.xml" token="      &#60;active&#62;true&#60;/active&#62;&#10;" value="&#60;active&#62;true&#60;/active&#62;&#10;" />
     <replace file="${maven_home}/conf/settings.xml" token="&#60;id&#62;optional&#60;/id&#62;&#10;" value="" />
     <replace file="${maven_home}/conf/settings.xml" token="&#60;username&#62;proxyuser&#60;/username&#62;&#10;" value="" />
@@ -119,224 +119,223 @@
     <replace file="${maven_home}/conf/settings.xml" token="      &#60;host&#62;proxy.host.net&#60;/host&#62;&#10;" value="&#60;host&#62;${PROXY_HOST}&#60;/host&#62;&#10;" />
     <replace file="${maven_home}/conf/settings.xml" token="&#60;port&#62;80&#60;/port&#62;&#10;" value="&#60;port&#62;${PROXY_PORT}&#60;/port&#62;&#10;" />
     <replace file="${maven_home}/conf/settings.xml" token="&#60;nonProxyHosts&#62;local.net|some.host.com&#60;/nonProxyHosts&#62;&#10;" value="" />
-    <replace file="${maven_home}/conf/settings.xml" token="&#60;/proxy&#62;&#10;" value="&#60;/proxy&#62;&#10;  &#60;!--"/>
+    <replace file="${maven_home}/conf/settings.xml" token="&#60;/proxy&#62;&#10;" value="&#60;/proxy&#62;&#10;  &#60;!--" />
 
     <exec executable="chmod">
-      <arg value="o-w"/>
-      <arg value="${maven_home}/conf/settings.xml"/>
+      <arg value="o-w" />
+      <arg value="${maven_home}/conf/settings.xml" />
     </exec>
   </target>
 
   <target name="tomcat" description="Install Apache Tomcat">
-    <echo message='### for TOMCAT&#10;' file="${env_set_file}" append="yes"/>
-    <echo message='export TOMCAT_USER=dspace&#10;' file="${env_set_file}" append="yes"/>
-    <echo message='export CATALINA_HOME=${catalina_home}&#10;' file="${env_set_file}" append="yes"/>
-    <echo message='export PATH=${catalina_home}/bin:${PATH}&#10;' file="${env_set_file}" append="yes"/>
-    <get src="${src_tomcat}" dest="${dst_tomcat}" usetimestamp="true"/>
-    <unzip src="${dst_tomcat}" dest="${install_dir}"/>
+    <echo message='### for TOMCAT&#10;' file="${env_set_file}" append="yes" />
+    <echo message='export TOMCAT_USER=dspace&#10;' file="${env_set_file}" append="yes" />
+    <echo message='export CATALINA_HOME=${catalina_home}&#10;' file="${env_set_file}" append="yes" />
+    <echo message='export PATH=${catalina_home}/bin:${PATH}&#10;' file="${env_set_file}" append="yes" />
+    <get src="${src_tomcat}" dest="${dst_tomcat}" usetimestamp="true" />
+    <unzip src="${dst_tomcat}" dest="${install_dir}" />
     <exec executable="sudo">
-      <arg value="ln"/>
-      <arg value="-s"/>
-      <arg value="${install_dir}/${tomcat_prefix}"/>
-      <arg value="${catalina_home}"/>
+      <arg value="ln" />
+      <arg value="-s" />
+      <arg value="${install_dir}/${tomcat_prefix}" />
+      <arg value="${catalina_home}" />
     </exec>
-    <copy file="${work}/${catalina_home}/conf/server.xml" todir="${catalina_home}/conf" overwrite="yes"/>
+    <copy file="${work}/${catalina_home}/conf/server.xml" todir="${catalina_home}/conf" overwrite="yes" />
     <exec executable="sudo">
-      <arg value="chown"/>
-      <arg value="-R"/>
-      <arg value="dspace:dspace"/>
-      <arg value="${install_dir}/${tomcat_prefix}"/>
+      <arg value="chown" />
+      <arg value="-R" />
+      <arg value="dspace:dspace" />
+      <arg value="${install_dir}/${tomcat_prefix}" />
     </exec>
   </target>
 
   <target name="g2d" description="Install G2d">
     <exec executable="git">
-      <arg value="clone"/>
-      <arg value="ssh://${git_server}/~/git/git2dspace/g2d.git"/>
-      <arg value="${work}/g2d"/>
+      <arg value="clone" />
+      <arg value="ssh://${git_server}/~/git/git2dspace/g2d.git" />
+      <arg value="${work}/g2d" />
     </exec>
   </target>
 
   <target name="httpd" description="Install Apache HTTPD">
-    <echo message='### for Proxy&#10;' file="${http_conf}/httpd.conf" append="yes"/>
-    <echo message="ProxyPass /iugonet/ ajp://localhost:8009/iugonet/&#10;" file="${http_conf}/httpd.conf" append="yes"/>
+    <echo message='### for Proxy&#10;' file="${http_conf}/httpd.conf" append="yes" />
+    <echo message="ProxyPass /iugonet/ ajp://localhost:8009/iugonet/&#10;" file="${http_conf}/httpd.conf" append="yes" />
 
     <exec executable="sudo">
-      <arg value="chmod"/>
-      <arg value="-R"/>
-      <arg value="o-rwx"/>
-      <arg value="${http_conf}"/>
+      <arg value="chmod" />
+      <arg value="-R" />
+      <arg value="o-rwx" />
+      <arg value="${http_conf}" />
     </exec>
 
     <exec executable="sudo">
-      <arg value="chkconfig"/>
-      <arg value="httpd"/>
-      <arg value="on"/>
+      <arg value="chkconfig" />
+      <arg value="httpd" />
+      <arg value="on" />
     </exec>
 
     <exec executable="sudo">
-      <arg value="/etc/init.d/httpd"/>
-      <arg value="start"/>
+      <arg value="/etc/init.d/httpd" />
+      <arg value="start" />
     </exec>
   </target>
 
   <target name="postgresql" description="Install PostgreSQL">
-    <echo message='### for PostgreSQL&#10;' file="${env_set_file}" append="yes"/>
-    <echo message='export POSTGRES_HOME=${postgresql_home}&#10;' file="${env_set_file}" append="yes"/>
-    <echo message='export PGLILB=${postgresql_home}/lib&#10;' file="${env_set_file}" append="yes"/>
-    <echo message='export PGDATA=${pgdata}&#10;' file="${env_set_file}" append="yes"/>
-    <echo message='export MANPATH=${manpath}:${postgresql_home}/man&#10;' file="${env_set_file}" append="yes"/>
-    <echo message='export PATH=${postgresql_home}/bin:${PATH}&#10;' file="${env_set_file}" append="yes"/>
-    <echo message='export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${pglib}&#10;' file="${env_set_file}" append="yes"/>
-    <get src="${src_postgresql}" dest="${dst_postgresql}"/>
+    <echo message='### for PostgreSQL&#10;' file="${env_set_file}" append="yes" />
+    <echo message='export POSTGRES_HOME=${postgresql_home}&#10;' file="${env_set_file}" append="yes" />
+    <echo message='export PGLILB=${postgresql_home}/lib&#10;' file="${env_set_file}" append="yes" />
+    <echo message='export PGDATA=${pgdata}&#10;' file="${env_set_file}" append="yes" />
+    <echo message='export MANPATH=${manpath}:${postgresql_home}/man&#10;' file="${env_set_file}" append="yes" />
+    <echo message='export PATH=${postgresql_home}/bin:${PATH}&#10;' file="${env_set_file}" append="yes" />
+    <echo message='export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${pglib}&#10;' file="${env_set_file}" append="yes" />
+    <get src="${src_postgresql}" dest="${dst_postgresql}" />
     <exec executable="sudo">
-      <arg value="/usr/sbin/useradd"/>
-      <arg value="-c"/>
-      <arg value="Server"/>
-      <arg value="-d"/>
-      <arg value="${postgresql_home}"/>
-      <arg value="pgsql"/>
+      <arg value="/usr/sbin/useradd" />
+      <arg value="-c" />
+      <arg value="Server" />
+      <arg value="-d" />
+      <arg value="${postgresql_home}" />
+      <arg value="pgsql" />
     </exec>
     <exec executable="sudo">
-      <arg value="rm"/>
-      <arg value="-rf"/>
-      <arg value="${postgresql_home}"/>
+      <arg value="rm" />
+      <arg value="-rf" />
+      <arg value="${postgresql_home}" />
     </exec>
     <!-- To stay away to use untar task because untar task for ant 1.7.1 is buggy. -->
     <exec executable="tar">
-      <arg value="xvjf"/>
-      <arg value="${dst_postgresql}"/>
-      <arg value="--directory"/>
-      <arg value="${tmp}"/>
+      <arg value="xvjf" />
+      <arg value="${dst_postgresql}" />
+      <arg value="--directory" />
+      <arg value="${tmp}" />
     </exec>
     <exec executable="sudo">
-      <arg value="chown"/>
-      <arg value="-R"/>
-      <arg value="pgsql:pgsql"/>
-      <arg value="${tmp}/${postgresql_prefix}"/>
+      <arg value="chown" />
+      <arg value="-R" />
+      <arg value="pgsql:pgsql" />
+      <arg value="${tmp}/${postgresql_prefix}" />
     </exec>
     <exec executable="sudo">
-      <arg value="mkdir"/>
-      <arg value="${postgresql_home}-${postgresql_version}"/>
+      <arg value="mkdir" />
+      <arg value="${postgresql_home}-${postgresql_version}" />
     </exec>
     <exec executable="sudo">
-      <arg value="chmod"/>
-      <arg value="755"/>
-      <arg value="${postgresql_home}-${postgresql_version}"/>
+      <arg value="chmod" />
+      <arg value="755" />
+      <arg value="${postgresql_home}-${postgresql_version}" />
     </exec>
     <exec executable="sudo">
-      <arg value="chown"/>
-      <arg value="-R"/>
-      <arg value="pgsql:pgsql"/>
-      <arg value="${postgresql_home}-${postgresql_version}"/>
+      <arg value="chown" />
+      <arg value="-R" />
+      <arg value="pgsql:pgsql" />
+      <arg value="${postgresql_home}-${postgresql_version}" />
     </exec>
     <exec executable="ln">
-      <arg value="-s"/>
-      <arg value="${postgresql_home}-${postgresql_version}"/>
-      <arg value="${postgresql_home}"/>
+      <arg value="-s" />
+      <arg value="${postgresql_home}-${postgresql_version}" />
+      <arg value="${postgresql_home}" />
     </exec>
     <exec executable="./configure" dir="${tmp}/${postgresql_prefix}">
-      <arg line="--prefix=${postgresql_home} --with-pgport=${postgresql_port}"/> 
+      <arg line="--prefix=${postgresql_home} --with-pgport=${postgresql_port}"/>
     </exec>
     <exec executable="sudo" dir="${tmp}/${postgresql_prefix}">
-      <arg value="-u"/>
-      <arg value="pgsql"/>
-      <arg value="make"/> 
+      <arg value="-u" />
+      <arg value="pgsql" />
+      <arg value="make" /> 
     </exec>
     <exec executable="sudo" dir="${tmp}/${postgresql_prefix}">
-      <arg value="-u"/>
-      <arg value="pgsql"/>
-      <arg value="make"/> 
-      <arg value="install"/> 
+      <arg value="-u" />
+      <arg value="pgsql" />
+      <arg value="make" /> 
+      <arg value="install" />
     </exec>
-    <mkdir dir="${pgdata}-${postgresql_version}"/> 
-    <exec executable="chmod"> 
-      <arg value="700"/>
-      <arg value="${pgdata}-${postgresql_version}"/> 
+    <mkdir dir="${pgdata}-${postgresql_version}" />
+    <exec executable="chmod">
+      <arg value="700" />
+      <arg value="${pgdata}-${postgresql_version}" />
     </exec>
     <exec executable="ls" >
       <arg line="-a ${pgdata}-${postgresql_version}" />
     </exec>
     <exec executable="chown"> 
-      <arg value="-R"/>
-      <arg value="pgsql:pgsql"/>
-      <arg value="${pgdata}-${postgresql_version}"/>
+      <arg value="-R" />
+      <arg value="pgsql:pgsql" />
+      <arg value="${pgdata}-${postgresql_version}" />
     </exec>
     <exec executable="ls" >
       <arg line="-a ${pgdata}-${postgresql_version}" />
     </exec>
     <exec executable="ln"> 
-      <arg value="-s"/> 
-      <arg value="${pgdata}-${postgresql_version}"/> 
-      <arg value="${pgdata}"/> 
+      <arg value="-s" />
+      <arg value="${pgdata}-${postgresql_version}" />
+      <arg value="${pgdata}"/>
     </exec>
     <exec executable="bash">
       <arg value="-c" />
-      <arg value="sudo -u pgsql -i ${postgresql_home}/bin/initdb --no-locale --encoding=UTF-8"/>
+      <arg value="sudo -u pgsql -i ${postgresql_home}/bin/initdb --no-locale --encoding=UTF-8" />
      </exec>
-    <echo message='### for Log&#10;' file="${pgdata}/postgresql.conf" append="yes"/>
-    <echo message="log_destination = 'syslog'&#10;" file="${pgdata}/postgresql.conf" append="yes"/>
-    <echo message='### for encryption&#10;' file="${pgdata}/pg_hba.conf" append="yes"/>
-    <echo message='host    dspace      dspace      127.0.0.1/32          md5&#10;' file="${pgdata}/pg_hba.conf" append="yes"/>
+    <echo message='### for Log&#10;' file="${pgdata}/postgresql.conf" append="yes" />
+    <echo message="log_destination = 'syslog'&#10;" file="${pgdata}/postgresql.conf" append="yes" />
+    <echo message='### for encryption&#10;' file="${pgdata}/pg_hba.conf" append="yes" />
+    <echo message='host    dspace      dspace      127.0.0.1/32          md5&#10;' file="${pgdata}/pg_hba.conf" append="yes" />
     <exec executable="chmod">
-      <arg value="-R"/>
-      <arg value="o-rwx"/>
-      <arg value="${pgdata}-${postgresql_version}"/> 
+      <arg value="-R" />
+      <arg value="o-rwx" />
+      <arg value="${pgdata}-${postgresql_version}" />
     </exec>
-
     <exec executable="bash" spawn="true">
       <arg value="-c" />
-      <arg value="sudo -u pgsql -i ${postgresql_home}/bin/pg_ctl -D ${pgdata} start"/> 
+      <arg value="sudo -u pgsql -i ${postgresql_home}/bin/pg_ctl -D ${pgdata} start" /> 
     </exec>
-    <echo message="&#xA;Wait for 30 seconds or establishment of the socket connection to 5432 port...&#xA;"/>
+    <echo message="&#xA;Wait for 30 seconds or establishment of the socket connection to 5432 port...&#xA;" />
     <waitfor maxwait="30" maxwaitunit="second">
-      <socket server="localhost" port="5432"/>
+      <socket server="localhost" port="5432" />
     </waitfor>
     <exec executable="bash">
       <arg value="-c" />
-      <arg value="sudo -u pgsql -i createuser -d -S -R dspace"/>
+      <arg value="sudo -u pgsql -i createuser -d -S -R dspace" />
     </exec>
   </target>
 
   <target name="mdb" description="Install IUGONET Metadata DB.">
-    <get src="${src_dspace_release}" dest="${dst_dspace_release}" usetimestamp="true"/>
-    <get src="${src_dspace_src_release}" dest="${dst_dspace_src_release}" usetimestamp="true"/>
+    <get src="${src_dspace_release}" dest="${dst_dspace_release}" usetimestamp="true" />
+    <get src="${src_dspace_src_release}" dest="${dst_dspace_src_release}" usetimestamp="true" />
     <!-- To stay away to use untar task because untar task for ant 1.7.1 is buggy. -->
     <exec executable="bash">
       <arg value="-c" />
-      <arg value="sudo -u dspace tar xvzf ${tmp}/${dspace_release} --directory ${dspace_user_home}"/>
+      <arg value="sudo -u dspace tar xvzf ${tmp}/${dspace_release} --directory ${dspace_user_home}" />
     </exec>
     <exec executable="sudo">
-      <arg value="-u"/>
-      <arg value="dspace"/>
+      <arg value="-u" />
+      <arg value="dspace" />
     <!-- To stay away to use untar task because untar task for ant 1.7.1 is buggy. -->
-      <arg value="tar"/>
-      <arg value="xvzf"/>
-      <arg value="${tmp}/${dspace_src_release}"/>
-      <arg value="--directory"/>
-      <arg value="${dspace_user_home}"/>
+      <arg value="tar" />
+      <arg value="xvzf" />
+      <arg value="${tmp}/${dspace_src_release}" />
+      <arg value="--directory" />
+      <arg value="${dspace_user_home}" />
     </exec>
 
     <exec executable="sudo">
-      <arg value="mkdir"/>
-      <arg value="${dspace_install_dir}-${dspace_version}/"/>
+      <arg value="mkdir" />
+      <arg value="${dspace_install_dir}-${dspace_version}/" />
     </exec>
     <exec executable="chown">
-      <arg value="-R"/>
-      <arg value="dspace:dspace"/>
-      <arg value="${dspace_install_dir}-${dspace_version}/"/>
+      <arg value="-R" />
+      <arg value="dspace:dspace" />
+      <arg value="${dspace_install_dir}-${dspace_version}/" />
     </exec>
     <exec executable="ln">
-      <arg value="-s"/>
-      <arg value="${dspace_install_dir}-${dspace_version}/"/>
-      <arg value="${dspace_install_dir}"/>
+      <arg value="-s" />
+      <arg value="${dspace_install_dir}-${dspace_version}/" />
+      <arg value="${dspace_install_dir}" />
     </exec>
     <exec executable="bash">
       <arg value="-c" />
-      <arg value="sudo -u dspace -i createdb dspace"/>
+      <arg value="sudo -u dspace -i createdb dspace" />
     </exec>
 
-    <antcall target="cp_conf"/>
+    <antcall target="cp_conf" />
 
     <exec executable="bash" dir="${dspace_release_dir}/dspace">
       <arg value="-c" />
@@ -346,34 +345,34 @@
       <arg value="-c" />
       <arg value="sudo -u dspace ant fresh_install" />
     </exec>
-    <antcall target="cp_webapps"/>
-    <antcall target="cp_src"/>
-    <antcall target="comp"/>    
+    <antcall target="cp_webapps" />
+    <antcall target="cp_src" />
+    <antcall target="comp" />    
   </target>
 
   <target name="cp_conf" description="Originally cp_conf.sh">
-    <copy file="${custom_dir}/config/dspace.cfg" todir="${dspace_release_dir}/dspace/config/"/>
-    <copy file="${custom_dir}/config/registries/dublin-core-types.xml" todir="${dspace_release_dir}/dspace/config/registries/"/>
-    <echo message="&#10;"/>
+    <copy file="${custom_dir}/config/dspace.cfg" todir="${dspace_release_dir}/dspace/config/" />
+    <copy file="${custom_dir}/config/registries/dublin-core-types.xml" todir="${dspace_release_dir}/dspace/config/registries/" />
+    <echo message="&#10;" />
   </target>
 
   <target name="cp_webapps" description="Originally cp_webapps.sh">
     <copy todir="${iugonet_webapps}">
-      <fileset dir="${default_webapps}"/>
+      <fileset dir="${default_webapps}" />
     </copy>
     <exec executable="cp">
-      <arg value="-rf"/>
-      <arg value="${custom_iugonet_webapps}/iugonet"/>
-      <arg value="${iugonet_webapps}"/>
+      <arg value="-rf" />
+      <arg value="${custom_iugonet_webapps}/iugonet" />
+      <arg value="${iugonet_webapps}" />
     </exec>
     <exec executable="cp">
-      <arg value="-rf"/>
-      <arg value="${custom_dir}/webapps/iphone"/>
-      <arg value="${dspace_install_dir}/webapps"/>
+      <arg value="-rf" />
+      <arg value="${custom_dir}/webapps/iphone" />
+      <arg value="${dspace_install_dir}/webapps" />
     </exec>
     <exec executable="cp">
-      <arg value="-rf"/>
-      <arg line="${custom_iugonet_webapps}/index.jsp ${iugonet_webapps}"/>
+      <arg value="-rf" />
+      <arg line="${custom_iugonet_webapps}/index.jsp ${iugonet_webapps}" />
     </exec>
     <for list="collection-home.jsp,community-home.jsp,community-list.jsp,display-item.jsp" param="jsp">
       <sequential>
