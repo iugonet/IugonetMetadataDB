@@ -43,6 +43,7 @@
   </target>
 
   <target name="init" description="Initialize">
+    <antcall target="change_jvm" />
     <antcall target="useradd" />
     <antcall target="maven" />
     <antcall target="maven_proxy_settings" />
@@ -50,6 +51,13 @@
 <!--    <antcall target="g2d" /> -->
     <antcall target="httpd" />
     <antcall target="postgresql" />
+  </target>
+
+  <target name="change_jvm" description="Change JVM version">
+    <exec executable="bash">
+      <arg value="-c" />
+      <arg value="echo '2' | alternatives --config java" />
+    </exec>
   </target>
 
   <target name="useradd" description="Create dspace user">
