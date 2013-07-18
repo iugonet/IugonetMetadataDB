@@ -318,15 +318,10 @@
       <arg value="-c" />
       <arg value="sudo -u dspace tar xvzf ${tmp}/${dspace_release} --directory ${dspace_user_home}" />
     </exec>
-    <exec executable="sudo">
-      <arg value="-u" />
-      <arg value="dspace" />
     <!-- To stay away to use untar task because untar task for ant 1.7.1 is buggy. -->
-      <arg value="tar" />
-      <arg value="xvzf" />
-      <arg value="${tmp}/${dspace_src_release}" />
-      <arg value="--directory" />
-      <arg value="${dspace_user_home}" />
+    <exec executable="bash">
+      <arg value="-c" />
+      <arg value="sudo -u dspace tar xvzf ${tmp}/${dspace_src_release} --directory ${dspace_user_home}" />
     </exec>
 
     <exec executable="sudo">
