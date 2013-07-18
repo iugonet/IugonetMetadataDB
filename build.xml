@@ -56,12 +56,8 @@
     <exec executable="/usr/sbin/useradd">
       <arg line="dspace" />
     </exec>
-    <echo message="TEST1" />
-    <exec executable="ls">
     </exec>
-    <echo message="${java_home}" />
     <replace file="/home/dspace/.bashrc" token="# User specific aliases and functions&#10;" value="# User specific aliases and functions&#10;export JAVA_HOME=${java_home}" />
-    <echo message="TEST2" />
   </target>
 
   <target name="packages" description="Install RPM packages">
