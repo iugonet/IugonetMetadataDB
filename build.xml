@@ -502,11 +502,13 @@
   </target>
 
   <target name="comp" description="Originally comp_all.sh">
-    <exec executable="${maven_home}/bin/mvn" dir="${dspace_src_release_dir}/dspace-api">
-      <arg value="install"/>
+    <exec executable="bash" dir="${dspace_src_release_dir}/dspace-api">
+      <arg value="-c" />
+      <arg value="${maven_home}/bin/mvn install" />
     </exec>
-    <exec executable="${maven_home}/bin/mvn" dir="${dspace_src_release_dir}/dspace-jspui/dspace-jspui-api">
-      <arg value="install"/>
+    <exec executable="bash" dir="${dspace_src_release_dir}/dspace-jspui/dspace-jspui-api">
+      <arg value="-c" />
+      <arg value="${maven_home}/bin/mvn install" />
     </exec>
     <copy file="${dspace_src_release_dir}/dspace-api/target/dspace-api-${dspace_version}.jar" todir="${dspace_install_dir}/lib"/>
     <copy file="${dspace_src_release_dir}/dspace-api/target/dspace-api-${dspace_version}.jar" todir="${iugonet_webapps}/WEB-INF/lib"/>
