@@ -212,6 +212,7 @@
       <arg value="${postgresql_home}" />
     </exec>
     <!-- To stay away to use untar task because untar task for ant 1.7.1 is buggy. -->
+    <!--
     <exec executable="tar">
       <arg value="xvjf" />
       <arg value="${dst_postgresql}" />
@@ -223,6 +224,11 @@
       <arg value="-R" />
       <arg value="pgsql:pgsql" />
       <arg value="${tmp}/${postgresql_prefix}" />
+    </exec>
+    -->
+    <exec executable="bash">
+      <arg value="-c" />
+      <arg value="tar xvjf ${dst_postgresql} --directory ${tmp}" />
     </exec>
     <exec executable="sudo">
       <arg value="mkdir" />
