@@ -212,20 +212,6 @@
       <arg value="${postgresql_home}" />
     </exec>
     <!-- To stay away to use untar task because untar task for ant 1.7.1 is buggy. -->
-    <!--
-    <exec executable="tar">
-      <arg value="xvjf" />
-      <arg value="${dst_postgresql}" />
-      <arg value="--directory" />
-      <arg value="${tmp}" />
-    </exec>
-    <exec executable="sudo">
-      <arg value="chown" />
-      <arg value="-R" />
-      <arg value="pgsql:pgsql" />
-      <arg value="${tmp}/${postgresql_prefix}" />
-    </exec>
-    -->
     <exec executable="bash">
       <arg value="-c" />
       <arg value="tar xvjf ${dst_postgresql} --directory ${tmp}" />
@@ -250,8 +236,14 @@
       <arg value="${postgresql_home}-${postgresql_version}" />
       <arg value="${postgresql_home}" />
     </exec>
+    <!--
     <exec executable="./configure" dir="${tmp}/${postgresql_prefix}">
-      <arg line="--prefix=${postgresql_home} --with-pgport=${postgresql_port}"/>
+      <arg line="- -prefix=${postgresql_home} - -with-pgport=${postgresql_port}"/>
+    </exec>
+    -->
+    <exec executable="bash" dir="${tmp}/${postgresql_prefix}">
+      <arg value="-c" />
+      <arg value="./configure --prefix=${postgresql_home} --with-pgport=${postgresql_port}"/>
     </exec>
     <exec executable="sudo" dir="${tmp}/${postgresql_prefix}">
       <arg value="-u" />
