@@ -68,8 +68,10 @@
   </target>
 
   <target name="packages" description="Install RPM packages">
-    <exec executable="sudo">
-      <arg value="yum" />
+    <exec executable="yum">
+      <arg line="-y install git emacs gcc zlib-devel readline-devel flex bison glibc-headers httpd-devel gcc-c++ libstdc++-devel java-1.6.0-openjdk-devel ant-apache-regexp" />
+<!--      <arg value="yum" /> -->
+<!--
       <arg value="-y" />
       <arg value="install" />
       <arg value="git" />
@@ -85,6 +87,7 @@
       <arg value="libstdc++-devel" />
       <arg value="java-1.6.0-openjdk-devel" />
       <arg value="ant-apache-regexp" />
+-->
     </exec>
   </target>
 
@@ -236,11 +239,6 @@
       <arg value="${postgresql_home}-${postgresql_version}" />
       <arg value="${postgresql_home}" />
     </exec>
-    <!--
-    <exec executable="./configure" dir="${tmp}/${postgresql_prefix}">
-      <arg line="- -prefix=${postgresql_home} - -with-pgport=${postgresql_port}"/>
-    </exec>
-    -->
     <exec executable="bash" dir="${tmp}/${postgresql_prefix}">
       <arg value="-c" />
       <arg value="sudo -u pgsql ./configure --prefix=${postgresql_home} --with-pgport=${postgresql_port}"/>
