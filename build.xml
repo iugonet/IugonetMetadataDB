@@ -288,7 +288,9 @@
     <get src="${src_dspace_src_release}" dest="${dst_dspace_src_release}" usetimestamp="true" />
     <!-- To stay away to use untar task because untar task for ant 1.7.1 is buggy. -->
     <echo message="TEST1" />
-    <exec executable="env">
+    <exec executable="bash">
+      <arg value="-c" />
+      <arg value="sudo -u dspace env" />
     </exec>
     <echo message="TEST2" />
     <exec executable="bash">
@@ -320,7 +322,9 @@
       <arg value="sudo -u dspace -i createdb dspace" />
     </exec>
 
+    <echo message="TEST3" />
     <antcall target="cp_conf" />
+    <echo message="TEST4" />
 
     <exec executable="bash" dir="${dspace_release_dir}/dspace">
       <arg value="-c" />
