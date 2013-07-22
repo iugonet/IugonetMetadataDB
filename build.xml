@@ -108,14 +108,19 @@
     <echo message='export MAVEN_HOME=${MAVEN_HOME}&#10;' file="${env_set_file}" append="yes" />
     <echo message='export PATH=${maven_home}/bin:${PATH}&#10;' file="${env_set_file}" append="yes" />
     <get src="${src_maven}" dest="${dst_maven}" usetimestamp="true" />
-    <unzip src="${dst_maven}" dest="${install_dir}" />
-    <exec executable="sudo">
-      <arg value="ln" />
-      <arg value="-s" />
-      <arg value="${install_dir}/${maven_prefix}" />
-      <arg value="${maven_home}" />
+    <exec executable="unzip" dir="${tmp}">
+      <arg value="${dst_maven}" />
     </exec>
+<!--
+    <unzip src="${dst_maven}" dest="${install_dir}" />
+-->
+    <exec executable="bash">
+      <arg value="-c" />
+      <arg value="sudo ln -s ${install_dir}/${maven_prefix} ${maven_home}" />
+    </exec>
+<!--
     <chmod file="${maven_home}/bin/mvn" perm="gou+x" />
+-->
   </target>
 
   <target name="maven_proxy_settings" description="Set Apache Maven proxy" if="have.proxy">
@@ -343,7 +348,7 @@
 
     <exec executable="bash" dir="${dspace_release_dir}/dspace">
       <arg value="-c" />
-      <arg value="sudo -u dspace ${maven_home}/bin/mvn package" />
+      <arg value="sudo -u dspace ${maven_home}/bin/mvn package -Dlicense.skip=true" />
     </exec>
     <exec executable="bash" dir="${dspace_release_dir}/dspace/target/dspace-${dspace_version}-build.dir">
       <arg value="-c" />
@@ -503,11 +508,11 @@
   <target name="comp" description="Originally comp_all.sh">
     <exec executable="bash" dir="${dspace_src_release_dir}/dspace-api">
       <arg value="-c" />
-      <arg value="sudo -u dspace ${maven_home}/bin/mvn install" />
+      <arg value="sudo -u dspace ${maven_home}/bin/mvn install -Dlicense.skip=true" />
     </exec>
     <exec executable="bash" dir="${dspace_src_release_dir}/dspace-jspui/dspace-jspui-api">
       <arg value="-c" />
-      <arg value="sudo -u dspace ${maven_home}/bin/mvn install" />
+      <arg value="sudo -u dspace ${maven_home}/bin/mvn install -Dlicense.skip=true" />
     </exec>
     <copy file="${dspace_src_release_dir}/dspace-api/target/dspace-api-${dspace_version}.jar" todir="${dspace_install_dir}/lib"/>
     <copy file="${dspace_src_release_dir}/dspace-api/target/dspace-api-${dspace_version}.jar" todir="${iugonet_webapps}/WEB-INF/lib"/>
