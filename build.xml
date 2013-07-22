@@ -70,24 +70,6 @@
   <target name="packages" description="Install RPM packages">
     <exec executable="yum">
       <arg line="-y install git emacs gcc zlib-devel readline-devel flex bison glibc-headers httpd-devel gcc-c++ libstdc++-devel java-1.6.0-openjdk-devel ant-apache-regexp" />
-<!--      <arg value="yum" /> -->
-<!--
-      <arg value="-y" />
-      <arg value="install" />
-      <arg value="git" />
-      <arg value="emacs" />
-      <arg value="gcc" />
-      <arg value="zlib-devel" />
-      <arg value="readline-devel" />
-      <arg value="flex" />
-      <arg value="bison" />
-      <arg value="glibc-headers" />
-      <arg value="httpd-devel" />
-      <arg value="gcc-c++" />
-      <arg value="libstdc++-devel" />
-      <arg value="java-1.6.0-openjdk-devel" />
-      <arg value="ant-apache-regexp" />
--->
     </exec>
   </target>
 
@@ -111,16 +93,10 @@
     <exec executable="unzip" dir="${install_dir}">
       <arg value="${dst_maven}" />
     </exec>
-<!--
-    <unzip src="${dst_maven}" dest="${install_dir}" />
--->
     <exec executable="bash">
       <arg value="-c" />
       <arg value="sudo ln -s ${install_dir}/${maven_prefix} ${maven_home}" />
     </exec>
-<!--
-    <chmod file="${maven_home}/bin/mvn" perm="gou+x" />
--->
   </target>
 
   <target name="maven_proxy_settings" description="Set Apache Maven proxy" if="have.proxy">
