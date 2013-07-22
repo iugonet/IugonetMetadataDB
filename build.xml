@@ -108,7 +108,7 @@
     <echo message='export MAVEN_HOME=${MAVEN_HOME}&#10;' file="${env_set_file}" append="yes" />
     <echo message='export PATH=${maven_home}/bin:${PATH}&#10;' file="${env_set_file}" append="yes" />
     <get src="${src_maven}" dest="${dst_maven}" usetimestamp="true" />
-    <exec executable="unzip" dir="${tmp}">
+    <exec executable="unzip" dir="${install_dir}">
       <arg value="${dst_maven}" />
     </exec>
 <!--
