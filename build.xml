@@ -330,13 +330,18 @@
       <arg value="-c" />
       <arg value="sudo -u dspace ${maven_home}/bin/mvn package -Dlicense.skip=true" />
     </exec>
+    <echo message="TEST5" />
     <exec executable="bash" dir="${dspace_release_dir}/dspace/target/dspace-${dspace_version}-build.dir">
       <arg value="-c" />
       <arg value="sudo -u dspace ant fresh_install" />
     </exec>
+    <echo message="TEST6" />
     <antcall target="cp_webapps" />
+    <echo message="TEST7" />
     <antcall target="cp_src" />
+    <echo message="TEST8" />
     <antcall target="comp" />    
+    <echo message="TEST9" />
   </target>
 
   <target name="cp_conf" description="Originally cp_conf.sh">
