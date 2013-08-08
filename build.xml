@@ -44,6 +44,7 @@
 
   <target name="init" description="Initialize">
     <antcall target="change_jvm" />
+    <antcall target="set_java_home" />
     <antcall target="useradd" />
     <antcall target="maven" />
     <antcall target="maven_proxy_settings" />
@@ -57,6 +58,13 @@
     <exec executable="bash">
       <arg value="-c" />
       <arg value="echo '2' | alternatives --config java" />
+    </exec>
+  </target>
+  
+  <target name="set_java_home" description="Set JAVA_HOME">
+    <exec executable="bash">
+      <arg value="-c" /> 
+      <arg value="cat /etc/profile | grep JAVA_HOME" />
     </exec>
   </target>
 
