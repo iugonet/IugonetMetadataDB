@@ -62,10 +62,11 @@
   </target>
   
   <target name="set_java_home" description="Set JAVA_HOME">
-    <exec executable="bash">
+    <exec executable="bash" outputproperty="exist.java_home">
       <arg value="-c" /> 
-      <arg value="cat /etc/profile | grep JAVA_HOME" />
+      <arg value="cat /etc/profile | grep ANT" />
     </exec>
+    <echo message="${exist.java_home}" />
   </target>
 
   <target name="useradd" description="Create dspace user">
@@ -291,20 +292,18 @@
     </exec>
   </target>
 
-  <target name="mdb" description="Install IUGONET Metadata DB.">
+  <target name="dspace_original" description="Install DSpace Original">
     <get src="${src_dspace_release}" dest="${dst_dspace_release}" usetimestamp="true" />
     <get src="${src_dspace_src_release}" dest="${dst_dspace_src_release}" usetimestamp="true" />
     <!-- To stay away to use untar task because untar task for ant 1.7.1 is buggy. -->
-    <echo message="TEST1" />
-    <exec executable="bash">
-      <arg value="-c" />
-      <arg value="sudo -u dspace env" />
-    </exec>
-    <echo message="TEST2" />
     <exec executable="bash">
       <arg value="-c" />
       <arg value="sudo -u dspace tar xvzf ${tmp}/${dspace_release} --directory ${dspace_user_home}" />
     </exec>
+  </target>
+
+  <target name="mdb" description="Install IUGONET Metadata DB.">
+    <antcall target="dspace_original" />
     <!-- To stay away to use untar task because untar task for ant 1.7.1 is buggy. -->
     <exec executable="bash">
       <arg value="-c" />
@@ -341,7 +340,7 @@
     <echo message="TEST5" />
     <exec executable="bash" dir="${dspace_release_dir}/dspace/target/dspace-${dspace_version}-build.dir">
       <arg value="-c" />
-      <arg value="sudo -u dspace ant fresh_install" />
+      <arg value="sudo -i -u dspace ant fresh_install" />
     </exec>
     <echo message="TEST6" />
     <antcall target="cp_webapps" />
