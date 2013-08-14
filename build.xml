@@ -306,32 +306,35 @@
     <waitfor maxwait="30" maxwaitunit="second">
       <socket server="localhost" port="5432" />
     </waitfor>
-    <echo message="TEST1.94" />
     <exec executable="bash">
       <arg value="-c" />
       <arg value="sudo -i -u pgsql -i createuser -d -S -R dspace" />
     </exec>
-    <echo message="TEST1.95" />
+    <echo message="TEST1.94" />
   </target>
 
   <target name="dspace_original" description="Install DSpace Original">
     <get src="${src_dspace_release}" dest="${dst_dspace_release}" usetimestamp="true" />
     <get src="${src_dspace_src_release}" dest="${dst_dspace_src_release}" usetimestamp="true" />
     <!-- To stay away to use untar task because untar task for ant 1.7.1 is buggy. -->
-    <echo message="TEST2" />
     <exec executable="bash">
       <arg value="-c" />
       <arg value="sudo -i -u dspace tar xvzf ${tmp}/${dspace_release} --directory ${dspace_user_home}" />
     </exec>
-    <echo message="TEST3" />    
     <copy file="${custom_dir}/config/dspace.cfg" todir="${dspace_release_dir}/dspace/config/" />
+    <echo message="TEST3.0" />
+    <exec executable="bash" dir="${dspace_release_dir}/dspace">
+      <arg value="-c" />
+      <arg value="sudo -i -u dspace bash -c 'cd ${dspace_release_dir}/dspace ; ${maven_home}/bin/mvn package'" />
+    </exec>
     <echo message="TEST3.1" />
-    <echo message="${dspace_release_dir}" />
+<!--
     <exec executable="bash" dir="${dspace_release_dir}/dspace">
       <arg value="-c" />
       <arg value="sudo -i -u dspace ${maven_home}/bin/mvn package" />
     </exec>
     <echo message="TEST3.2" />
+-->
   </target>
 
   <target name="mdb" description="Install IUGONET Metadata DB.">
