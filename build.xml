@@ -375,9 +375,11 @@
       <arg value="-c" />
       <arg value="sudo -i -u dspace bash -c 'cd ${dspace_release_dir}/dspace/target/dspace-${dspace_version}-build.dir ; ant fresh_install'" />
     </exec>
+<!--
     <antcall target="cp_webapps" />
     <antcall target="cp_src" />
-    <antcall target="comp" />    
+    <antcall target="comp" />
+-->
     <echo message="TEST9" />
   </target>
 
