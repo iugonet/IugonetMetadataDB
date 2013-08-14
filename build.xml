@@ -47,7 +47,9 @@
     <antcall target="set_java_home" />
     <antcall target="useradd" />
     <antcall target="maven" />
+    <echo message="TEST0.1" />
     <antcall target="maven_proxy_settings" />
+    <echo message="TEST0.2" />
     <antcall target="tomcat" />
 <!--    <antcall target="g2d" /> -->
     <antcall target="httpd" />
@@ -109,6 +111,7 @@
   </target>
 
   <target name="maven_proxy_settings" description="Set Apache Maven proxy" if="have.proxy">
+    <echo message="TEST0.3" />
     <exec executable="chmod">
       <arg value="o+w" />
       <arg value="${maven_home}/conf/settings.xml" />
@@ -123,10 +126,13 @@
     <replace file="${maven_home}/conf/settings.xml" token="&#60;nonProxyHosts&#62;local.net|some.host.com&#60;/nonProxyHosts&#62;&#10;" value="" />
     <replace file="${maven_home}/conf/settings.xml" token="&#60;/proxy&#62;&#10;" value="&#60;/proxy&#62;&#10;  &#60;!--" />
 
+    <echo message="TEST0.4" />
+
     <exec executable="chmod">
       <arg value="o-w" />
       <arg value="${maven_home}/conf/settings.xml" />
     </exec>
+    <echo message="TEST0.4.1" />
   </target>
 
   <target name="tomcat" description="Install Apache Tomcat">
