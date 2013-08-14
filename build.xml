@@ -296,12 +296,19 @@
     <get src="${src_dspace_release}" dest="${dst_dspace_release}" usetimestamp="true" />
     <get src="${src_dspace_src_release}" dest="${dst_dspace_src_release}" usetimestamp="true" />
     <!-- To stay away to use untar task because untar task for ant 1.7.1 is buggy. -->
-    <echo message="TEST2">
+    <echo message="TEST2" />
     <exec executable="bash">
       <arg value="-c" />
       <arg value="sudo -u dspace tar xvzf ${tmp}/${dspace_release} --directory ${dspace_user_home}" />
     </exec>
-    <echo message="TEST3">
+    <echo message="TEST3" />    
+    <copy file="${custom_dir}/config/dspace.cfg" todir="${dspace_release_dir}/dspace/config/" />
+    <echo message="TEST3.1" />
+    <exec executable="bash" dir="${dspace_release_dir}">
+      <arg value="-c" />
+      <arg value="sudo -u dspace mvn package" />
+    </exec>
+    <echo message="TEST3.2" />
   </target>
 
   <target name="mdb" description="Install IUGONET Metadata DB.">
