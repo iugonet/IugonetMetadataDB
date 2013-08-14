@@ -229,29 +229,39 @@
       <arg value="${postgresql_home}-${postgresql_version}" />
       <arg value="${postgresql_home}" />
     </exec>
+    <exec executable="bash">
+      <arg value="-c" />
+      <arg value="sudo -i -u pgsql ${tmp}/${postgresql_prefix}/configure --prefix=${postgresql_home} --with-pgport=${postgresql_port}"/>
+    </exec>
+    <echo message="TEST0.5" />
     <exec executable="bash" dir="${tmp}/${postgresql_prefix}">
       <arg value="-c" />
-      <arg value="sudo -i -u pgsql ./configure --prefix=${postgresql_home} --with-pgport=${postgresql_port}"/>
+      <arg value="sudo -i -u pgsql make" />
     </exec>
-    <exec executable="sudo" dir="${tmp}/${postgresql_prefix}">
-      <arg value="-u" />
-      <arg value="pgsql" />
-      <arg value="make" /> 
+    <echo message="TEST1.5" />
+    <exec executable="bash" dir="${tmp}/${postgresql_prefix}">
+      <arg value="-c" />
+      <arg value="sudo -i -u pgsql make install" />
     </exec>
+    <echo message="TEST1.6" />
+<!--
     <exec executable="sudo" dir="${tmp}/${postgresql_prefix}">
       <arg value="-u" />
       <arg value="pgsql" />
       <arg value="make" /> 
       <arg value="install" />
     </exec>
+-->
     <mkdir dir="${pgdata}-${postgresql_version}" />
     <exec executable="chmod">
       <arg value="700" />
       <arg value="${pgdata}-${postgresql_version}" />
     </exec>
+    <echo message="TEST1.7" />
     <exec executable="ls" >
       <arg line="-a ${pgdata}-${postgresql_version}" />
     </exec>
+    <echo message="TEST1.8" />
     <exec executable="chown"> 
       <arg value="-R" />
       <arg value="pgsql:pgsql" />
@@ -265,10 +275,12 @@
       <arg value="${pgdata}-${postgresql_version}" />
       <arg value="${pgdata}"/>
     </exec>
+    <echo message="TEST1.9" />
     <exec executable="bash">
       <arg value="-c" />
       <arg value="sudo -i -u pgsql -i ${postgresql_home}/bin/initdb --no-locale --encoding=UTF-8" />
      </exec>
+    <echo message="TEST1.91" />
     <echo message='### for Log&#10;' file="${pgdata}/postgresql.conf" append="yes" />
     <echo message="log_destination = 'syslog'&#10;" file="${pgdata}/postgresql.conf" append="yes" />
     <echo message='### for encryption&#10;' file="${pgdata}/pg_hba.conf" append="yes" />
@@ -278,18 +290,22 @@
       <arg value="o-rwx" />
       <arg value="${pgdata}-${postgresql_version}" />
     </exec>
+    <echo message="TEST1.92" />
     <exec executable="bash" spawn="true">
       <arg value="-c" />
       <arg value="sudo -i -u pgsql -i ${postgresql_home}/bin/pg_ctl -D ${pgdata} start" /> 
     </exec>
+    <echo message="TEST1.93" />
     <echo message="&#xA;Wait for 30 seconds or establishment of the socket connection to 5432 port...&#xA;" />
     <waitfor maxwait="30" maxwaitunit="second">
       <socket server="localhost" port="5432" />
     </waitfor>
+    <echo message="TEST1.94" />
     <exec executable="bash">
       <arg value="-c" />
       <arg value="sudo -i -u pgsql -i createuser -d -S -R dspace" />
     </exec>
+    <echo message="TEST1.95" />
   </target>
 
   <target name="dspace_original" description="Install DSpace Original">
