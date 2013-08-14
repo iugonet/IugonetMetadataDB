@@ -365,22 +365,18 @@
     </exec>
 
     <antcall target="cp_conf" />
-    <echo message="TEST4" />
 
     <exec executable="bash" dir="${dspace_release_dir}/dspace">
       <arg value="-c" />
-      <arg value="sudo -i -u dspace bash -c 'cd ${dspace_release_dir}/dspace' ; ${maven_home}/bin/mvn package -Dlicense.skip=true'" />
+      <arg value="sudo -i -u dspace bash -c 'cd ${dspace_release_dir}/dspace ; ${maven_home}/bin/mvn package -Dlicense.skip=true'" />
     </exec>
     <echo message="TEST5" />
     <exec executable="bash" dir="${dspace_release_dir}/dspace/target/dspace-${dspace_version}-build.dir">
       <arg value="-c" />
       <arg value="sudo -i -u dspace bash -c 'cd ${dspace_release_dir}/dspace/target/dspace-${dspace_version}-build.dir ; ant fresh_install'" />
     </exec>
-    <echo message="TEST6" />
     <antcall target="cp_webapps" />
-    <echo message="TEST7" />
     <antcall target="cp_src" />
-    <echo message="TEST8" />
     <antcall target="comp" />    
     <echo message="TEST9" />
   </target>
@@ -532,15 +528,14 @@
   </target>
 
   <target name="comp" description="Originally comp_all.sh">
-    <echo message="TEST8.1" />
     <exec executable="bash" dir="${dspace_src_release_dir}/dspace-api">
       <arg value="-c" />
-      <arg value="sudo -i -u dspace ${maven_home}/bin/mvn install -Dlicense.skip=true" />
+      <arg value="sudo -i -u dspace bash -c 'cd ${dspace_src_release_dir}/dspace-api} ; ${maven_home}/bin/mvn install -Dlicense.skip=true'" />
     </exec>
     <echo message="TEST8.2" />
     <exec executable="bash" dir="${dspace_src_release_dir}/dspace-jspui/dspace-jspui-api">
       <arg value="-c" />
-      <arg value="sudo -i -u dspace ${maven_home}/bin/mvn install -Dlicense.skip=true" />
+      <arg value="sudo -i -u dspace bash -c 'cd ${dspace_src_release_dir}/dspace-jspui/dspace-jspui-api ; ${maven_home}/bin/mvn install -Dlicense.skip=true'" />
     </exec>
     <echo message="TEST8.3" />
     <copy file="${dspace_src_release_dir}/dspace-api/target/dspace-api-${dspace_version}.jar" todir="${dspace_install_dir}/lib"/>
