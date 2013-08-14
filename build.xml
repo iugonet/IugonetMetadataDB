@@ -231,7 +231,7 @@
     </exec>
     <exec executable="bash" dir="${tmp}/${postgresql_prefix}">
       <arg value="-c" />
-      <arg value="sudo -u pgsql ./configure --prefix=${postgresql_home} --with-pgport=${postgresql_port}"/>
+      <arg value="sudo -i -u pgsql ./configure --prefix=${postgresql_home} --with-pgport=${postgresql_port}"/>
     </exec>
     <exec executable="sudo" dir="${tmp}/${postgresql_prefix}">
       <arg value="-u" />
@@ -267,7 +267,7 @@
     </exec>
     <exec executable="bash">
       <arg value="-c" />
-      <arg value="sudo -u pgsql -i ${postgresql_home}/bin/initdb --no-locale --encoding=UTF-8" />
+      <arg value="sudo -i -u pgsql -i ${postgresql_home}/bin/initdb --no-locale --encoding=UTF-8" />
      </exec>
     <echo message='### for Log&#10;' file="${pgdata}/postgresql.conf" append="yes" />
     <echo message="log_destination = 'syslog'&#10;" file="${pgdata}/postgresql.conf" append="yes" />
@@ -280,7 +280,7 @@
     </exec>
     <exec executable="bash" spawn="true">
       <arg value="-c" />
-      <arg value="sudo -u pgsql -i ${postgresql_home}/bin/pg_ctl -D ${pgdata} start" /> 
+      <arg value="sudo -i -u pgsql -i ${postgresql_home}/bin/pg_ctl -D ${pgdata} start" /> 
     </exec>
     <echo message="&#xA;Wait for 30 seconds or establishment of the socket connection to 5432 port...&#xA;" />
     <waitfor maxwait="30" maxwaitunit="second">
@@ -288,7 +288,7 @@
     </waitfor>
     <exec executable="bash">
       <arg value="-c" />
-      <arg value="sudo -u pgsql -i createuser -d -S -R dspace" />
+      <arg value="sudo -i -u pgsql -i createuser -d -S -R dspace" />
     </exec>
   </target>
 
@@ -299,14 +299,15 @@
     <echo message="TEST2" />
     <exec executable="bash">
       <arg value="-c" />
-      <arg value="sudo -u dspace tar xvzf ${tmp}/${dspace_release} --directory ${dspace_user_home}" />
+      <arg value="sudo -i -u dspace tar xvzf ${tmp}/${dspace_release} --directory ${dspace_user_home}" />
     </exec>
     <echo message="TEST3" />    
     <copy file="${custom_dir}/config/dspace.cfg" todir="${dspace_release_dir}/dspace/config/" />
     <echo message="TEST3.1" />
+    <echo message="${dspace_release_dir}" />
     <exec executable="bash" dir="${dspace_release_dir}">
       <arg value="-c" />
-      <arg value="sudo -u dspace mvn package" />
+      <arg value="sudo -i -u dspace ${maven_home}/bin/mvn package" />
     </exec>
     <echo message="TEST3.2" />
   </target>
@@ -316,7 +317,7 @@
     <!-- To stay away to use untar task because untar task for ant 1.7.1 is buggy. -->
     <exec executable="bash">
       <arg value="-c" />
-      <arg value="sudo -u dspace tar xvzf ${tmp}/${dspace_src_release} --directory ${dspace_user_home}" />
+      <arg value="sudo -i -u dspace tar xvzf ${tmp}/${dspace_src_release} --directory ${dspace_user_home}" />
     </exec>
 
     <exec executable="sudo">
@@ -335,7 +336,7 @@
     </exec>
     <exec executable="bash">
       <arg value="-c" />
-      <arg value="sudo -u dspace -i createdb dspace" />
+      <arg value="sudo -i -u dspace -i createdb dspace" />
     </exec>
 
     <antcall target="cp_conf" />
