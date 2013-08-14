@@ -69,6 +69,7 @@
       <arg value="cat /etc/profile | grep ANT" />
     </exec>
     <echo message="${exist.java_home}" />
+    <echo file="/etc/bashrc" append="true" message="# User specific aliases and functions&#10;export JAVA_HOME=${java_home}&#10;" />
   </target>
 
   <target name="useradd" description="Create dspace user">
