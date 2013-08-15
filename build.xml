@@ -356,7 +356,7 @@
 -->
     <exec executable="bash">
       <arg value="-c" />
-      <arg value="sudo -i -u dspace bash -c 'cd ${dspace_release_dir}/dspace ; ${maven_home}/bin/mvn package'" />
+      <arg value="sudo -i -u dspace bash -c 'cd ${dspace_release_dir}/dspace ; ${maven_home}/bin/mvn package -s ${maven_home}/conf/settings.xml'" />
     </exec>
     <echo message="TEST3.1" />
 <!--
