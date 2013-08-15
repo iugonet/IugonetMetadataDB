@@ -324,7 +324,9 @@
       <arg value="-c" />
       <arg value="sudo -i -u dspace tar xvzf ${tmp}/${dspace_release} --directory ${dspace_user_home}" />
     </exec>
+<!--
     <copy file="${custom_dir}/config/dspace.cfg" todir="${dspace_release_dir}/dspace/config/" />
+-->
     <echo message="TEST3.0" />
 <!--
     <exec executable="bash" dir="${dspace_release_dir}/dspace">
