@@ -324,7 +324,10 @@
     </exec>
     <copy file="${custom_dir}/config/dspace.cfg" todir="${dspace_release_dir}/dspace/config/" />
     <echo message="TEST3.0" />
+<!--
     <exec executable="bash" dir="${dspace_release_dir}/dspace">
+-->
+    <exec executable="bash">
       <arg value="-c" />
       <arg value="sudo -i -u dspace bash -c 'cd ${dspace_release_dir}/dspace ; ${maven_home}/bin/mvn package'" />
     </exec>
