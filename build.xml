@@ -289,12 +289,10 @@
       <arg value="${pgdata}-${postgresql_version}" />
       <arg value="${pgdata}"/>
     </exec>
-    <echo message="TEST1.9" />
     <exec executable="bash">
       <arg value="-c" />
       <arg value="sudo -i -u pgsql bash -c 'cd ${postgresql_home}/bin ; ${postgresql_home}/bin/initdb --no-locale --encoding=UTF-8'" />
      </exec>
-    <echo message="TEST1.91" />
     <echo message='### for Log&#10;' file="${pgdata}/postgresql.conf" append="yes" />
     <echo message="log_destination = 'syslog'&#10;" file="${pgdata}/postgresql.conf" append="yes" />
     <echo message='### for encryption&#10;' file="${pgdata}/pg_hba.conf" append="yes" />
@@ -307,16 +305,15 @@
     <echo message="TEST1.92" />
     <exec executable="bash" spawn="true">
       <arg value="-c" />
-      <arg value="sudo -i -u pgsql -i ${postgresql_home}/bin/pg_ctl -D ${pgdata} start" /> 
+      <arg value="sudo -i -u pgsql bash -c 'cd ${postgresql_home}/bin ; ${postgresql_home}/bin/pg_ctl -D ${pgdata} start'" /> 
     </exec>
-    <echo message="TEST1.93" />
     <echo message="&#xA;Wait for 30 seconds or establishment of the socket connection to 5432 port...&#xA;" />
     <waitfor maxwait="30" maxwaitunit="second">
       <socket server="localhost" port="5432" />
     </waitfor>
     <exec executable="bash">
       <arg value="-c" />
-      <arg value="sudo -i -u pgsql -i createuser -d -S -R dspace" />
+      <arg value="sudo -i -u pgsql createuser -d -S -R dspace" />
     </exec>
     <echo message="TEST1.94" />
   </target>
