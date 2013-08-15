@@ -47,7 +47,6 @@
     <antcall target="set_java_home" />
     <antcall target="useradd" />
     <antcall target="maven" />
-    <echo message="TEST0.1" />
     <antcall target="maven_proxy_settings" />
     <echo message="TEST0.2" />
     <antcall target="tomcat" />
@@ -98,6 +97,7 @@
 
     <echo message="${have.resources}" />
 
+    <!-- enviromnent -->
     <echo message='### for MAVEN&#10;' file="${env_set_file}" append="yes" />
     <echo message='export MAVEN_HOME=${MAVEN_HOME}&#10;' file="${env_set_file}" append="yes" />
     <echo message='export PATH=${maven_home}/bin:${PATH}&#10;' file="${env_set_file}" append="yes" />
@@ -109,10 +109,40 @@
       <arg value="-c" />
       <arg value="sudo ln -s ${install_dir}/${maven_prefix} ${maven_home}" />
     </exec>
+
+    <!-- mirror settings -->
+    <replace file="${maven_home}/conf/settings.xml" token="&#60;mirrors&#62;&#10;" value="&#60;mirrors&#62;&#10;
+    &#60;mirror&#62;&#10;
+      &#60;id&#62;Central&#60;/id&#62;&#10;
+      &#60;url&#62;http://repo1.maven.org/maven2&#60;/url&#62;&#10;
+      &#60;mirrorOf&#62;central&#60;/mirrorOf&#62;&#10;
+      &#60;!-- United States, St. Louis --&#62;&#10;
+    &#60;/mirror&#62;&#10;
+
+    &#60;mirror&#62;&#10;
+      &#60;id&#62;uk.maven.org&#60;/id&#62;&#10;
+      &#60;url&#62;http://uk.maven.org/maven2&#60;/url&#62;&#10;
+      &#60;mirrorOf&#62;central&#60;/mirrorOf&#62;&#10;
+      &#60;!-- United Kingdom --&#62;
+    &#60;/mirror&#62;&#10;
+
+    &#60;mirror&#62;&#10;
+      &#60;id&#62;ibiblio.org&#60;/id&#62;&#10;
+      &#60;url&#62;http://mirrors.ibiblio.org/pub/mirrors/maven2&#60;/url&#62;&#10;
+      &#60;mirrorOf&#62;central&#60;/mirrorOf&#62;&#10;
+      &#60;!-- United States, North Carolina --&#62;
+    &#60;/mirror&#62;&#10;
+
+    &#60;mirror&#62;&#10;
+      &#60;id&#62;antelink.com&#60;/id&#62;&#10;
+      &#60;url&#62;http://maven.antelink.com/content/repositories/central&#60;/url&#62;&#10;
+      &#60;mirrorOf&#62;central&#60;/mirrorOf&#62;&#10;
+      &#60;!-- France --&#62;
+    &#60;/mirror&#62;&#10;
+" />
   </target>
 
   <target name="maven_proxy_settings" description="Set Apache Maven proxy" if="have.proxy">
-    <echo message="TEST0.3" />
     <exec executable="chmod">
       <arg value="o+w" />
       <arg value="${maven_home}/conf/settings.xml" />
@@ -127,13 +157,10 @@
     <replace file="${maven_home}/conf/settings.xml" token="&#60;nonProxyHosts&#62;local.net|some.host.com&#60;/nonProxyHosts&#62;&#10;" value="" />
     <replace file="${maven_home}/conf/settings.xml" token="&#60;/proxy&#62;&#10;" value="&#60;/proxy&#62;&#10;  &#60;!--" />
 
-    <echo message="TEST0.4" />
-
     <exec executable="chmod">
       <arg value="o-w" />
       <arg value="${maven_home}/conf/settings.xml" />
     </exec>
-    <echo message="TEST0.4.1" />
   </target>
 
   <target name="tomcat" description="Install Apache Tomcat">
