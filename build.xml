@@ -113,13 +113,6 @@
     <!-- mirror settings -->
     <replace file="${maven_home}/conf/settings.xml" token="&#60;mirrors&#62;&#10;" value="&#60;mirrors&#62;&#10;
     &#60;mirror&#62;&#10;
-      &#60;id&#62;uk.maven.org&#60;/id&#62;&#10;
-      &#60;url&#62;http://uk.maven.org/maven2&#60;/url&#62;&#10;
-      &#60;mirrorOf&#62;central&#60;/mirrorOf&#62;&#10;
-      &#60;!-- United Kingdom --&#62;&#10;
-    &#60;/mirror&#62;&#10;
-
-    &#60;mirror&#62;&#10;
       &#60;id&#62;ibiblio.org&#60;/id&#62;&#10;
       &#60;url&#62;http://mirrors.ibiblio.org/pub/mirrors/maven2&#60;/url&#62;&#10;
       &#60;mirrorOf&#62;central&#60;/mirrorOf&#62;&#10;
@@ -131,6 +124,13 @@
       &#60;url&#62;http://repo1.maven.org/maven2&#60;/url&#62;&#10;
       &#60;mirrorOf&#62;central&#60;/mirrorOf&#62;&#10;
       &#60;!-- United States, St. Louis --&#62;&#10;
+    &#60;/mirror&#62;&#10;
+
+    &#60;mirror&#62;&#10;
+      &#60;id&#62;uk.maven.org&#60;/id&#62;&#10;
+      &#60;url&#62;http://uk.maven.org/maven2&#60;/url&#62;&#10;
+      &#60;mirrorOf&#62;central&#60;/mirrorOf&#62;&#10;
+      &#60;!-- United Kingdom --&#62;&#10;
     &#60;/mirror&#62;&#10;
 
     &#60;mirror&#62;&#10;
