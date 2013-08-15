@@ -48,7 +48,6 @@
     <antcall target="useradd" />
     <antcall target="maven" />
     <antcall target="maven_proxy_settings" />
-    <echo message="TEST0.2" />
     <antcall target="tomcat" />
 <!--    <antcall target="g2d" /> -->
     <antcall target="httpd" />
@@ -265,17 +264,18 @@
     </exec>
     <exec executable="bash">
       <arg value="-c" />
-      <arg value="sudo -i -u pgsql ${tmp}/${postgresql_prefix}/configure --prefix=${postgresql_home} --with-pgport=${postgresql_port}"/>
+      <arg value="sudo -i -u pgsql bash -c 'cd ${tmp}/${postgresql_prefix} ; ${tmp}/${postgresql_prefix}/configure --prefix=${postgresql_home} --with-pgport=${postgresql_port}'"/>
     </exec>
-    <echo message="TEST0.5" />
-    <exec executable="bash" dir="${tmp}/${postgresql_prefix}">
+    <exec executable="bash">
       <arg value="-c" />
-      <arg value="sudo -i -u pgsql make" />
+      <arg value="sudo -i -u pgsql bash -c 'cd ${tmp}/${postgresql_prefix} ; make'" />
     </exec>
-    <echo message="TEST1.5" />
+    <exec executable="bash">
+<!--
     <exec executable="bash" dir="${tmp}/${postgresql_prefix}">
+-->
       <arg value="-c" />
-      <arg value="sudo -i -u pgsql make install" />
+      <arg value="sudo -i -u pgsql bash -c 'cd ${tmp}/${postgresql_prefix} ; make install'" />
     </exec>
     <echo message="TEST1.6" />
 <!--
