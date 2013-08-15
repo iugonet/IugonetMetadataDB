@@ -302,7 +302,6 @@
       <arg value="o-rwx" />
       <arg value="${pgdata}-${postgresql_version}" />
     </exec>
-    <echo message="TEST1.92" />
     <exec executable="bash" spawn="true">
       <arg value="-c" />
       <arg value="sudo -i -u pgsql bash -c 'cd ${postgresql_home}/bin ; ${postgresql_home}/bin/pg_ctl -D ${pgdata} start'" /> 
@@ -315,7 +314,6 @@
       <arg value="-c" />
       <arg value="sudo -i -u pgsql createuser -d -S -R dspace" />
     </exec>
-    <echo message="TEST1.94" />
   </target>
 
   <target name="dspace_original" description="Install DSpace Original">
