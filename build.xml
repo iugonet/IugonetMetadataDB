@@ -271,38 +271,18 @@
       <arg value="sudo -i -u pgsql bash -c 'cd ${tmp}/${postgresql_prefix} ; make'" />
     </exec>
     <exec executable="bash">
-<!--
-    <exec executable="bash" dir="${tmp}/${postgresql_prefix}">
--->
       <arg value="-c" />
       <arg value="sudo -i -u pgsql bash -c 'cd ${tmp}/${postgresql_prefix} ; make install'" />
     </exec>
-    <echo message="TEST1.6" />
-<!--
-    <exec executable="sudo" dir="${tmp}/${postgresql_prefix}">
-      <arg value="-u" />
-      <arg value="pgsql" />
-      <arg value="make" /> 
-      <arg value="install" />
-    </exec>
--->
     <mkdir dir="${pgdata}-${postgresql_version}" />
     <exec executable="chmod">
       <arg value="700" />
       <arg value="${pgdata}-${postgresql_version}" />
     </exec>
-    <echo message="TEST1.7" />
-    <exec executable="ls" >
-      <arg line="-a ${pgdata}-${postgresql_version}" />
-    </exec>
-    <echo message="TEST1.8" />
     <exec executable="chown"> 
       <arg value="-R" />
       <arg value="pgsql:pgsql" />
       <arg value="${pgdata}-${postgresql_version}" />
-    </exec>
-    <exec executable="ls" >
-      <arg line="-a ${pgdata}-${postgresql_version}" />
     </exec>
     <exec executable="ln"> 
       <arg value="-s" />
@@ -312,7 +292,7 @@
     <echo message="TEST1.9" />
     <exec executable="bash">
       <arg value="-c" />
-      <arg value="sudo -i -u pgsql -i ${postgresql_home}/bin/initdb --no-locale --encoding=UTF-8" />
+      <arg value="sudo -i -u pgsql bash -c 'cd ${postgresql_home}/bin ; ${postgresql_home}/bin/initdb --no-locale --encoding=UTF-8'" />
      </exec>
     <echo message="TEST1.91" />
     <echo message='### for Log&#10;' file="${pgdata}/postgresql.conf" append="yes" />
