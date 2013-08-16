@@ -177,9 +177,6 @@
       <arg value="--directory"/>
       <arg value="${install_dir}"/>
     </exec>
-    <exec executable="unzip" dir="${install_dir}">
-      <arg value="${dst_tomcat}" />
-    </exec>
     <exec executable="sudo">
       <arg value="ln" />
       <arg value="-s" />
