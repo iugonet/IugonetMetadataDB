@@ -327,6 +327,10 @@
     <copy file="${custom_dir}/config/dspace.cfg" todir="${dspace_release_dir}/dspace/config/" />
     <exec executable="bash">
       <arg value="-c" />
+      <arg value="sudo -i -u dspace -i createdb dspace" />
+    </exec>
+    <exec executable="bash">
+      <arg value="-c" />
       <arg value="sudo -i -u dspace bash -c 'cd ${dspace_release_dir}/dspace ; ${maven_home}/bin/mvn -e package -s ${maven_home}/conf/settings.xml'" />
     </exec>
     <echo message="TEST3.1" />
