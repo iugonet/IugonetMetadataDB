@@ -381,10 +381,6 @@
       <arg value="${dspace_install_dir}-${dspace_version}/" />
       <arg value="${dspace_install_dir}" />
     </exec>
-    <exec executable="bash">
-      <arg value="-c" />
-      <arg value="sudo -i -u dspace -i createdb dspace" />
-    </exec>
 
     <antcall target="cp_conf" />
 
