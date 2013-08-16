@@ -385,18 +385,16 @@
 
     <exec executable="bash" dir="${dspace_release_dir}/dspace">
       <arg value="-c" />
-      <arg value="sudo -i -u dspace bash -c 'cd ${dspace_release_dir}/dspace ; ${maven_home}/bin/mvn -X package -s /opt/maven/conf/settings.xml -Dlicense.skip=true'" />
+      <arg value="sudo -i -u dspace bash -c 'cd ${dspace_release_dir}/dspace ; ${maven_home}/bin/mvn package -Dlicense.skip=true'" />
     </exec>
     <echo message="TEST5" />
-    <exec executable="bash" dir="${dspace_release_dir}/dspace/target/dspace-${dspace_version}-build.dir">
+    <exec executable="bash">
       <arg value="-c" />
       <arg value="sudo -i -u dspace bash -c 'cd ${dspace_release_dir}/dspace/target/dspace-${dspace_version}-build.dir ; ant fresh_install'" />
     </exec>
-<!--
     <antcall target="cp_webapps" />
     <antcall target="cp_src" />
     <antcall target="comp" />
--->
     <echo message="TEST9" />
   </target>
 
