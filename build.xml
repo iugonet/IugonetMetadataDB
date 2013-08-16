@@ -171,7 +171,12 @@
     <echo message='export CATALINA_HOME=${catalina_home}&#10;' file="${env_set_file}" append="yes" />
     <echo message='export PATH=${catalina_home}/bin:${PATH}&#10;' file="${env_set_file}" append="yes" />
     <get src="${src_tomcat}" dest="${dst_tomcat}" usetimestamp="true" />
-    <unzip src="${dst_tomcat}" dest="${install_dir}" />
+    <exec executable="tar">
+      <arg value="xvzf"/>
+      <arg value="${dst_tomcat"/>
+      <arg value="--directory"/>
+      <arg value="${install_dir}"/>
+    </exec>
     <exec executable="unzip" dir="${install_dir}">
       <arg value="${dst_tomcat}" />
     </exec>
