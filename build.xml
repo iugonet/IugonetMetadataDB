@@ -173,7 +173,7 @@
     <get src="${src_tomcat}" dest="${dst_tomcat}" usetimestamp="true" />
     <exec executable="tar">
       <arg value="xvzf"/>
-      <arg value="${dst_tomcat"/>
+      <arg value="${dst_tomcat}"/>
       <arg value="--directory"/>
       <arg value="${install_dir}"/>
     </exec>
