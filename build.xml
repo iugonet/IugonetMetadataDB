@@ -343,9 +343,13 @@
       <arg value="-c" />
       <arg value="sudo -i -u dspace bash -c 'cd ${dspace_release_dir}/dspace/target/dspace-${dspace_version}-build.dir ; ant fresh_install'" />
     </exec>
+    <echo message="${dspace_admin_email}" file="/tmp/test" append="no" />
+    <echo message="${dspace_admin_first_name}" file="/tmp/test" append="yes" />
+    <echo message="${dspace_admin_last_name}" file="/tmp/test" append="yes" />
+    <echo message="${dspace_admin_password}" file="/tmp/test" append="yes" />
     <exec executable="bash">
       <arg value="-c" />
-      <arg value="sudo -i -u dspace bash -c 'cd /opt/dspace/bin ; ./dspace create-administrator < /tmp/test'" />
+      <arg value="sudo -i -u dspace bash -c 'cd /opt/dspace/bin ; ./dspace create-administrator &#60; /tmp/test'" />
     </exec>
   </target>
 
