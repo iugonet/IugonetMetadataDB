@@ -327,10 +327,6 @@
 <!--
     <copy file="${custom_dir}/config/dspace.cfg" todir="${dspace_release_dir}/dspace/config/" />
 -->
-    <echo message="TEST3.0" />
-<!--
-    <exec executable="bash" dir="${dspace_release_dir}/dspace">
--->
     <exec executable="bash">
       <arg value="-c" />
       <arg value="sudo -i -u dspace bash -c 'cd ${dspace_release_dir}/dspace ; ${maven_home}/bin/mvn -e package -s ${maven_home}/conf/settings.xml'" />
@@ -338,7 +334,7 @@
     <echo message="TEST3.1" />
     <exec executable="bash">
       <arg value="-c" />
-      <arg value="sudo -i -u dspace bash -c 'cd ${dspace_release_dir}/dspace ; ${maven_home}/bin/mvn package'" />
+      <arg value="sudo -i -u dspace bash -c 'cd ${dspace_release_dir}/dspace/target/dspace-${dspace_version}-build.dir ; ant fresh_install'" />
     </exec>
     <echo message="TEST3.2" />
   </target>
