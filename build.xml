@@ -110,6 +110,7 @@
     </exec>
 
     <!-- mirror settings -->
+    <!--
     <replace file="${maven_home}/conf/settings.xml" token="&#60;mirrors&#62;&#10;" value="&#60;mirrors&#62;&#10;
     &#60;mirror&#62;&#10;
       &#60;id&#62;uk.maven.org&#60;/id&#62;&#10;
@@ -139,6 +140,7 @@
       &#60;!-- France --&#62;&#10;
     &#60;/mirror&#62;&#10;
 " />
+    -->
   </target>
 
   <target name="maven_proxy_settings" description="Set Apache Maven proxy" if="have.proxy">
@@ -335,7 +337,10 @@
     </exec>
     <exec executable="bash">
       <arg value="-c" />
+      <!--
       <arg value="sudo -i -u dspace bash -c 'cd ${dspace_release_dir}/dspace ; ${maven_home}/bin/mvn package -s ${maven_home}/conf/settings.xml -Dlicense.skip=true'" />
+      -->
+      <arg value="sudo -i -u dspace bash -c 'cd ${dspace_release_dir}/dspace ; ${maven_home}/bin/mvn package -Dlicense.skip=true'" />
     </exec>
     <mkdir dir="/opt/dspace" />
     <exec executable="chown">
@@ -387,7 +392,10 @@
     <echo message="TEST4" />
     <exec executable="bash">
       <arg value="-c" />
-      <arg value="sudo -i -u dspace bash -c 'cd ${dspace_release_dir}/dspace ; ${maven_home}/bin/mvn package -s ${maven_home}/conf/settings.xml -Dlicense.skip=true'" />
+      <!--
+      <arg value="sudo -i -u dspace bash -c 'cd ${dspace_release_dir}/dspace ; ${maven_home}/bin/mvn clean package -s ${maven_home}/conf/settings.xml -Dlicense.skip=true'" />
+      -->
+      <arg value="sudo -i -u dspace bash -c 'cd ${dspace_release_dir}/dspace ; ${maven_home}/bin/mvn clean package -Dlicense.skip=true'" />
     </exec>
     <echo message="TEST5" />
     <exec executable="bash">
@@ -397,6 +405,7 @@
     <echo message="TEST5.5" />
     <antcall target="cp_webapps" />
     <antcall target="cp_src" />
+    <echo message="TEST6.0" />
     <antcall target="comp" />
     <echo message="TEST9" />
   </target>
@@ -550,10 +559,7 @@
   <target name="comp" description="Originally comp_all.sh">
     <exec executable="bash" dir="${dspace_src_release_dir}/dspace-api">
       <arg value="-c" />
-      <arg value="sudo -i -u dspace bash -c 'cd ${dspace_src_release_dir}/dspace-api ; ${maven_home}/bin/mvn install -Dlicense.skip=true -Dlicense.skip=true'" />
-<!--
       <arg value="sudo -i -u dspace bash -c 'cd ${dspace_src_release_dir}/dspace-api ; ${maven_home}/bin/mvn install -Dlicense.skip=true'" />
--->
     </exec>
     <echo message="TEST8.2" />
     <exec executable="bash" dir="${dspace_src_release_dir}/dspace-jspui/dspace-jspui-api">
