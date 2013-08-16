@@ -323,7 +323,6 @@
 
   <target name="dspace_orig" description="Install DSpace Original">
     <get src="${src_dspace_release}" dest="${dst_dspace_release}" usetimestamp="true" />
-    <get src="${src_dspace_src_release}" dest="${dst_dspace_src_release}" usetimestamp="true" />
     <!-- To stay away to use untar task because untar task for ant 1.7.1 is buggy. -->
     <exec executable="bash">
       <arg value="-c" />
@@ -361,6 +360,7 @@
   </target>
 
   <target name="mdb" description="Install IUGONET Metadata DB.">
+    <get src="${src_dspace_src_release}" dest="${dst_dspace_src_release}" usetimestamp="true" />
     <!-- To stay away to use untar task because untar task for ant 1.7.1 is buggy. -->
     <exec executable="bash">
       <arg value="-c" />
