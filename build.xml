@@ -518,7 +518,7 @@
   <target name="comp" description="Originally comp_all.sh">
     <exec executable="bash">
       <arg value="-c" />
-      <arg value="sudo -i -u dspace bash -c 'cd ${dspace_src_release_dir}/dspace-api ; ${maven_home}/bin/mvn -e install -Dlicense.skip=true'" />
+      <arg value="sudo -i -u dspace bash -c 'cd ${dspace_src_release_dir}/dspace-api ; ${maven_home}/bin/mvn install -Dlicense.skip=true'" />
     </exec>
     <echo message="TEST8.2" />
     <exec executable="bash">
