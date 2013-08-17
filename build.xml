@@ -108,39 +108,6 @@
       <arg value="-c" />
       <arg value="sudo ln -s ${install_dir}/${maven_prefix} ${maven_home}" />
     </exec>
-
-    <!-- mirror settings -->
-    <!--
-    <replace file="${maven_home}/conf/settings.xml" token="&#60;mirrors&#62;&#10;" value="&#60;mirrors&#62;&#10;
-    &#60;mirror&#62;&#10;
-      &#60;id&#62;uk.maven.org&#60;/id&#62;&#10;
-      &#60;url&#62;http://uk.maven.org/maven2&#60;/url&#62;&#10;
-      &#60;mirrorOf&#62;central&#60;/mirrorOf&#62;&#10;
-      &#60;!-- United Kingdom --&#62;&#10;
-    &#60;/mirror&#62;&#10;
-
-    &#60;mirror&#62;&#10;
-      &#60;id&#62;ibiblio.org&#60;/id&#62;&#10;
-      &#60;url&#62;http://mirrors.ibiblio.org/pub/mirrors/maven2&#60;/url&#62;&#10;
-      &#60;mirrorOf&#62;central&#60;/mirrorOf&#62;&#10;
-      &#60;!-- United States, North Carolina --&#62;&#10;
-    &#60;/mirror&#62;&#10;
-
-    &#60;mirror&#62;&#10;
-      &#60;id&#62;Central&#60;/id&#62;&#10;
-      &#60;url&#62;http://repo1.maven.org/maven2&#60;/url&#62;&#10;
-      &#60;mirrorOf&#62;central&#60;/mirrorOf&#62;&#10;
-      &#60;!-- United States, St. Louis --&#62;&#10;
-    &#60;/mirror&#62;&#10;
-
-    &#60;mirror&#62;&#10;
-      &#60;id&#62;antelink.com&#60;/id&#62;&#10;
-      &#60;url&#62;http://maven.antelink.com/content/repositories/central&#60;/url&#62;&#10;
-      &#60;mirrorOf&#62;central&#60;/mirrorOf&#62;&#10;
-      &#60;!-- France --&#62;&#10;
-    &#60;/mirror&#62;&#10;
-" />
-    -->
   </target>
 
   <target name="maven_proxy_settings" description="Set Apache Maven proxy" if="have.proxy">
@@ -337,9 +304,6 @@
     </exec>
     <exec executable="bash">
       <arg value="-c" />
-      <!--
-      <arg value="sudo -i -u dspace bash -c 'cd ${dspace_release_dir}/dspace ; ${maven_home}/bin/mvn package -s ${maven_home}/conf/settings.xml -Dlicense.skip=true'" />
-      -->
       <arg value="sudo -i -u dspace bash -c 'cd ${dspace_release_dir}/dspace ; ${maven_home}/bin/mvn package -Dlicense.skip=true'" />
     </exec>
     <mkdir dir="/opt/dspace" />
@@ -392,9 +356,6 @@
     <echo message="TEST4" />
     <exec executable="bash">
       <arg value="-c" />
-      <!--
-      <arg value="sudo -i -u dspace bash -c 'cd ${dspace_release_dir}/dspace ; ${maven_home}/bin/mvn clean package -s ${maven_home}/conf/settings.xml -Dlicense.skip=true'" />
-      -->
       <arg value="sudo -i -u dspace bash -c 'cd ${dspace_release_dir}/dspace ; ${maven_home}/bin/mvn clean package -Dlicense.skip=true'" />
     </exec>
     <echo message="TEST5" />
