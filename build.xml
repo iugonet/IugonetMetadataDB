@@ -26,7 +26,7 @@
     </exec>
     <echo message="###&#x0A;###&#x0A;Access to http://${ip_address}/geta_client/gss3.html&#x0A;&#x0A; and&#x0A;&#x0A;Access to http://${ip_address}/index.html&#x0A;###&#x0A;###&#x0A;" />
   </target>
-  
+
   <target name="git" description="Install Git">
     <exec executable="git">
       <arg value="config" />
@@ -516,7 +516,7 @@
   <target name="comp" description="Originally comp_all.sh">
     <exec executable="bash">
       <arg value="-c" />
-      <arg value="sudo -i -u dspace bash -c 'cd ${dspace_src_release_dir}/dspace-api ; ${maven_home}/bin/mvn install -Dlicense.skip=true'" />
+      <arg value="sudo -i -u dspace bash -c 'cd ${dspace_src_release_dir}/dspace-api ; ${maven_home}/bin/mvn -e install -Dlicense.skip=true'" />
     </exec>
     <echo message="TEST8.2" />
     <exec executable="bash">
