@@ -336,6 +336,7 @@
       <arg value="sudo -i -u dspace tar xvzf ${tmp}/${dspace_src_release} --directory ${dspace_user_home}" />
     </exec>
 
+<!--
     <exec executable="sudo">
       <arg value="mkdir" />
       <arg value="${dspace_install_dir}-${dspace_version}/" />
@@ -350,6 +351,7 @@
       <arg value="${dspace_install_dir}-${dspace_version}/" />
       <arg value="${dspace_install_dir}" />
     </exec>
+-->
 
     <antcall target="cp_conf" />
 
