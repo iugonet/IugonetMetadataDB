@@ -556,7 +556,11 @@
       <arg value="${catalina_home}/bin"/>
     </exec>
 
-    <copy dir="etc" todir="/" />
+    <copy file="etc/rc.d/init.d/jsvc" todir="/etc/rc.d/init.d" />
+    <exec executable="chmod">
+      <arg value="+x" />
+      <arg value="/etc/rc.d/init.d/jsvc" />
+    </exec>
   </target>
 
   <target name="clean" description="Clean Everything">
