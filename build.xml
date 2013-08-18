@@ -545,11 +545,6 @@
       <arg value="${tmp}"/>
     </exec>
     <exec executable="./configure" dir="${tmp}/commons-daemon-${commons_daemon_version}-native-src/unix/"/>
-<!--
-    <exec executable="make" dir="${tmp}/commons-daemon-${commons_daemon_version}-native-src/unix/">
-      <arg value="clean"/> 
-    </exec>
--->
     <exec executable="make" dir="${tmp}/commons-daemon-${commons_daemon_version}-native-src/unix/"/>
     <exec executable="cp" dir="${tmp}/commons-daemon-${commons_daemon_version}-native-src/unix/">
       <arg value="jsvc"/>
@@ -565,6 +560,11 @@
     <exec executable="chkconfig">
       <arg value="jsvc" />
       <arg value="on" />
+    </exec>
+
+    <exec executable="sudo">
+      <arg value="/etc/rc.d/init.d/jsvc" />
+      <arg value="start" />
     </exec>
   </target>
 
