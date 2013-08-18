@@ -167,16 +167,16 @@
   </target>
 
   <target name="httpd" description="Install Apache HTTPD">
-    <echo message='### for Proxy&#10;' file="${httpd_conf}/httpd.conf" append="yes" />
-    <echo message="ProxyPass /iugonet/ ajp://localhost:8009/iugonet/&#10;" file="${httpd_conf}/httpd.conf" append="yes" />
-
-    <exec executable="sudo">
-      <arg value="chmod" />
-      <arg value="-R" />
-      <arg value="o-rwx" />
-      <arg value="${httpd_conf}" />
-    </exec>
-
+    <!-- setting for /etc/httpd/conf.d/httpd-proxy.conf --> 
+    <echo message='### for Proxy&#10;' file="${httpd_home}/conf.d/httpd-proxy.conf" append="no" />
+    <echo message='&#60;Location /iugonet/&#62;&#10;' file="${httpd_home}/conf.d/httpd-proxy.conf" append="yes" />
+    <echo message="ProxyPass ajp://localhost:8009/iugonet/&#10;" file="${httpd_home}/conf.d/httpd-proxy.conf" append="yes" />
+    <echo message='&#60;/Location /iugonet/&#62;&#10;' file="${httpd_home}/conf.d/httpd-proxy.conf" append="yes" />
+    <echo message='&#10;' file="${httpd_home}/conf.d/httpd-proxy.conf" append="yes" />
+    <echo message='&#60;Location /iugonet&#62;&#10;' file="${httpd_home}/conf.d/httpd-proxy.conf" append="yes" />
+    <echo message="ProxyPass ajp://localhost:8009/iugonet/&#10;" file="${httpd_home}/conf.d/httpd-proxy.conf" append="yes" />
+    <echo message='&#60;/Location /iugonet/&#62;&#10;' file="${httpd_home}/conf.d/httpd-proxy.conf" append="yes" />
+    <!-- -->
     <exec executable="sudo">
       <arg value="chkconfig" />
       <arg value="httpd" />
