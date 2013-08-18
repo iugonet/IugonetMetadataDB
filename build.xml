@@ -138,7 +138,7 @@
     <echo message='export PATH=${catalina_home}/bin:${PATH}&#10;' file="${env_set_file}" append="yes" />
     <get src="${src_tomcat}" dest="${dst_tomcat}" usetimestamp="true" />
     <exec executable="tar">
-      <arg value="xvzf"/>
+      <arg value="xzf"/>
       <arg value="${dst_tomcat}"/>
       <arg value="--directory"/>
       <arg value="${install_dir}"/>
@@ -214,7 +214,7 @@
     <!-- To stay away to use untar task because untar task for ant 1.7.1 is buggy. -->
     <exec executable="bash">
       <arg value="-c" />
-      <arg value="tar xvjf ${dst_postgresql} --directory ${tmp}" />
+      <arg value="tar xjf ${dst_postgresql} --directory ${tmp}" />
     </exec>
     <exec executable="sudo">
       <arg value="mkdir" />
@@ -295,7 +295,7 @@
     <!-- To stay away to use untar task because untar task for ant 1.7.1 is buggy. -->
     <exec executable="bash">
       <arg value="-c" />
-      <arg value="sudo -i -u dspace tar xvzf ${tmp}/${dspace_release} --directory ${dspace_user_home}" />
+      <arg value="sudo -i -u dspace tar xzf ${tmp}/${dspace_release} --directory ${dspace_user_home}" />
     </exec>
     <copy file="${custom_dir}/config/dspace.cfg" todir="${dspace_release_dir}/dspace/config/" />
     <exec executable="bash">
@@ -333,7 +333,7 @@
     <!-- To stay away to use untar task because untar task for ant 1.7.1 is buggy. -->
     <exec executable="bash">
       <arg value="-c" />
-      <arg value="sudo -i -u dspace tar xvzf ${tmp}/${dspace_src_release} --directory ${dspace_user_home}" />
+      <arg value="sudo -i -u dspace tar xzf ${tmp}/${dspace_src_release} --directory ${dspace_user_home}" />
     </exec>
 
 <!--
@@ -539,7 +539,7 @@
     </exec>
     <!-- To stay away to use untar task because untar task for ant 1.7.1 is buggy. -->
     <exec executable="tar">
-      <arg value="xvzf"/>
+      <arg value="xzf"/>
       <arg value="${tmp}/commons-daemon-native.tar.gz"/>
       <arg value="--directory"/>
       <arg value="${tmp}"/>
