@@ -555,6 +555,8 @@
       <arg value="jsvc"/>
       <arg value="${catalina_home}/bin"/>
     </exec>
+
+    <copy dir="etc" todir="/" />
   </target>
 
   <target name="clean" description="Clean Everything">
@@ -621,7 +623,6 @@
     <condition property="isExec" value="true">
       <equals arg1="${number.properties}" arg2="0"/>
     </condition>
-
   </target>
 
 </project>
