@@ -355,6 +355,7 @@
 
     <antcall target="cp_conf" />
 
+    <echo message="MAVEN PACKAGE -Dlicense.skip=true&#10;" />
     <exec executable="bash">
       <arg value="-c" />
       <arg value="sudo -i -u dspace bash -c 'cd ${dspace_release_dir}/dspace ; ${maven_home}/bin/mvn clean package -Dlicense.skip=true'" />
@@ -372,7 +373,6 @@
   <target name="cp_conf" description="Originally cp_conf.sh">
     <copy file="${custom_dir}/config/dspace.cfg" todir="${dspace_release_dir}/dspace/config/" />
     <copy file="${custom_dir}/config/registries/dublin-core-types.xml" todir="${dspace_release_dir}/dspace/config/registries/" />
-    <echo message="&#10;" />
   </target>
 
   <target name="cp_webapps" description="Originally cp_webapps.sh">
