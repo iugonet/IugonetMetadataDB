@@ -173,7 +173,7 @@
     <echo message="  ProxyPass ajp://localhost:8009/iugonet/&#10;" file="${httpd_home}/conf.d/httpd-proxy.conf" append="yes" />
     <echo message='&#60;/Location&#62;&#10;' file="${httpd_home}/conf.d/httpd-proxy.conf" append="yes" />
     <echo message='&#10;' file="${httpd_home}/conf.d/httpd-proxy.conf" append="yes" />
-    <echo message='&#60;Location /iugonet/&#62;&#10;' file="${httpd_home}/conf.d/httpd-proxy.conf" append="yes" />
+    <echo message='&#60;Location /iugonet&#62;&#10;' file="${httpd_home}/conf.d/httpd-proxy.conf" append="yes" />
     <echo message="  ProxyPass ajp://localhost:8009/iugonet/&#10;" file="${httpd_home}/conf.d/httpd-proxy.conf" append="yes" />
     <echo message='&#60;/Location&#62;&#10;' file="${httpd_home}/conf.d/httpd-proxy.conf" append="yes" />
     <!-- -->
