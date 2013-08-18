@@ -4,7 +4,7 @@
 # description: jsvc
 # Source function library.
 . /etc/init.d/functions
-JAVA_HOME=/usr/lib/java-openjdk
+JAVA_HOME=/usr/lib/jvm/java-openjdk
 CATALINA_HOME=/opt/tomcat
 TOMCAT_USER=root
 TMP_DIR=/tmp

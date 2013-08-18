@@ -561,6 +561,11 @@
       <arg value="+x" />
       <arg value="/etc/rc.d/init.d/jsvc" />
     </exec>
+
+    <exec executable="chkconfig">
+      <arg value="jsvc" />
+      <arg value="on" />
+    </exec>
   </target>
 
   <target name="clean" description="Clean Everything">
