@@ -558,12 +558,12 @@
     </exec>
 
     <exec executable="chkconfig">
-      <arg value="jsvc" />
+      <arg value="tomcat" />
       <arg value="on" />
     </exec>
 
     <exec executable="sudo">
-      <arg value="/etc/rc.d/init.d/jsvc" />
+      <arg value="/etc/rc.d/init.d/tomcat" />
       <arg value="start" />
     </exec>
   </target>
