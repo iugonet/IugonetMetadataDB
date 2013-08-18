@@ -551,19 +551,19 @@
       <arg value="${catalina_home}/bin"/>
     </exec>
 
-    <copy file="etc/rc.d/init.d/tomcat" todir="/etc/rc.d/init.d" />
+    <copy file="etc/rc.d/init.d/jsvc" todir="/etc/rc.d/init.d" />
     <exec executable="chmod">
       <arg value="+x" />
-      <arg value="/etc/rc.d/init.d/tomcat" />
+      <arg value="/etc/rc.d/init.d/jsvc" />
     </exec>
 
     <exec executable="chkconfig">
-      <arg value="tomcat" />
+      <arg value="jsvc" />
       <arg value="on" />
     </exec>
 
     <exec executable="sudo">
-      <arg value="/etc/rc.d/init.d/tomcat" />
+      <arg value="/etc/rc.d/init.d/jsvc" />
       <arg value="start" />
     </exec>
   </target>
