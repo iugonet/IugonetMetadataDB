@@ -167,14 +167,14 @@
   </target>
 
   <target name="httpd" description="Install Apache HTTPD">
-    <echo message='### for Proxy&#10;' file="${http_conf}/httpd.conf" append="yes" />
-    <echo message="ProxyPass /iugonet/ ajp://localhost:8009/iugonet/&#10;" file="${http_conf}/httpd.conf" append="yes" />
+    <echo message='### for Proxy&#10;' file="${httpd_conf}/httpd.conf" append="yes" />
+    <echo message="ProxyPass /iugonet/ ajp://localhost:8009/iugonet/&#10;" file="${httpd_conf}/httpd.conf" append="yes" />
 
     <exec executable="sudo">
       <arg value="chmod" />
       <arg value="-R" />
       <arg value="o-rwx" />
-      <arg value="${http_conf}" />
+      <arg value="${httpd_conf}" />
     </exec>
 
     <exec executable="sudo">
