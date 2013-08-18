@@ -358,7 +358,7 @@
     <echo message="MAVEN PACKAGE -Dlicense.skip=true&#10;" />
     <exec executable="bash">
       <arg value="-c" />
-      <arg value="sudo -i -u dspace bash -c 'cd ${dspace_release_dir}/dspace ; ${maven_home}/bin/mvn clean package -Dlicense.skip=true'" />
+      <arg value="sudo -i -u dspace bash -c 'cd ${dspace_release_dir}/dspace ; ${maven_home}/bin/mvn package -Dlicense.skip=true'" />
     </exec>
     <exec executable="bash">
       <arg value="-c" />
