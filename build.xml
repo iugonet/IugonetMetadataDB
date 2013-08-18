@@ -545,9 +545,11 @@
       <arg value="${tmp}"/>
     </exec>
     <exec executable="./configure" dir="${tmp}/commons-daemon-${commons_daemon_version}-native-src/unix/"/>
+<!--
     <exec executable="make" dir="${tmp}/commons-daemon-${commons_daemon_version}-native-src/unix/">
       <arg value="clean"/> 
     </exec>
+-->
     <exec executable="make" dir="${tmp}/commons-daemon-${commons_daemon_version}-native-src/unix/"/>
     <exec executable="cp" dir="${tmp}/commons-daemon-${commons_daemon_version}-native-src/unix/">
       <arg value="jsvc"/>
