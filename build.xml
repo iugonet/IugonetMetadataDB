@@ -360,6 +360,7 @@
       <arg value="-c" />
       <arg value="sudo -i -u dspace bash -c 'cd ${dspace_release_dir}/dspace ; ${maven_home}/bin/mvn package -Dlicense.skip=true'" />
     </exec>
+    <echo message="TEST9-1" />
     <exec executable="bash">
       <arg value="-c" />
       <arg value="sudo -i -u dspace bash -c 'cd ${dspace_release_dir}/dspace/target/dspace-${dspace_version}-build.dir ; ant fresh_install'" />
