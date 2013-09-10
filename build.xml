@@ -295,9 +295,9 @@
     <copy file="${custom_dir}/config/dspace.cfg" todir="${dspace_release_dir}/dspace/config/" />
     <exec executable="bash">
       <arg value="-c" />
-      <arg value="sudo -i -u dspace -i createdb dspace" />
+      <arg value="sudo -i -u dspace createdb dspace" />
     </exec>
-    <exec executable="bash">
+    <exec executable="bash" dir="${dspace_release_dir}/dspace">
       <arg value="-c" />
       <arg value="sudo -i -u dspace bash -c 'cd ${dspace_release_dir}/dspace ; ${maven_home}/bin/mvn package -Dlicense.skip=true'" />
     </exec>
