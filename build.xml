@@ -361,7 +361,10 @@
     <antcall target="cp_conf" />
 
     <echo message="MAVEN PACKAGE -Dlicense.skip=true&#10;" />
+    <exec executable="bash" dir="${dspace_release_dir}/dspace">
+<!--
     <exec executable="bash">
+-->
       <arg value="-c" />
       <arg value="sudo -i -u dspace bash -c 'cd ${dspace_release_dir}/dspace ; ${maven_home}/bin/mvn package -Dlicense.skip=true'" />
     </exec>
