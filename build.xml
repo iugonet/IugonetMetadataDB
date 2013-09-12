@@ -299,7 +299,7 @@
     </exec>
     <exec executable="bash" dir="${dspace_release_dir}/dspace">
       <arg value="-c" />
-      <arg value="sudo -i -u dspace bash -c 'cd ${dspace_release_dir}/dspace ; ${maven_home}/bin/mvn package -Dlicense.skip=true'" />
+      <arg value="sudo -i -u dspace bash -c '${maven_home}/bin/mvn -f ${dspace_release_dir}/dspace/pom.xml package -Dlicense.skip=true'" />
     </exec>
     <mkdir dir="/opt/dspace" />
     <exec executable="chown">
@@ -307,9 +307,9 @@
       <arg value="dspace:dspace" />
       <arg value="/opt/dspace" />
     </exec>
-    <exec executable="bash">
+    <exec executable="bash" dir="${dspace_release_dir}/dspace/target/dspace-${dspace_version}-build.dir">
       <arg value="-c" />
-      <arg value="sudo -i -u dspace bash -c 'cd ${dspace_release_dir}/dspace/target/dspace-${dspace_version}-build.dir ; ant fresh_install'" />
+      <arg value="sudo -i -u dspace ant -f ${dspace_release_dir}/dspace/target/dspace-${dspace_version}-build.dir/build.xml fresh_install" />
     </exec>
     <echo message="${dspace_admin_email}&#10;" file="/tmp/test" append="no" />
     <echo message="${dspace_admin_first_name}&#10;" file="/tmp/test" append="yes" />
