@@ -13,7 +13,7 @@
     <equals arg1="${have_proxy}" arg2="yes" />
   </condition>
 
-  <target name="all" depends="initial_message, packages, git, init, dspace_orig, mdb, tomcat_daemon, final_message" />
+  <target name="all" depends="initial_message, packages, git, init, mdb, tomcat_daemon, final_message" />
 
   <target name="initial_message" description="Display initial message">
     <echo message="###&#x0A;###&#x0A;This installation process takes 60 minutes at least.&#x0A;###&#x0A;###&#x0A;" />
@@ -308,16 +308,7 @@
       <arg value="-c" />
       <arg value="sudo -i -u dspace ant -f ${dspace_release_dir}/dspace/target/dspace-${dspace_version}-build.dir/build.xml fresh_install" />
     </exec>
-    <echo message="${dspace_admin_email}&#10;" file="/tmp/test" append="no" />
-    <echo message="${dspace_admin_first_name}&#10;" file="/tmp/test" append="yes" />
-    <echo message="${dspace_admin_last_name}&#10;" file="/tmp/test" append="yes" />
-    <echo message="${dspace_admin_password}&#10;" file="/tmp/test" append="yes" />
-    <echo message="${dspace_admin_password}&#10;" file="/tmp/test" append="yes" />
-    <echo message="y&#10;" file="/tmp/test" append="yes" />
-    <exec executable="bash">
-      <arg value="-c" />
-      <arg value="sudo -i -u dspace bash -c 'cd /opt/dspace/bin ; ./dspace create-administrator &#60; /tmp/test'" />
-    </exec>
+    <antcall target="set_dspace_admin" />
   </target>
 
   <target name="retrieve_and_extract_dspace_packages" description="Retrieve and Extract dspace packages from sourceforge">
@@ -371,6 +362,8 @@
       <arg value="-c" />
       <arg value="sudo -i -u dspace ant -f ${dspace_release_dir}/dspace/target/dspace-${dspace_version}-build.dir/build.xml fresh_install" />
     </exec>
+    <antcall target="set_dspace_admin" />
+<!-- -->
     <antcall target="cp_webapps" />
     <antcall target="cp_src" />
     <echo message="TEST9-2" />
@@ -391,6 +384,19 @@
     <exec executable="bash">
       <arg value="-c" />
       <arg value="sudo -i -u dspace createdb dspace" />
+    </exec>
+  </target>
+
+  <target name="set_dspace_admin" description="Set Dspace Admin from build.properties information.">
+    <echo message="${dspace_admin_email}&#10;" file="/tmp/test" append="no" />
+    <echo message="${dspace_admin_first_name}&#10;" file="/tmp/test" append="yes" />
+    <echo message="${dspace_admin_last_name}&#10;" file="/tmp/test" append="yes" />
+    <echo message="${dspace_admin_password}&#10;" file="/tmp/test" append="yes" />
+    <echo message="${dspace_admin_password}&#10;" file="/tmp/test" append="yes" />
+    <echo message="y&#10;" file="/tmp/test" append="yes" />
+    <exec executable="bash">
+      <arg value="-c" />
+      <arg value="sudo -i -u dspace bash -c 'cd /opt/dspace/bin ; ./dspace create-administrator &#60; /tmp/test'" />
     </exec>
   </target>
 
