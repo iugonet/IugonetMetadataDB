@@ -293,10 +293,7 @@
   <target name="dspace_orig" description="Install DSpace Original">
     <antcall target="retrieve_and_extract_dspace_packages" />
     <antcall target="cp_conf4dspace_orig" />
-    <exec executable="bash">
-      <arg value="-c" />
-      <arg value="sudo -i -u dspace createdb dspace" />
-    </exec>
+    <antcall target="createdb" />
     <exec executable="bash" dir="${dspace_release_dir}/dspace">
       <arg value="-c" />
       <arg value="sudo -i -u dspace ${maven_home}/bin/mvn -f ${dspace_release_dir}/dspace/pom.xml clean package -Dlicense.skip=true" />
@@ -358,10 +355,7 @@
 -->
     <antcall target="retrieve_and_extract_dspace_packages" />
     <antcall target="cp_conf" />
-    <exec executable="bash">
-      <arg value="-c" />
-      <arg value="sudo -i -u dspace createdb dspace" />
-    </exec>
+    <antcall target="createdb" />
     <exec executable="bash" dir="${dspace_release_dir}/dspace">
       <arg value="-c" />
       <arg value="sudo -i -u dspace bash -c '${maven_home}/bin/mvn -f ${dspace_release_dir}/dspace/pom.xml clean package -Dlicense.skip=true'" />
@@ -391,6 +385,13 @@
 
   <target name="cp_conf4dspace_orig" description="For dspace_orig">
     <copy file="${custom_dir}/config/dspace.cfg" todir="${dspace_release_dir}/dspace/config/" />
+  </target>
+
+  <target name="createdb">
+    <exec executable="bash">
+      <arg value="-c" />
+      <arg value="sudo -i -u dspace createdb dspace" />
+    </exec>
   </target>
 
   <target name="cp_webapps" description="Originally cp_webapps.sh">
