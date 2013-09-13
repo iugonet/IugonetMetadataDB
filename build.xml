@@ -292,7 +292,7 @@
 
   <target name="dspace_orig" description="Install DSpace Original">
     <antcall target="retrieve_and_extract_dspace_packages" />
-    <copy file="${custom_dir}/config/dspace.cfg" todir="${dspace_release_dir}/dspace/config/" />
+    <antcall target="cp_conf4dspace_orig" />
     <exec executable="bash">
       <arg value="-c" />
       <arg value="sudo -i -u dspace createdb dspace" />
@@ -340,7 +340,6 @@
   </target>
 
   <target name="mdb" description="Install IUGONET Metadata DB.">
-    <antcall target="retrieve_and_extract_dspace_packages" />
 <!--
     <exec executable="sudo">
       <arg value="mkdir" />
@@ -357,7 +356,12 @@
       <arg value="${dspace_install_dir}" />
     </exec>
 -->
+    <antcall target="retrieve_and_extract_dspace_packages" />
     <antcall target="cp_conf" />
+    <exec executable="bash">
+      <arg value="-c" />
+      <arg value="sudo -i -u dspace createdb dspace" />
+    </exec>
     <exec executable="bash" dir="${dspace_release_dir}/dspace">
       <arg value="-c" />
       <arg value="sudo -i -u dspace bash -c '${maven_home}/bin/mvn -f ${dspace_release_dir}/dspace/pom.xml clean package -Dlicense.skip=true'" />
@@ -383,6 +387,10 @@
   <target name="cp_conf" description="Originally cp_conf.sh">
     <copy file="${custom_dir}/config/dspace.cfg" todir="${dspace_release_dir}/dspace/config/" />
     <copy file="${custom_dir}/config/registries/dublin-core-types.xml" todir="${dspace_release_dir}/dspace/config/registries/" />
+  </target>
+
+  <target name="cp_conf4dspace_orig" description="For dspace_orig">
+    <copy file="${custom_dir}/config/dspace.cfg" todir="${dspace_release_dir}/dspace/config/" />
   </target>
 
   <target name="cp_webapps" description="Originally cp_webapps.sh">
