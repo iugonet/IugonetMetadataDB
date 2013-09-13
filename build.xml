@@ -537,6 +537,10 @@
       <arg value="sudo -i -u dspace ${maven_home}/bin/mvn -f ${dspace_src_release_dir}/dspace-api/pom.xml install -Dlicense.skip=true" />
     </exec>
     <echo message="TEST8.2" />
+    <exec executable="bash">
+      <arg value="-c" />
+      <arg value="sudo -i -u dspace ${maven_home}/bin/mvn install:install-file -Dfile=/home/dspace/dspace-1.7.0-src-release/dspace-api/target/dspace-api-1.7.0.jar -DgroupId=org.dspace -Dversion=1.7.0 -Dpackaging=jar -DartifactId=dspace-api" />
+    </exec>
     <exec executable="bash" dir="${dspace_src_release_dir}/dspace-jspui/dspace-jspui-api">
       <arg value="-c" />
       <arg value="sudo -i -u dspace ${maven_home}/bin/mvn -f ${dspace_src_release_dir}/dspace-jspui/dspace-jspui-api/pom.xml install -Dlicense.skip=true" />
