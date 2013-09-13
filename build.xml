@@ -366,7 +366,7 @@
     <exec executable="bash">
 -->
       <arg value="-c" />
-      <arg value="sudo -i -u dspace bash -c '${maven_home}/bin/mvn -f ${dspace_release_dir}/dspace/pom.xml package -Dlicense.skip=true'" />
+      <arg value="sudo -i -u dspace bash -c '${maven_home}/bin/mvn -f ${dspace_release_dir}/dspace/pom.xml clean package -Dlicense.skip=true'" />
     </exec>
     <mkdir dir="/opt/dspace" />
     <exec executable="chown">
