@@ -532,14 +532,14 @@
   </target>
 
   <target name="comp" description="Originally comp_all.sh">
-    <exec executable="bash">
+    <exec executable="bash" dir="${dspace_src_release_dir}/dspace-api">
       <arg value="-c" />
-      <arg value="sudo -i -u dspace bash -c 'cd ${dspace_src_release_dir}/dspace-api ; ${maven_home}/bin/mvn install -Dlicense.skip=true'" />
+      <arg value="sudo -i -u dspace bash ${maven_home}/bin/mvn clean install -Dlicense.skip=true" />
     </exec>
     <echo message="TEST8.2" />
-    <exec executable="bash">
+    <exec executable="bash" dir="${dspace_src_release_dir}/dspace-jspui/dspace-jspui-api">
       <arg value="-c" />
-      <arg value="sudo -i -u dspace bash -c 'cd ${dspace_src_release_dir}/dspace-jspui/dspace-jspui-api ; ${maven_home}/bin/mvn install -Dlicense.skip=true'" />
+      <arg value="sudo -i -u dspace ${maven_home}/bin/mvn clean install -Dlicense.skip=true" />
     </exec>
     <copy file="${dspace_src_release_dir}/dspace-api/target/dspace-api-${dspace_version}.jar" todir="${dspace_install_dir}/lib"/>
     <copy file="${dspace_src_release_dir}/dspace-api/target/dspace-api-${dspace_version}.jar" todir="${iugonet_webapps}/WEB-INF/lib"/>
