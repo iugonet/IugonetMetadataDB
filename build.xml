@@ -294,6 +294,7 @@
     <antcall target="retrieve_and_extract_dspace_packages" />
     <antcall target="cp_conf4dspace_orig" />
     <antcall target="createdb" />
+    <antcall target="createInstallDir" />
     <exec executable="bash" dir="${dspace_release_dir}/dspace">
       <arg value="-c" />
       <arg value="sudo -i -u dspace ${maven_home}/bin/mvn -f ${dspace_release_dir}/dspace/pom.xml clean package -Dlicense.skip=true" />
@@ -384,6 +385,23 @@
     <exec executable="bash">
       <arg value="-c" />
       <arg value="sudo -i -u dspace createdb dspace" />
+    </exec>
+  </target>
+
+  <target name="createInstallDir">
+    <exec executable="sudo">
+      <arg value="mkdir" />
+      <arg value="${dspace_install_dir}-${dspace_version}/" />
+    </exec>
+    <exec executable="chown">
+      <arg value="-R" />
+      <arg value="dspace:dspace" />
+      <arg value="${dspace_install_dir}-${dspace_version}/" />
+    </exec>
+    <exec executable="ln">
+      <arg value="-s" />
+      <arg value="${dspace_install_dir}-${dspace_version}/" />
+      <arg value="${dspace_install_dir}" />
     </exec>
   </target>
 
