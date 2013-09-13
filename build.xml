@@ -306,59 +306,20 @@
     <antcall target="set_dspace_admin" />
   </target>
 
-  <target name="retrieve_and_extract_dspace_packages" description="Retrieve and Extract dspace packages from sourceforge">
-    <get src="${src_dspace_release}" dest="${dst_dspace_release}" usetimestamp="true" />
-    <!-- To keep permissions, stay away to use untar task. -->
-    <exec executable="bash">
-      <arg value="-c" />
-      <arg value="sudo -i -u dspace tar xzf ${tmp}/${dspace_release} --directory ${dspace_user_home}" />
-    </exec>
-
-    <get src="${src_dspace_src_release}" dest="${dst_dspace_src_release}" usetimestamp="true" />
-    <!-- To keep permissions, stay away to use untar task. -->
-    <exec executable="bash">
-      <arg value="-c" />
-      <arg value="sudo -i -u dspace tar xzf ${tmp}/${dspace_src_release} --directory ${dspace_user_home}" />
-    </exec>
-  </target>
-
   <target name="mdb" description="Install IUGONET Metadata DB.">
-<!--
-    <exec executable="sudo">
-      <arg value="mkdir" />
-      <arg value="${dspace_install_dir}-${dspace_version}/" />
-    </exec>
-    <exec executable="chown">
-      <arg value="-R" />
-      <arg value="dspace:dspace" />
-      <arg value="${dspace_install_dir}-${dspace_version}/" />
-    </exec>
-    <exec executable="ln">
-      <arg value="-s" />
-      <arg value="${dspace_install_dir}-${dspace_version}/" />
-      <arg value="${dspace_install_dir}" />
-    </exec>
--->
     <antcall target="retrieve_and_extract_dspace_packages" />
     <antcall target="cp_conf" />
     <antcall target="createdb" />
+    <antcall target="createInstallDir" />
     <exec executable="bash" dir="${dspace_release_dir}/dspace">
       <arg value="-c" />
       <arg value="sudo -i -u dspace bash -c '${maven_home}/bin/mvn -f ${dspace_release_dir}/dspace/pom.xml clean package -Dlicense.skip=true'" />
     </exec>
-    <mkdir dir="/opt/dspace" />
-    <exec executable="chown">
-      <arg value="-R" />
-      <arg value="dspace:dspace" />
-      <arg value="/opt/dspace" />
-    </exec>
-    <echo message="TEST9-1" />
     <exec executable="bash" dir="${dspace_release_dir}/dspace/target/dspace-${dspace_version}-build.dir">
       <arg value="-c" />
       <arg value="sudo -i -u dspace ant -f ${dspace_release_dir}/dspace/target/dspace-${dspace_version}-build.dir/build.xml fresh_install" />
     </exec>
     <antcall target="set_dspace_admin" />
-<!-- -->
     <antcall target="cp_webapps" />
     <antcall target="cp_src" />
     <echo message="TEST9-2" />
@@ -673,6 +634,24 @@
     <condition property="isExec" value="true">
       <equals arg1="${number.properties}" arg2="0"/>
     </condition>
+  </target>
+
+
+
+  <target name="retrieve_and_extract_dspace_packages" description="Retrieve and Extract dspace packages from sourceforge">
+    <get src="${src_dspace_release}" dest="${dst_dspace_release}" usetimestamp="true" />
+    <!-- To keep permissions, stay away to use untar task. -->
+    <exec executable="bash">
+      <arg value="-c" />
+      <arg value="sudo -i -u dspace tar xzf ${tmp}/${dspace_release} --directory ${dspace_user_home}" />
+    </exec>
+
+    <get src="${src_dspace_src_release}" dest="${dst_dspace_src_release}" usetimestamp="true" />
+    <!-- To keep permissions, stay away to use untar task. -->
+    <exec executable="bash">
+      <arg value="-c" />
+      <arg value="sudo -i -u dspace tar xzf ${tmp}/${dspace_src_release} --directory ${dspace_user_home}" />
+    </exec>
   </target>
 
 </project>
