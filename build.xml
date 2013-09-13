@@ -291,7 +291,7 @@
   </target>
 
   <target name="dspace_orig" description="Install DSpace Original">
-    <antcall target="retrieve_extract_dspace_packages" />
+    <antcall target="retrieve_and_extract_dspace_packages" />
     <copy file="${custom_dir}/config/dspace.cfg" todir="${dspace_release_dir}/dspace/config/" />
     <exec executable="bash">
       <arg value="-c" />
@@ -323,7 +323,7 @@
     </exec>
   </target>
 
-  <target name="retrieve_extract_dspace_packages" description="Retrieve and Extract dspace packages from sourceforge">
+  <target name="retrieve_and_extract_dspace_packages" description="Retrieve and Extract dspace packages from sourceforge">
     <get src="${src_dspace_release}" dest="${dst_dspace_release}" usetimestamp="true" />
     <!-- To keep permissions, stay away to use untar task. -->
     <exec executable="bash">
@@ -340,7 +340,7 @@
   </target>
 
   <target name="mdb" description="Install IUGONET Metadata DB.">
-    <antcall target="retrieve_extract_dspace_packages" />
+    <antcall target="retrieve_and_extract_dspace_packages" />
 <!--
     <exec executable="sudo">
       <arg value="mkdir" />
@@ -357,14 +357,8 @@
       <arg value="${dspace_install_dir}" />
     </exec>
 -->
-
     <antcall target="cp_conf" />
-
-    <echo message="MAVEN PACKAGE -Dlicense.skip=true&#10;" />
     <exec executable="bash" dir="${dspace_release_dir}/dspace">
-<!--
-    <exec executable="bash">
--->
       <arg value="-c" />
       <arg value="sudo -i -u dspace bash -c '${maven_home}/bin/mvn -f ${dspace_release_dir}/dspace/pom.xml clean package -Dlicense.skip=true'" />
     </exec>
