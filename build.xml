@@ -13,7 +13,7 @@
     <equals arg1="${have_proxy}" arg2="yes" />
   </condition>
 
-  <target name="all" depends="initial_message, packages, git, init, mdb, tomcat_daemon, final_message" />
+  <target name="all" depends="initial_message, packages, init, mdb, tomcat_daemon, final_message" />
 
   <target name="initial_message" description="Display initial message">
     <echo message="###&#x0A;###&#x0A;This installation process takes 60 minutes at least.&#x0A;###&#x0A;###&#x0A;" />
@@ -43,6 +43,7 @@
   </target>
 
   <target name="init" description="Initialize">
+    <antcall target="git" />
     <antcall target="change_jvm" />
     <antcall target="set_java_home" />
     <antcall target="useradd" />
