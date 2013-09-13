@@ -299,12 +299,6 @@
       <arg value="-c" />
       <arg value="sudo -i -u dspace ${maven_home}/bin/mvn -f ${dspace_release_dir}/dspace/pom.xml clean package -Dlicense.skip=true" />
     </exec>
-    <mkdir dir="/opt/dspace" />
-    <exec executable="chown">
-      <arg value="-R" />
-      <arg value="dspace:dspace" />
-      <arg value="/opt/dspace" />
-    </exec>
     <exec executable="bash" dir="${dspace_release_dir}/dspace/target/dspace-${dspace_version}-build.dir">
       <arg value="-c" />
       <arg value="sudo -i -u dspace ant -f ${dspace_release_dir}/dspace/target/dspace-${dspace_version}-build.dir/build.xml fresh_install" />
