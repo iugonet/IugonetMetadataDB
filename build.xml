@@ -323,9 +323,7 @@
     <antcall target="set_dspace_admin" />
     <antcall target="cp_webapps" />
     <antcall target="cp_src" />
-    <echo message="TEST9-2" />
     <antcall target="comp" />
-    <echo message="TEST9" />
   </target>
 
   <target name="cp_conf" description="Originally cp_conf.sh">
@@ -515,6 +513,7 @@
   </target>
 
   <target name="comp" description="Originally comp_all.sh">
+    <echo message="TEST8.1" />
     <exec executable="bash" dir="${dspace_src_release_dir}/dspace-api">
       <arg value="-c" />
       <arg value="sudo -i -u dspace ${maven_home}/bin/mvn -f ${dspace_src_release_dir}/dspace-api/pom.xml install -Dlicense.skip=true" />
