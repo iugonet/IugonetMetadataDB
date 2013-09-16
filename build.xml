@@ -158,9 +158,9 @@
       <arg value="dspace:dspace" />
       <arg value="${install_dir}/${tomcat_prefix}" />
     </exec>
-    <exec executable="sudo">
-      <arg value="dspace" />
-      <arg value="startup.sh" />
+    <exec executable="bash">
+      <arg value="-c" />
+      <arg value="sudo -i -u dspace startup.sh" />
     </exec>
   </target>
 
