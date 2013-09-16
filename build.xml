@@ -158,6 +158,10 @@
       <arg value="dspace:dspace" />
       <arg value="${install_dir}/${tomcat_prefix}" />
     </exec>
+    <exec executable="sudo">
+      <arg value="dspace" />
+      <arg value="startup.sh" />
+    </exec>
   </target>
 
   <target name="g2d" description="Install G2d">
