@@ -555,7 +555,9 @@
       <arg value="--directory"/>
       <arg value="${tmp}"/>
     </exec>
-    <exec executable="./configure" dir="${tmp}/commons-daemon-${commons_daemon_version}-native-src/unix/"/>
+    <exec executable="./configure" dir="${tmp}/commons-daemon-${commons_daemon_version}-native-src/unix/">
+      <arg value="--with-java=/usr/lib/jvm/java-1.6.0-openjdk-1.6.0.0.x86_64" />
+    </exec>
     <exec executable="make" dir="${tmp}/commons-daemon-${commons_daemon_version}-native-src/unix/"/>
     <exec executable="cp" dir="${tmp}/commons-daemon-${commons_daemon_version}-native-src/unix/">
       <arg value="jsvc"/>
