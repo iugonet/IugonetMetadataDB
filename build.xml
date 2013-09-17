@@ -247,13 +247,13 @@
       <arg value="sudo -i -u pgsql ${tmp}/${postgresql_prefix}/configure --prefix=${postgresql_home} --with-pgport=${postgresql_port}"/>
     </exec>
     <echo message="TEST" />
-    <exec executable="bash">
+    <exec executable="bash" dir="${tmp}/${postgresql_prefix}">
       <arg value="-c" />
-      <arg value="sudo -i -u pgsql bash -c 'cd ${tmp}/${postgresql_prefix} ; make'" />
+      <arg value="sudo -i -u pgsql make" />
     </exec>
-    <exec executable="bash">
+    <exec executable="bash" dir="${tmp}/${postgresql_prefix}">
       <arg value="-c" />
-      <arg value="sudo -i -u pgsql bash -c 'cd ${tmp}/${postgresql_prefix} ; make install'" />
+      <arg value="sudo -i -u pgsql make install" />
     </exec>
     <mkdir dir="${pgdata}-${postgresql_version}" />
     <exec executable="chmod">
