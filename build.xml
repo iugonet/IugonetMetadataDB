@@ -246,9 +246,9 @@
       <arg value="${postgresql_home}-${postgresql_version}" />
       <arg value="${postgresql_home}" />
     </exec>
-    <exec executable="bash">
+    <exec executable="bash" dir="${tmp}/${postgresql_prefix}">
       <arg value="-c" />
-      <arg value="sudo -i -u pgsql bash -c 'cd ${tmp}/${postgresql_prefix} ; ${tmp}/${postgresql_prefix}/configure --prefix=${postgresql_home} --with-pgport=${postgresql_port}'"/>
+      <arg value="sudo -i -u pgsql ${tmp}/${postgresql_prefix}/configure --prefix=${postgresql_home} --with-pgport=${postgresql_port}"/>
     </exec>
     <exec executable="bash">
       <arg value="-c" />
