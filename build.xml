@@ -246,6 +246,7 @@
       <arg value="-c" />
       <arg value="sudo -i -u pgsql ${tmp}/${postgresql_prefix}/configure --prefix=${postgresql_home} --with-pgport=${postgresql_port}"/>
     </exec>
+    <echo message="TEST" />
     <exec executable="bash">
       <arg value="-c" />
       <arg value="sudo -i -u pgsql bash -c 'cd ${tmp}/${postgresql_prefix} ; make'" />
