@@ -271,7 +271,7 @@
     </exec>
     <exec executable="bash">
       <arg value="-c" />
-      <arg value="sudo -i -u pgsql bash -c 'cd ${postgresql_home}/bin ; ${postgresql_home}/bin/initdb --no-locale --encoding=UTF-8'" />
+      <arg value="sudo -i -u pgsql ${postgresql_home}/bin/initdb --no-locale --encoding=UTF-8" />
      </exec>
     <echo message='### for Log&#10;' file="${pgdata}/postgresql.conf" append="yes" />
     <echo message="log_destination = 'syslog'&#10;" file="${pgdata}/postgresql.conf" append="yes" />
