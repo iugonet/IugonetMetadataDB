@@ -92,13 +92,9 @@
       <available file="${tmp}/${maven}" />
     </condition>
 
-    <echo message="${have.resources}" />
-
     <condition property="have.resources">
       <available file="${maven_home}" />
     </condition>
-
-    <echo message="${have.resources}" />
 
     <!-- enviromnent -->
     <echo message='### for MAVEN&#10;' file="${env_set_file}" append="yes" />
