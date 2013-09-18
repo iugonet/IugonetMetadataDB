@@ -14,12 +14,12 @@ PGLOG="/usr/local/pgsql/postgresql.log"
 case "$1" in
     start)
         echo -n "Starting postgres: "
-        su - $PGACCOUNT -c "$PG_CTL -D \
-            $PGDATA -o \"-i\" -l $PGLOG start"
+        su - ${PGACCOUNT} -c "${PG_CTL} -D \
+            ${PGDATA} -o \"-i\" -l ${PGLOG} start"
         ;;
     stop)
         echo -n "Stopping postgres: "
-        su - $PGACCOUNT -c "$PG_CTL -D $PGDATA stop"
+        su - ${PGACCOUNT} -c "${PG_CTL} -D ${PGDATA} stop"
         ;;
     *)
         echo "Usage: $0 {start|stop}"
