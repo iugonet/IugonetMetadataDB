@@ -290,9 +290,8 @@
       <arg value="on" />
     </exec>
 
-    <exec executable="sudo">
-      <arg value="/etc/rc.d/init.d/pgsql" />
-      <arg value="start" />
+    <exec executable="service">
+      <arg line="pgsql start" />
     </exec>
 
     <echo message="&#xA;Wait for 30 seconds or establishment of the socket connection to 5432 port...&#xA;" />
