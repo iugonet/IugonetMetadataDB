@@ -11,7 +11,7 @@
 
 RETVAL=0
 
-JAVA_HOME=/opt/java
+JAVA_HOME=/usr/lib/jvm/java-1.6.0-openjdk-1.6.0.0.x86_64
 CATALINA_HOME=/opt/tomcat
 DAEMON=$CATALINA_HOME/bin/daemon.sh
 LOCKFILE=/var/lock/subsys/tomcat
