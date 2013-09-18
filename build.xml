@@ -158,9 +158,6 @@
       <arg value="dspace:dspace" />
       <arg value="${install_dir}/${tomcat_prefix}" />
     </exec>
-    <exec executable="service">
-      <arg line="jsvc start" />
-    </exec>
   </target>
 
   <target name="g2d" description="Install G2d">
@@ -586,6 +583,10 @@
     <exec executable="chkconfig">
       <arg value="jsvc" />
       <arg value="on" />
+    </exec>
+
+    <exec executable="service">
+      <arg line="jsvc start" />
     </exec>
   </target>
 
