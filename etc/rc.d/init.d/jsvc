@@ -19,7 +19,7 @@ TOMCAT_USER=dspace
 
 start() {
         echo -n $"Starting tomcat: "
-        $DAEMON --java-home $JAVA_HOME --catalina-home $CATALINA_HOME start
+        $DAEMON --java-home $JAVA_HOME --catalina-home $CATALINA_HOME --tomcat-user $TOMCAT_USER start
         RETVAL=$?
         if [ $RETVAL -eq 0 ]; then
                 echo_success
@@ -33,7 +33,7 @@ start() {
 
 stop() {
         echo -n $"Shutting down tomcat: "
-        $DAEMON --java-home $JAVA_HOME --catalina-home $CATALINA_HOME stop
+        $DAEMON --java-home $JAVA_HOME --catalina-home $CATALINA_HOME --tomcat-user $TOMCAT_USER stop
         RETVAL=$?
         if [ $RETVAL -eq 0 ]; then
                 echo_success
