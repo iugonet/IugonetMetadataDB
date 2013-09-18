@@ -3,7 +3,7 @@
 # chkconfig: 35 86 15
 # description: PostgreSQL
 
-PGACCOUNT="postgres"
+PGACCOUNT="pgsql"
 PGDATA="/usr/local/pgsql/data"
 PGLOG="/var/log/postgresql.log"
 PG_CTL="/usr/local/pgsql/bin/pg_ctl"
