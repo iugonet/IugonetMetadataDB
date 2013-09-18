@@ -4,9 +4,10 @@
 # description: PostgreSQL
 
 PGACCOUNT="pgsql"
-PGDATA="/usr/local/pgsql/data"
-PGLOG="/var/log/postgresql.log"
+PGDATA="/usr/local/pgsql_data"
+PGLIB="/usr/local/pgsql/lib"
 PG_CTL="/usr/local/pgsql/bin/pg_ctl"
+PGLOG="/usr/local/pgsql/postgresql.log"
 
 . /etc/rc.d/init.d/functions
 
