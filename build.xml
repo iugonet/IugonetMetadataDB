@@ -671,6 +671,11 @@
       <arg value="-c" />
       <arg value="sudo -i -u dspace tar xzf ${tmp}/${dspace_src_release} --directory ${dspace_user_home}" />
     </exec>
+
+    <!-- replace license header to the correct one. 
+	 Redirection do bad things for some reason.-->
+    <replace file="${dspace_src_release_dir}/dspace-api/pom.xml" token="http://scm.dspace.org/svn/repo/licenses/LICENSE_HEADER" value="https://svn.duraspace.org/dspace/licenses/LICENSE_HEADER" />
+    <replace file="/home/dspace/.bashrc" token="# User specific aliases and functions&#10;" value="# User specific aliases and functions&#10;export JAVA_HOME=${java_home}&#10;" />
   </target>
 
 </project>
