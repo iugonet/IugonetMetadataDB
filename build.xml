@@ -158,9 +158,8 @@
       <arg value="dspace:dspace" />
       <arg value="${install_dir}/${tomcat_prefix}" />
     </exec>
-    <exec executable="bash">
-      <arg value="-c" />
-      <arg value="sudo -i -u dspace startup.sh" />
+    <exec executable="service">
+      <arg line="jsvc start" />
     </exec>
   </target>
 
@@ -588,13 +587,6 @@
       <arg value="jsvc" />
       <arg value="on" />
     </exec>
-
-<!--
-    <exec executable="sudo">
-      <arg value="/etc/rc.d/init.d/jsvc" />
-      <arg value="start" />
-    </exec>
--->
   </target>
 
   <target name="clean" description="Clean Everything">
