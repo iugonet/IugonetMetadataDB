@@ -294,6 +294,22 @@
       <arg value="-c" />
       <arg value="sudo -i -u pgsql createuser -d -S -R dspace" />
     </exec>
+    <!-- -->
+    <copy file="etc/rc.d/init.d/pgsql" todir="/etc/rc.d/init.d" />
+    <exec executable="chmod">
+      <arg value="+x" />
+      <arg value="/etc/rc.d/init.d/pgsql" />
+    </exec>
+
+    <exec executable="chkconfig">
+      <arg value="pgsql" />
+      <arg value="on" />
+    </exec>
+
+    <exec executable="sudo">
+      <arg value="/etc/rc.d/init.d/pgsql" />
+      <arg value="start" />
+    </exec>
   </target>
 
   <target name="dspace_orig" description="Install DSpace Original">

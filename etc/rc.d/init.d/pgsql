@@ -1,0 +1,28 @@
+#!/bin/sh
+#
+# chkconfig: 35 86 15
+# description: PostgreSQL
+
+PGACCOUNT="postgres"
+PGDATA="/usr/local/pgsql/data"
+PGLOG="/var/log/postgresql.log"
+PG_CTL="/usr/local/pgsql/bin/pg_ctl"
+
+. /etc/rc.d/init.d/functions
+
+case "$1" in
+    start)
+        echo -n "Starting postgres: "
+        su - $PGACCOUNT -c "$PG_CTL -D \
+            $PGDATA -o \"-i\" -l $PGLOG start"
+        ;;
+    stop)
+        echo -n "Stopping postgres: "
+        su - $PGACCOUNT -c "$PG_CTL -D $PGDATA stop"
+        ;;
+    *)
+        echo "Usage: $0 {start|stop}"
+        exit 1
+esac
+
+exit 0
