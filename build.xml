@@ -589,10 +589,12 @@
       <arg value="on" />
     </exec>
 
+<!--
     <exec executable="sudo">
       <arg value="/etc/rc.d/init.d/jsvc" />
       <arg value="start" />
     </exec>
+-->
   </target>
 
   <target name="clean" description="Clean Everything">
