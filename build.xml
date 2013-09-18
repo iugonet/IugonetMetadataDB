@@ -298,12 +298,7 @@
       <arg value="/etc/rc.d/init.d/pgsql" />
       <arg value="start" />
     </exec>
-<!--
-    <exec executable="bash" spawn="true">
-      <arg value="-c" />
-      <arg value="sudo -i -u pgsql bash -c 'cd ${postgresql_home}/bin ; ${postgresql_home}/bin/pg_ctl -D ${pgdata} start'" /> 
-    </exec>
--->
+
     <echo message="&#xA;Wait for 30 seconds or establishment of the socket connection to 5432 port...&#xA;" />
     <waitfor maxwait="30" maxwaitunit="second">
       <socket server="localhost" port="5432" />
