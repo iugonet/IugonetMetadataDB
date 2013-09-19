@@ -532,7 +532,6 @@
       <arg value="-c" />
       <arg value="sudo -i -u dspace mvn -f ${dspace_src_release_dir}/dspace-api/pom.xml clean install -DskipTests=true -Dlicense.skip=true" />
     </exec>
-    <!--
     <echo message="TEST8.2" />
     <exec executable="bash">
       <arg value="-c" />
@@ -549,7 +548,6 @@
     <echo message="TEST8.5" />
     <copy file="${dspace_src_release_dir}/dspace-jspui/dspace-jspui-api/target/dspace-jspui-api-${dspace_version}.jar" todir="${iugonet_webapps}/WEB-INF/lib"/>
     <echo message="TEST8.6" />
--->
   </target>
 
   <target name="tomcat_daemon" description="Set Tomcat Daemon">
