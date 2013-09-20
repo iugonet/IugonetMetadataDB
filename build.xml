@@ -480,6 +480,16 @@
       <arg value="-rf"/>
       <arg line="${custom_src_dspace_api}/java/org/dspace/app/statistics/ReportGenerator.java ${dspace_src_release_api}/java/org/dspace/app/statistics"/>
     </exec>
+    <!-- -->
+    <exec executable="cp">
+      <arg value="-rf"/>
+      <arg line="${custom_src_dspace_api}/java/org/dspace/content/Item.java ${dspace_src_release_api}/java/org/dspace/content"/>
+    </exec>
+    <exec executable="cp">
+      <arg value="-rf"/>
+      <arg line="${custom_src_dspace_api}/java/org/dspace/content/DCValue.java ${dspace_src_release_api}/java/org/dspace/content"/>
+    </exec>    
+    <!-- -->
     <exec executable="cp">
       <arg value="-rf"/>
       <arg line="${custom_src_dspace_jspui}/servlet/SearchServlet.java ${dspace_src_release_jspui}/servlet"/>
@@ -492,6 +502,15 @@
       <arg value="-rf"/>
       <arg line="${custom_src_dspace_jspui}/servlet/HandleServlet.java ${dspace_src_release_jspui}/servlet"/>
     </exec>
+    <exec executable="cp">
+      <arg value="-rf"/>
+      <arg line="${custom_src_dspace_jspui}/servlet/OpenSearchServlet.java ${dspace_src_release_jspui}/servlet"/>
+    </exec>
+    <exec executable="cp">
+      <arg value="-rf"/>
+      <arg line="${custom_src_dspace_jspui}/servlet/BrowserServlet.java ${dspace_src_release_jspui}/servlet"/>
+    </exec>
+    <!-- -->
     <exec executable="cp">
       <arg value="-rf"/>
       <arg line="${custom_src_dspace_jspui}/jsptag/ItemListTag.java ${dspace_src_release_jspui}/jsptag"/>
@@ -522,7 +541,7 @@
     <echo message="TEST8.3" />
     <exec executable="bash" dir="${dspace_src_release_dir}/dspace-jspui/dspace-jspui-api">
       <arg value="-c" />
-      <arg value="sudo -i -u dspace mvn -f ${dspace_src_release_dir}/dspace-jspui/dspace-jspui-api/pom.xml clean install -DskipTests=true -Dlicense.skip=true" />
+      <arg value="sudo -i -u dspace mvn -X -f ${dspace_src_release_dir}/dspace-jspui/dspace-jspui-api/pom.xml clean install -DskipTests=true -Dlicense.skip=true" />
     </exec>
     <echo message="TEST8.4" />
     <copy file="${dspace_src_release_dir}/dspace-api/target/dspace-api-${dspace_version}.jar" todir="${dspace_install_dir}/lib"/>
