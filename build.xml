@@ -541,7 +541,7 @@
     <echo message="TEST8.3" />
     <exec executable="bash" dir="${dspace_src_release_dir}/dspace-jspui/dspace-jspui-api">
       <arg value="-c" />
-      <arg value="sudo -i -u dspace mvn -X -f ${dspace_src_release_dir}/dspace-jspui/dspace-jspui-api/pom.xml clean install -DskipTests=true -Dlicense.skip=true" />
+      <arg value="sudo -i -u dspace mvn -f ${dspace_src_release_dir}/dspace-jspui/dspace-jspui-api/pom.xml install -DskipTests=true -Dlicense.skip=true" />
     </exec>
     <echo message="TEST8.4" />
     <copy file="${dspace_src_release_dir}/dspace-api/target/dspace-api-${dspace_version}.jar" todir="${dspace_install_dir}/lib"/>
