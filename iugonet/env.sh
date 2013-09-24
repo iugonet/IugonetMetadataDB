@@ -1,6 +1,6 @@
 #!/bin/bash
 
-WORK=/home/dspace/iugonet
+WORK=/home/dspace
 
 DSPACE_VERSION=1.7.0
 CUSTOM_DIR=${WORK}/iugonet/${DSPACE_VERSION}

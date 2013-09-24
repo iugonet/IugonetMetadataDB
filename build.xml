@@ -541,7 +541,7 @@
     <echo message="TEST8.3" />
     <exec executable="bash" dir="${dspace_src_release_dir}/dspace-jspui/dspace-jspui-api">
       <arg value="-c" />
-      <arg value="sudo -i -u dspace mvn -f ${dspace_src_release_dir}/dspace-jspui/dspace-jspui-api/pom.xml install -DskipTests=true -Dlicense.skip=true" />
+      <arg value="sudo -i -u dspace mvn -f ${dspace_src_release_dir}/dspace-jspui/dspace-jspui-api/pom.xml install" />
     </exec>
     <echo message="TEST8.4" />
     <copy file="${dspace_src_release_dir}/dspace-api/target/dspace-api-${dspace_version}.jar" todir="${dspace_install_dir}/lib"/>
@@ -679,7 +679,7 @@
     <replace file="${dspace_src_release_dir}/dspace-jspui/dspace-jspui-api/pom.xml" token="scm:svn:http://scm.dspace.org/svn/repo/dspace/tags/dspace-1.7.0/dspace-jspui/dspace-jspui-api" value="scm:svn:http://svn.duraspace.org/dspace/dspace/tags/dspace-1.7.0/dspace-jspui/dspace-jspui-api" />
     <replace file="${dspace_src_release_dir}/dspace-jspui/dspace-jspui-api/pom.xml" token="scm:svn:https://scm.dspace.org/svn/repo/dspace/tags/\
 dspace-1.7.0/dspace-jspui/dspace-jspui-api" value="https://svn.duraspace.org/dspace/dspace/tags/dspace-1.7.0/dspace-jspui/dspace-jspui-api" />
-    <replace file="${dspace_src_release_dir}/dspace-jspui/dspace-jspui-api/pom.xml" token="https://scm.dspace.org/svn/repo/dspace/tags/dspace-1.7.0/dspace-jspui/dspace-jspui-api" value="https://svn.duraspace.org/dspace/dspace/tags/dspace-1.7.0/dspace-jspui/dspace-jspui-api" />
+    <replace file="${dspace_src_release_dir}/dspace-jspui/dspace-jspui-api/pom.xml" token="http://scm.dspace.org/svn/repo/dspace/tags/dspace-1.7.0/dspace-jspui/dspace-jspui-api" value="https://svn.duraspace.org/dspace/dspace/tags/dspace-1.7.0/dspace-jspui/dspace-jspui-api" />
   </target>
 
 </project>
