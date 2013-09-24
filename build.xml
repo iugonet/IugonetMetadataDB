@@ -526,18 +526,16 @@
   </target>
 
   <target name="comp" description="Originally comp_all.sh">
+    <exec executable="bash" dir="${dspace_src_release_dir}/dspace-api">
+      <arg value="-c" />
+      <arg value="sudo -i -u dspace mvn -f ${dspace_src_release_dir}/pom.xml clean install -DskipTests=true -Dlicense.skip=true" />
+    </exec>
+<!--
     <echo message="TEST8.1" />
     <exec executable="bash" dir="${dspace_src_release_dir}/dspace-api">
       <arg value="-c" />
       <arg value="sudo -i -u dspace mvn -f ${dspace_src_release_dir}/dspace-api/pom.xml clean install -DskipTests=true -Dlicense.skip=true" />
     </exec>
-<!--
-    <echo message="TEST8.2" />
-    <exec executable="bash">
-      <arg value="-c" />
-      <arg value="sudo -i -u dspace mvn install:install-file -Dfile=/home/dspace/dspace-1.7.0-src-release/dspace-api/target/dspace-api-1.7.0.jar -DgroupId=org.dspace -Dversion=1.7.0 -Dpackaging=jar -DartifactId=dspace-api" />
-    </exec>
--->
     <echo message="TEST8.3" />
     <exec executable="bash" dir="${dspace_src_release_dir}/dspace-jspui/dspace-jspui-api">
       <arg value="-c" />
@@ -549,6 +547,7 @@
     <echo message="TEST8.5" />
     <copy file="${dspace_src_release_dir}/dspace-jspui/dspace-jspui-api/target/dspace-jspui-api-${dspace_version}.jar" todir="${iugonet_webapps}/WEB-INF/lib"/>
     <echo message="TEST8.6" />
+-->
   </target>
 
   <target name="tomcat_daemon" description="Set Tomcat Daemon">
